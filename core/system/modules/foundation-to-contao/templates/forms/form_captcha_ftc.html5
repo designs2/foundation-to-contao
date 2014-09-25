@@ -1,0 +1,53 @@
+<?php
+
+if ($this->label_role=='postfix'||$this->label_role=='prefix') {
+	$fixStr ='<div class=" '.$this->ftc_fix_classes.'">';
+	$fixStr .='<span class=" '.$this->label_role.'">';
+	$fixStr .= $this->post_pre_fix.'</span></div>';
+
+}else {
+	$fixStr ='';
+}
+
+if (preg_match("/no-style/",$this->label_style)||$this->label_style=='') {
+	echo '<label for="ctrl_'.$this->id.'" >';
+}else {
+	echo '<label for="ctrl_'.$this->id.'" class="label '.$this->label_style.' ">';
+	//echo '<label for="ctrl_'.$this->id.'" >';
+}
+if ($this->mandatory){
+  	echo '<span class="invisible">'.$this->mandatoryField.'</span> ';
+  	echo '<span class="mandatory">*</span>';
+	
+}
+	echo $this->label;
+	echo '</label>';
+	
+	if ($this->label_role=='prefix') {
+		echo $fixStr;
+		
+	}
+	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+
+
+?>
+
+  <input type="text" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="<?php echo $this->type; ?> text<?php if ($this->class) echo ' ' . $this->class; ?>" value="<?php echo specialchars($this->value); ?>"<?php echo $this->getAttributes(); ?>>
+  
+  
+	<?php if ($this->hasErrors()): ?>
+	   <small class="error"><?php echo $this->getErrorAsString(); ?></small>
+	<?php endif; ?>
+  <?php if ($this->addSubmit): ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
+  <?php endif; ?>
+
+<?php
+	echo '</div>';
+	if ($this->label_role=='postfix') {
+		echo $fixStr;
+		
+	}
+?>
+ <?php echo $this->generateQuestion(); ?>
+

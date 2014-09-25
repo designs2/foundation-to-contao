@@ -1,0 +1,11 @@
+<?php if ($this->btn_split) {
+	echo '<a href="#" onclick="return false;" data-options="'.$this->dropdown_opt.'" class="button split '.$this->btn_classes.' '. $this->class.'"'. $this->cssID.' >'. $this->btn_name.' <span data-dropdown="'.$this->id.'"></span></a><br>';
+}else {
+	echo '<a href="#" data-options="'.$this->dropdown_opt.'" class="button '.$this->btn_classes.' '. $this->class.'"'. $this->cssID.' data-dropdown="'.$this->id.'">'. $this->btn_name.'</a><br>';
+}
+
+?>
+<div id="<?php echo $this->id; ?>" class="f-dropdown content<?php echo $this->class; ?>" data-dropdown-content>
+ 
+
+

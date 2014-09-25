@@ -1,0 +1,707 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package   Topic Slider
+ * @author    Monique Hahnefeld
+ * @license   LGPL
+ * @copyright 2014 Monique Hahnefeld
+ */
+@import url(http://fonts.googleapis.com/css?family=Abel);
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed:300italic,400italic,700italic,300,400,700&subset=latin,latin-ext);
+/* container  blue*/
+
+#content-box.blue{
+display: block ;
+	position: fixed;
+	z-index: 5;
+	bottom: 130px;
+	left: 50%;
+	margin-left: -588px;
+	display:block;
+	width: 105%;
+	height: 180px;
+	backg0round: #f01;
+}
+#content-box.blue >*{
+	display: block ;
+	position: static;
+	padding: 20px;
+	float: left;
+	width: 330px;
+	height: 140px;
+	margin-right:30px;
+	background: #00539b;
+	
+}
+#content-box.blue *{
+color: #fefefe;
+}
+#content-box.blue >*:last-child{
+
+	margin-right:0px;
+	
+}
+#content-box.blue .mod_eventlist .event{
+	padding-left: 60px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/calendar-light.png') no-repeat 0px 1px ;
+}
+/* container  white*/
+
+#content-box.white{
+display: block ;
+	position:relative !important;
+	z-index: 5;
+	min-width: 1170px;
+	max-width: 1170px;
+	height: 180px;
+	background: #fff;
+	margin: 0 auto;
+}
+#content-box.white >*{
+	display: block ;
+	position: static;
+	padding: 20px;
+	float: left;
+	width: 330px;
+	height: 140px;
+	margin-right:30px;
+	background: #fff;
+	
+}
+#content-box.white >*:last-child{
+
+	margin-right:0px;
+	
+}
+#content-box.white *{
+color: #00539b;
+}
+#content-box.white .mod_eventlist .event{
+	padding-left: 60px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/calendar-dark.png') no-repeat 0px 1px ;
+}
+
+/* container end */
+/* flex vars */
+#topic-slider > .flex-direction-nav{
+
+	display:block;
+	position: absolute;
+	width: 100px;
+	
+	
+	height: 60px;
+	z-index: 5;
+	top: 35%;
+	
+}
+#topic-slider > .flex-direction-nav li{
+	display:block;
+	position: absolute;
+	width: 100px;
+	height:60px;
+	
+}
+#topic-slider > .flex-direction-nav li span{
+	display:block;
+	position: absolute;
+	width: 100px;
+	height:60px;	
+	backg0round: #6f6;
+	cursor: pointer;
+}
+#topic-slider > .flex-direction-nav.prev,
+#topic-slider > .flex-direction-nav .flex-prev{
+	left: 10px;
+}
+#topic-slider > .flex-direction-nav .flex-prev span{
+	right: 0px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/prev-big.png') no-repeat top left;
+}
+#topic-slider > .flex-direction-nav.next,
+#topic-slider > .flex-direction-nav .flex-next{
+	right: 10px;
+}
+#topic-slider > .flex-direction-nav .flex-next span{
+	left: 0px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/next-big.png') no-repeat top right;
+}
+#topic-slider > .flex-control-nav{
+	display:block;
+	position: fixed;
+text-align: center;
+	/*left: 50%;
+	margin-left: -50px;*/
+	width: 100%;
+	
+	z-index: 4;
+	height: 40px;
+	bottom: 310px;
+	backgr0ound: #666;
+}
+#topic-slider > .flex-control-nav li,
+#topic-slider > .flex-control-nav li span{
+	display:inline-block;
+	width: 8px;
+	height: 8px;
+	
+	cursor: pointer;
+}
+#topic-slider > .flex-control-nav li span{
+margin: 5px;
+border: 2px solid #efefef;
+background-color: #efefef;
+-webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; -webkit-box-shadow:  0 0 3px rgba(0,0,0,0.3); -moz-box-shadow:  0 0 3px rgba(0,0,0,0.3); -o-box-shadow: 0 0 3px rgba(0,0,0,0.3); box-shadow: 0 0 3px rgba(0,0,0,0.3); 
+}
+#topic-slider > .flex-control-nav li span.flex-active{
+	background-color: #0e161f;
+	border: 2px solid #efefef;
+}
+
+/* 
+*
+*carousel im slide 
+*
+*
+*/
+#topic-slider .slide-gallery .carousel-direction-nav{
+
+	display:block;
+	position: absolute;
+
+	top:60px;
+	width: 40px !important;
+	padding: 0px !important;
+	height: 40px !important;
+	
+	z-index: 11;
+}
+#topic-slider .slide-gallery .carousel-direction-nav li{
+	display:block;
+	position: absolute;
+	padding: 0px;
+	width: 40px !important;
+	
+	height: 40px !important;
+	z-index: 11;
+	backg0round: #666;
+}
+#topic-slider .slide-gallery .carousel-direction-nav li span.carousel-disabled{
+	display:block !important;
+	opacity: 0.2 !important;
+	-moz-opacity:0.2 !important;
+	-webkit-opacity:0.2 !important;
+	
+	cursor: pointer !important;
+}
+#topic-slider .slide-gallery .carousel-direction-nav li span{
+	display:block !important;
+	opacity: 0.6;
+	-moz-opacity:0.6 ;
+	-webkit-opacity:0.6;
+	position: absolute;
+	z-index: 15;
+	width: 40px;
+	height: 40px;	
+	
+	cursor: pointer;
+}
+#topic-slider .slide-gallery .carousel-direction-nav:hover li span{
+	
+	opacity: 0.9;
+	-moz-opacity:0.9 ;
+	-webkit-opacity:0.9;
+	
+}
+#topic-slider .slide-gallery .carousel-direction-nav.prev,
+#topic-slider .slide-gallery .carousel-direction-nav .carousel-prev{
+	left: 0px;
+}
+#topic-slider .slide-gallery .carousel-direction-nav .carousel-prev span{
+	margin-right: 0px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/prev-small.png') no-repeat top left;
+}
+#topic-slider .slide-gallery .carousel-direction-nav.next,
+#topic-slider .slide-gallery .carousel-direction-nav .carousel-next{
+	right: 0px;
+}
+#topic-slider .slide-gallery .carousel-direction-nav .carousel-next span{
+	margin-left: 0px;
+	background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/next-small.png') no-repeat top right;
+}
+#topic-slider .slide-gallery .carousel-control-nav{
+	display:none;
+/*	position: absolute;
+text-align: center;
+	/*left: 50%;
+	margin-left: -50px;*!/
+	width: 100%;
+	
+	z-index: 4;
+	height: 40px;
+	bottom: 220px;
+	backgr0ound: #666;*/
+}
+#topic-slider .slide-gallery .carousel-control-nav li,
+#topic-slider .slide-gallery .carousel-control-nav li span{
+	display:inline-block;
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+#topic-slider .slide-gallery .carousel-control-nav li span{
+margin: 5px;
+background-color: #efefef;
+-webkit-border-radius: 20px; -moz-border-radius: 20px; -o-border-radius: 20px; border-radius: 20px; -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -moz-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); -o-box-shadow: inset 0 0 3px rgba(0,0,0,0.3); box-shadow: inset 0 0 3px rgba(0,0,0,0.3); 
+}
+#topic-slider .slide-gallery .carousel-control-nav li span.carousel-active{
+	background-color: #ccc;
+}
+
+/*
+* flex end 
+*
+*
+*/
+/* open */
+.open #header,
+.open #footer{
+	position:relative;
+}
+#header,
+ #footer,
+ #wrapper,
+ #wrapper > div,
+ #topic-slider{
+	
+	min-width: 1170px !important;
+}
+
+#wrapper,
+#wrapper > div{
+	width: 100%;
+	min-height: 1px;
+	position: relative;
+	display: block;
+	
+}
+/*#topic-gallery-start*/
+.open #topic-gallery-start{
+	height:100%;
+}
+.open .topic:not(.flex-active-slide) {
+display: none !important;
+}
+.open .topic{
+position: relative !important;
+
+	min-height: 300px !important;
+	height: 300px !important;
+	max-height: 300px !important;
+} 
+.open .whitebox{
+	background: #fff;
+	width: 100%;
+	min-height: 1px;
+	position: relative;
+	display: block;
+}
+.open #topic-slider.mh_topic_slider{
+position: relative;
+z-index: 4;
+margin-top: 0px;
+lef0t: 0px;
+display:block;
+width: 100%;
+height: 100%;
+font-family: 'Roboto Condensed', sans-serif;
+
+}
+/* closed */
+.closed #topic-slider.mh_topic_slider{
+position: fixed;
+z-index: -4;
+top: 90px;
+left: 0px;
+display:block;
+width: 100%;
+height: 100%;
+font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+/*
+*
+* TYPO
+*
+*/
+
+.highlight{
+color: #b7cee6 !important;
+	}
+	
+	
+#topic-slider .slide-popup .slide-text *{
+color: #fefefe !important;
+}
+#topic-slider .slide-popup .slide-text h2{
+font-size: 36px !important;
+line-height: 36px !important;
+letter-spacing: 1px;
+padding: 0;
+margin: 0 0 14px 0;
+font-weight: 400 ;
+}	
+#topic-slider .slide-popup .slide-text h3{
+font-size: 20px !important;
+line-height: 26px !important;
+letter-spacing: 0.00025em;
+text-transform: none;
+padding: 0;
+margin: 0 0 14px 0;
+font-weight: 400 ;
+}	
+#topic-slider .slide-popup .slide-text p{
+font-size: 16px !important;
+line-height: 24px !important;
+letter-spacing: 0.00025em;
+padding: 0;
+margin: 0 0 14px 0;
+font-weight: 300 !important;
+}	
+#content-box .ce_text h1,
+#content-box .mod_eventlist h1,
+#content-box .mod_newslist h1{
+	font-family: 'Abel','Roboto Condensed', sans-serif !important;
+font-size: 24px !important;
+line-height: 24px !important;
+letter-spacing: 1px;
+padding: 0;
+margin: 0 0 14px 0;
+text-transform: uppercase;
+font-weight: 400 ;
+}
+#content-box .layout_simple{
+	padding-bottom: 20px;
+}
+#content-box .ce_text ul,
+#content-box .ce_text li{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+#content-box .mod_eventlist .event h3,
+#content-box .mod_eventlist .event span,
+#content-box .mod_eventlist .event a,
+#content-box .mod_newslist h3,
+#content-box .mod_newslist span,
+#content-box .mod_newslist a,
+#content-box .ce_text h3,
+#content-box .ce_text span,
+#content-box .ce_text a,
+#content-box .ce_text li{
+font-family: 'Abel','Roboto Condensed', sans-serif !important;
+font-size: 14px !important;
+line-height: 18px !important;
+letter-spacing: 1px;
+text-transform: none;
+padding: 0;
+margin: 0 0 14px 0;
+font-weight: 400 ;
+}
+/* container  blue*/
+#content-box.blue .mod_eventlist a,
+#content-box.blue .mod_newslist a,
+#content-box.blue .ce_text a{
+color: #fefefe;
+}
+/* container  white*/
+#content-box.white .mod_eventlist a,
+#content-box.white .mod_newslist a,
+#content-box.white .ce_text a{
+color: #00539b;
+}
+
+/**/
+#topic-slider h2, #topic-slider  h3, #topic-slider p ,#topic-slider a{
+	font-family: 'Roboto Condensed', sans-serif;
+}
+#topic-slider h2, #topic-slider  h3{
+	text-transform: uppercase;
+	font-weight: 300 !important;
+}
+#topic-slider p, #topic-slider  span{
+	
+	font-weight: 400 !important;
+}
+#topic-slider .topic .topic-slogan{
+	font-size: 64px;
+	line-height: 72px;
+	font-weight: 300 !important;}
+#topic-slider .topic .topic-slogan >span{
+padding: 0  14px ;
+}
+
+#topic-slider .topic .topic-slogan span.space{
+padding: 0 0 0 14px ;
+}
+#topic-slider .topic .topic-slogan span{
+font-size: 64px;
+line-height: 72px;
+font-weight: 300 !important;
+letter-spacing: -1px !important;
+background: #00539b;
+	}
+		
+#topic-slider .topic .slide-more h5{
+widt0h: 220px;
+font-size: 24px;
+line-height: 24px !important;
+/*height:14px !important;*/
+text-transform: uppercase;
+display: block !important;
+padding: 0 !important;
+margin: 0 !important;
+font-weight: 300 !important;
+letter-spacing: -1px !important;
+
+}
+#topic-slider .topic .slide-more p{
+padding: 0 !important;
+margin: 0 !important;
+color: #eee;}
+#topic-slider .topic .slide-more p .caption{
+font-size: 12px;
+line-height: 12px;
+padding: 0 !important;
+margin: 0 !important;
+font-weight: 400 !important;
+letter-spacing: 0px !important;
+}
+/*a or span*/
+#topic-slider .topic .slide-more p .more-link{
+float:right;
+display: inline-block;
+min-width: 20px;
+width: auto;
+max-width: 19px;
+font-size: 12px;
+line-height: 18px;
+text-transform: uppercase;
+padding: 0 14px 0 20px !important;
+margin: 0 !important;
+font-weight: 400 !important;
+letter-spacing: 1px !important;
+background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/info15.png') no-repeat 0px 3px ;
+
+cursor: pointer;
+color: #eee;
+}			
+			
+			
+			
+		
+/*
+*
+*topic slide container
+*
+*
+*/
+
+#topic-slider .topic{
+display:block;
+width: 100%;
+height: 100%;}
+
+/*Slogan*/
+#topic-slider .topic .topic-slogan{
+display:block;
+position: absolute;
+top: 40px;
+left: 50%;
+margin-left: -590px;
+min-width: 100px;
+min-height: 100px;
+color: #eee;
+}
+
+/*More Link container*/
+#topic-slider .topic .slide-more{
+display:block;
+z-index: 5;
+/*position: absolute;
+top: 440px;
+left: 600px;*/
+position: fixed;
+bottom: 340px;
+left: 50%;
+margin-left: 384px;
+width: 172px;
+padding: 10px 14px;
+height: 60px;
+background: #00539b;
+color: #eee;
+}
+#topic-slider .topic .slide-more h3{color: #eee;}
+#topic-slider .topic .slide-more p{color: #eee;}
+#topic-slider .topic .slide-more p .caption{}
+/*a or span*/
+#topic-slider .topic .slide-more p .more-link{
+width: 100%;
+display: block;
+min-height: 32px;
+cursor: pointer;
+color: #eee;
+}
+/* image */
+#topic-slider .topic .slide-fullsize{
+display:block;
+width: 100%;
+height: auto;
+z-index: -1;
+
+}
+
+/*Controls*/
+#topic-slider #slide-controls{ display:none;}
+#topic-slider #slide-controls #slide-prev{}
+#topic-slider #slide-controls #slide-next{}
+
+#topic-slider #slide-list{display:none;}
+#topic-slider #slide-list ul{}
+#topic-slider #slide-list ul li{}
+
+/*PopUp*/
+#topic-slider .slide-overlay{
+display:none;
+
+position: relative;
+margin-top: 0px !important;
+padding:30px 0 90px 0;
+width: 100%;
+height: 100%;
+/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAwMWE0MyIgc3RvcC1vcGFjaXR5PSIwLjciLz4KICAgIDxzdG9wIG9mZnNldD0iMjUlIiBzdG9wLWNvbG9yPSIjMDAxYTQzIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMWE0MyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+background: -moz-linear-gradient(top,  rgba(0,26,67,0.7) 0%, rgba(0,26,67,1) 25%, rgba(0,26,67,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,26,67,0.7)), color-stop(25%,rgba(0,26,67,1)), color-stop(100%,rgba(0,26,67,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  rgba(0,26,67,0.7) 0%,rgba(0,26,67,1) 25%,rgba(0,26,67,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  rgba(0,26,67,0.7) 0%,rgba(0,26,67,1) 25%,rgba(0,26,67,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  rgba(0,26,67,0.7) 0%,rgba(0,26,67,1) 25%,rgba(0,26,67,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom,  rgba(0,26,67,0.7) 0%,rgba(0,26,67,1) 25%,rgba(0,26,67,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3001a43', endColorstr='#001a43',GradientType=0 ); /* IE6-8 */
+
+z-index: 11 ;
+
+}
+#topic-slider .slide-overlay.open{
+display:block !important;
+
+
+}
+#topic-slider .slide-overlay .slide-close{
+position: relative;
+display: block;
+width: 70px;
+height: 70px;
+margin: 0px auto 0px auto;
+background: transparent url('http://etslindgren.df-kunde.de/cms/files/FlexSlider-master/topic-slider/close.png') no-repeat top left;
+cursor: pointer;
+
+}
+#topic-slider .slide-overlay .slide-popup{
+position: relative;
+display: block;
+min-width: 1170px;
+max-width: 1170px;
+min-height: 400px;
+margin: 0px auto 0 auto;
+padding-top: 40px;
+
+}
+#topic-slider .slide-popup .slide-text{
+position: relative;
+display:block;
+color: #fefefe;
+float: left;
+width: 580px;
+}
+#topic-slider .slide-popup .slide-text p{
+color: #eee;
+}
+#topic-slider .slide-popup .slide-video.show{
+display:block !important;
+
+}
+
+#topic-slider .slide-popup .slide-video{
+position: relative;
+display:none;
+float: left;
+width: 370px;
+margin-left: 120px;
+}
+#topic-slider .slide-popup .slide-video video{
+cursor: pointer;
+
+}
+#topic-slider .slide-popup .slide-video p{
+color: #eee;
+}
+
+#topic-slider .slide-popup .slide-gallery{
+position: relative;
+float: left;
+display: block;
+position: relative !important;
+max-width: 920px;
+height: 176px;
+margin: 0px 50px;
+padding: 0px 50px;
+zoom: 1;
+}
+
+#topic-slider .slide-popup .slide-gallery .gallery-controls{
+	display:none;
+	}
+#topic-slider .slide-popup .slide-gallery .gallery-controls .gallery-prev{
+cursor: pointer;
+}
+#topic-slider .slide-popup .slide-gallery .gallery-controls .gallery-next{
+cursor: pointer;
+}
+
+#topic-slider .slide-popup .slide-gallery > ul.slide-container{
+position: relative;
+mi0n-width: 920px;
+
+display: block;
+margin: 0px;
+padding: 0px ;
+float: left;
+zoom: 1;
+/*list-style: none; float: left;
+min-width: 20px;*/
+}
+#topic-slid0er .slide-popup .slide-gallery .carousel-viewport{
+	max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; 
+	padding: 0px 0px;
+}
+#topic-slider .slide-popup .slide-gallery ul.slide-container li{
+display: block !important;
+margin: 0 10px 0 0px !important;
+padding: 0px;
+float: left; 
+
+
+}
+#topic-slider .slide-popup .slide-gallery ul.slide-container li img{
+display: block; 
+margin: 0px;
+padding: 0px;
+
+
+cursor: pointer;}
+

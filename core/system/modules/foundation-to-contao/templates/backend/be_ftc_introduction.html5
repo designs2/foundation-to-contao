@@ -1,0 +1,15 @@
+<div class="be_ftc_introduction">
+    <div class="left">
+    <a href="http://www.monique-hahnefeld.de" target="_blank"><img src="http://www.monique-hahnefeld.de/files/portfolio_mh/images/logo.png" alt="" width="361" height="28"></a>
+        <h2><?php echo $GLOBALS['TL_LANG']['MSC']['ftcIntroduction']['donate']; ?></h2>
+        
+        <p><?php echo $GLOBALS['TL_LANG']['MSC']['ftcIntroduction']['foundation']; ?></p>
+        <p><?php echo $GLOBALS['TL_LANG']['MSC']['ftcIntroduction']['more_info']; ?></p>
+ 
+    </div>
+    <div class="right">
+        <?php echo $GLOBALS['TL_LANG']['MSC']['ftcIntroduction']['donate_button']; ?>
+       
+    </div>
+    <div class="clr"></div>
+</div>

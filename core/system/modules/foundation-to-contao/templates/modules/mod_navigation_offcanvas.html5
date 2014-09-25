@@ -1,0 +1,54 @@
+<!-- indexer::stop -->
+<?php //var_dump($this); ?>
+<?php   if ($this->top_bar=='1'):?>
+	 <nav class="tab-bar" >
+
+     <?php   if ($this->top_bar_left=='1'):?>
+	<section class="left-small">
+	<!--  <a class="left-off-canvas-toggle" href="#" >Menu</a> -->
+	   <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+	 </section>
+         <?php  endif; ?>
+     
+        <?php if ($this->headline): ?>
+        <section class="middle tab-bar-section">
+          <<?php echo $this->hl; ?> class="title" ><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+         </section>
+        <?php endif; ?>
+     <?php   if ($this->top_bar_right=='1'):?>
+
+      <section class="right-small">
+        <a class="right-off-canvas-toggle menu-icon" href="#"><span></span></a>
+      </section>
+         <?php  endif; ?>
+    </nav>
+    
+    <?php  endif; ?>
+    
+    <?php   if ($this->items):?> 
+	  <?php   if ($this->offcanvas_align=='left') {
+	  	echo '<aside class="left-off-canvas-menu" '.$this->ftcID.'>';
+	  }else {
+	  	 	echo '<aside class="right-off-canvas-menu">';
+	  }
+	  ?>
+		  <a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
+		
+		  <?php echo $this->items; ?>
+		
+		  <a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>
+		
+		</aside>
+	<?php  else: ?>
+		  <script>
+		  	  <?php   if ($this->offcanvas_align=='left') {
+		  	echo "var _toggler = document.getElementsByClassName('left-off-canvas-toggle');";
+		   }else {
+		    echo " var _toggler = document.getElementsByClassName('right-off-canvas-toggle');";
+		  	} ?>
+		  var aNode = _toggler[0];
+		  aNode.style.display = 'none';
+
+		  </script>
+  <?php  endif; ?>
+<!-- indexer::continue -->

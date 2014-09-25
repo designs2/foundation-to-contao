@@ -1,0 +1,36 @@
+/**
+ * Contao Open Source CMS
+ *
+ * Copyright (c) 2005-2014 Leo Feyer
+ *
+ * @package   Foundation To Contao
+ * @author    Monique Hahnefeld
+ * @license   LGPL
+ * @copyright 2014 Monique Hahnefeld
+ */
+
+ /* listing box  */
+ .w50 {
+ 	min-height: 72px !important;
+ 	height:auto !important;
+ }
+ 
+ .w25 {
+ width: 25% !important;
+ float: left;
+ min-height: 72px ;
+ height:auto ;
+ }
+ .w75 {
+ width: 75% !important;
+ float: left;
+ min-height: 72px ;
+ height:auto ;
+ }
+ .w75 textarea{
+ width: 100% !important;
+ float: left;
+ min-height: 100px ;
+ height:auto ;
+ }
+

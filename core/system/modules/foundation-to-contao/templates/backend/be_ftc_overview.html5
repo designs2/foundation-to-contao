@@ -1,0 +1,40 @@
+<?php if ($this->before): ?>
+<?php echo $this->before; ?>
+<?php endif; ?>
+
+<div class="tl_formbody_edit be_ftc_overview">
+    <?php foreach ($this->modules as $strGroupKey => $arrGroup): ?>
+    <fieldset id="pal_<?php echo $strGroupKey; ?>" class="tl_box<?php if($arrGroup['collapse']): ?> collapsed<?php endif; ?>">
+        <legend onclick="AjaxRequest.toggleFieldset(this,'<?php echo $strGroupKey; ?>','ftc_be_overview_legend')"><?php echo $arrGroup['label']; ?></legend>
+        <?php if ($arrGroup['html']): ?>
+        <?php echo $arrGroup['html']; ?>
+        <?php else: ?>
+        <?php foreach ($arrGroup['modules'] as $strModule => $arrModule): ?>
+        <div class="item">
+            <a href="<?php echo $arrModule['href']; ?>" title="<?php echo $arrModule['description']; ?>"<?php if ($arrModule['class']): ?> class="<?php echo $arrModule['class']; ?>"<?php endif; ?>>
+                <img src="<?php echo $arrModule['icon']; ?>" alt="">
+                <span><?php echo $arrModule['label']; ?></span>
+            </a>
+        </div>
+        <?php endforeach; ?>
+        <?php endif; ?>
+    </fieldset>
+    <?php endforeach; ?>
+</div>
+<?php if ($this->after): ?>
+<?php echo $this->after; ?>
+<?php endif; ?>
+<?php
+echo'<div class="settings_prev">';
+echo sprintf($GLOBALS['TL_LANG']['MSC']['ftc_links']['list'],$this->modul_links['list']);
+
+echo'</div>';
+
+?>
+<script>
+//
+window.addEvent('domready', function() {
+    document.id(document.body).addClass('ftc_be_overview');
+
+});
+</script>

@@ -1,0 +1,5 @@
+<dd>
+<?php
+//var_dump($this);?>
+   <a href="#<?php echo $this->ftcID; ?>"  class="<?php echo $this->hl; ?>"><?php echo $this->headline; ?></a>
+    <div id="<?php echo $this->ftcID; ?>" class="content row <?php echo $this->class; ?>">

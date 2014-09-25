@@ -1,0 +1,16 @@
+<?php if ($this->btn_split) {
+	echo '<a href="#" onclick="return false;" class="button split '.$this->btn_classes.' data-options="'.$this->dropdown_opt.'" '. $this->class.'"'. $this->cssID.' >'. $this->btn_name.' <span data-dropdown="'.$this->id.'"></span></a><br>';
+}else {
+	echo '<a href="#" class="button '.$this->btn_classes.' data-options="'.$this->dropdown_opt.'" '. $this->class.'"'. $this->cssID.' data-dropdown="'.$this->id.'">'. $this->btn_name.'</a><br>';
+}
+
+?>
+
+<ul id="<?php echo $this->id; ?>" class="f-dropdown <?php echo $this->class; ?>" data-dropdown-content>
+  <?php 
+   if (!is_array($this->items)) {return;}
+  foreach ($this->items as $item): ?>
+  <li>  <a href="<?php echo $item['href']; ?>" title="<?php echo $item['content']; ?>" class="<?php if ($item['class']): ?><?php echo $item['class']; ?><?php endif; ?>"><?php echo $item['content']; ?></a></li>
+  <?php endforeach; ?>
+</ul>
+

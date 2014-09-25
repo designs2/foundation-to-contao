@@ -1,0 +1,3 @@
+<a href="<?php echo $this->cta_href; ?>" title="<?php echo $this->btn_name; ?>" class="<?php echo $this->class.' button '.$this->btn_classes; ?>" id="<?php echo $this->id; ?>" <?php if($this->btn_attr){echo $this->btn_attr;} ?>>
+  <?php echo $this->btn_name; ?>
+</a>

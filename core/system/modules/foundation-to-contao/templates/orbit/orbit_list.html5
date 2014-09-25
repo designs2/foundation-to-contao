@@ -1,0 +1,21 @@
+<ul class="orbit <?php echo $class; ?>"  data-orbit>
+  <?php foreach ($this->body as $class=>$row): ?>
+    <?php foreach ($row as $col): ?>
+      <?php if ($col->addImage): ?>
+        <li class="<?php echo $class; ?> <?php echo $col->class; ?>">  
+           <img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> data-caption="<?php echo $col->caption; ?>" alt="<?php echo $col->alt; ?>">
+            <div class="orbit-caption">
+            <?php
+            if ($col->caption!==''||!$col->caption) {
+            	echo $col->alt;
+            }  else {
+            	echo $col->caption;
+            }          
+            ?>
+            
+            </div>         
+        </li>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  <?php endforeach; ?>
+</ul>

@@ -1,0 +1,7 @@
+<ul class="button-group <?php echo $this->class; ?>" <?php echo $this->cssID; ?> > 
+  <?php 
+   if (!is_array($this->items)) {return;}
+  foreach ($this->items as $item): ?>
+  <li>  <a href="<?php echo $item['href']; ?>" title="<?php echo $item['content']; ?>" class=" button <?php echo $this->btn_classes; ?> <?php if ($item['class']): ?><?php echo $item['class']; ?><?php endif; ?>"><?php echo $item['content']; ?></a></li>
+  <?php endforeach; ?>
+</ul>
