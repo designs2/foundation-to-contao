@@ -37,9 +37,6 @@
         "branch-alias": {
         			"dev-dev": "1.1.x-dev"
         		}
-//            "runonce": [
-//                "system/modules/foundation-to-contao/config/runonce.php"
-//            ]
         }
     }
 }
