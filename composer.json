@@ -35,7 +35,7 @@
                 "core/system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
             },
         "branch-alias": {
-        			"dev-dev": "1.1.x-dev"
+        			"develop": "develop"
         		}
         }
     }
