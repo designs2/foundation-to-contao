@@ -39,7 +39,7 @@ class ftcPresetsModel extends \Model
     public function getPresets()
      {
     
-     $objModel = ftcPresetsModel::findAll()->fetchAll();
+     $objModel = (ftcPresetsModel::findAll()===NULL)?array():ftcPresetsModel::findAll()->fetchAll();
      $Presets = $objModel;
      $optionsArr = array();
      
