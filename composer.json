@@ -3,7 +3,7 @@
     "description":"FTC - Foundation To Contao. The extension uses the Framework Foundation (Version 5) from Zurb. This Framework has a lot of awesome Plugins, many solutions for the daily work of a frontend designer.",
     "keywords":["contao", "foundation","framework","grid","system","zurb","responsive"],
     "type":"contao-module",
-    "license":"lgplv3-lizenz",
+    "license":"LGPL-3.0+",
     "authors":[
         {
             "name":"Designs2",
