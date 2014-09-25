@@ -1,6 +1,5 @@
 #FTC
 
-Version 1.1.0 beta
 ##Requirements
 
 - Contao 3.3.

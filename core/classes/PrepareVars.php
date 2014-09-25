@@ -21,14 +21,24 @@ class PrepareVars extends \Controller
 	public function templates($obj){   
 		
 		$template = $obj->getName();
-		
+		//var_dump($template);
       		switch($template) {
       		
       		case 'ce_headline':
       		case 'ce_text':
+      		case 'ce_image':
       		case 'ce_list':
-      		//echo'<pre>XXX';
+      		case 'mod_article':
+      		case 'mod_navigation':
+      		case 'mod_breadcrumb':
+      		case 'mod_search':
+      		case 'ce_download':
+      		case 'ce_downloads':
+      		case 'ce_hyperlink':
+      		case 'ce_hyperlink_image':
+      		case 'ce_toplink':
       		$obj->setName($template.'_ftc');
+      		//var_dump($template);
 			break;
       		default:
     		}  		
@@ -40,12 +50,17 @@ class PrepareVars extends \Controller
 	public function elements($objRow, $strBuffer, $objElement)    {   
 		
 		// $objRow->type is the type of the Element e.g. 'row_start'
-		//var_dump($GLOBALS['objPage']);
-	
 		/* $objElement */ 
+		if($objRow->type=='module'){
+			//var_dump($strBuffer);
+			
+			$NewBuffer = $this->design_modules($objRow);
+			$strBuffer = (!$NewBuffer)?$strBuffer:$NewBuffer;
+		return $strBuffer;
 		
+		}
 		if ($objRow->type=='form') {
-		
+		//var_dump($objRow);
 		
 			$this->design_elements($objRow);
 			
@@ -57,9 +72,7 @@ class PrepareVars extends \Controller
 			$strBuffer = $objEl->generate();
 			
 		}
-		
-				
-		
+
 		unset($objEl);
 		
 		return $strBuffer; 
@@ -69,72 +82,85 @@ class PrepareVars extends \Controller
      //compileFormFields
      public function forms($arrFields, $formId)    {   
 
-    		foreach ($arrFields as $k => $field) {
-    		$this->design_fields($field);
-    		
-			}
-    		return $arrFields; 
+		foreach ($arrFields as $k => $field) {
+		$this->design_fields($field);
+		}
+		
+		return $arrFields; 
  
-        } 
+      } 
      
-     
-     
-       //loadFormField
-      protected function ffl($objWidget,$strForm, $arrForm)    {   
-          		
-          		// set templates ftc
-          		echo '<pre>';
-          	
-          		//Svar_dump($arrForm);
-          		$strClass = new \FormFieldset($objWidget);
-          		$strClass->strTemplate ='test';
-          			
-          	
-          		echo '<br>';
-          		//var_dump($arrData);
-          		//$objWidget = $strClass->parse();
-var_dump($objWidget);
-         		return $objWidget; 
-          			
-                   
-           }
-           // getFrontendModule
+          
        //getArticle
-	    public function articles($objArticle, $strBuffer)    {   
+	 public function articles($objRow)    {   
+
+		$ftc_classes = $this->getGridVars(unserialize($objRow->aktiv_preset_ftc)[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
+		//var_dump($objRow->aktiv_preset_ftc,'n');
+		//$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
+		$objRow->cssID = unserialize($objRow->cssID);
+		$objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
+		$objRow->ftcID = ($objRow->cssID[0] != '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
+		
+		return $objRow; 
+		
+	 } 
+          //outputFrontendTemplate, $strContent, $strTemplate
+           // getFrontendModule
+     public function modules($objRow, $strBuffer, $objModule)    {   
+ 		 		
+		switch ($objRow->type) {
+			case 'navigation':
+			case 'customnav':
+			case 'search':
+			case 'breadcrumb':
+			case 'topbar':
+			case 'offcanvas':
+			case 'offcanvasjq':
+			case 'multitogglejq':
+			$key = $objRow->type;
+			//get the registrated Classname
+			$strClass = 'Module'.strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1); 
+			//var_dump($strClass );
+			$objEl = new $strClass($objRow);
+			
+			$ftc_classes = $this->getGridVars(unserialize($objRow->aktiv_preset_ftc)[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
+
+			
+			$objEl->cssID = unserialize($objRow->cssID);
+			$objEl->ftc_classes = trim($objRow->typePrefix.$objRow->type.' '.$objEl->cssID[1]).' '.$ftc_classes;
+			$objEl->ftcID = ($objEl->cssID[0] != '') ? ' id="' . $objEl->cssID[0] . '"' : '';
+			
+			
+			$strBuffer = $objEl->generate();
+			
+			if ($objRow->type=='offcanvasjq') {
+			//echo'<pre>';var_dump($objRow);
+			}
+			unset($objEl);
+			
+			break;
+			default:
+			break;
+		}
 	
-//	   		foreach ($arrFields as $k => $field) {
-//	   		$this->design_fields($field);
-//	   		
-//				}
-//	   		return $arrFields; 
-//	
-	       } 
-          //outputFrontendTemplate
-       public function modules($strContent, $strTemplate)    {   
-  
-//      		foreach ($arrFields as $k => $field) {
-//      		$this->design_fields($field);
-//      		
-//  			}
-//      		return $arrFields; 
+ 		
+ 		return $strBuffer; 
    
-          } 
+      } 
                       
      
      public function design_elements($el){
-     
-     $ftc = array();
-     
+          
      //FTC Classes 
-     $ftc['align'] = $this->splitArr($el->align_ftc);
-     $ftc['data_attr'] = $this->splitArr($el->data_attr_ftc);
-     $ftc['classes'] = $el->small_ftc.' '.$el->large_ftc.' '.$el->float_ftc.' '. $ftc['align'].' columns';
-     
-     $el->data_attr = $ftc['data_attr'];
-     $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc['classes'];
+     $ftc_classes = $this->getGridVars(unserialize($el->aktiv_preset_ftc)[0],$el->add_custom_settings,$el->custom_preset_ftc);
+     //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
+    // $el->cssID = unserialize($el->cssID);
+     $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
      $el->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
-     //var_dump($el->id,$el->type);
-   //  echo'<br><pre>';
+     
+     
+     $el->data_attr = $this->splitArr($el->data_attr_ftc);
+     
      switch($el->type) {
      	case 'progress_bar':
      	$el->ftc_classes .= $this->splitArr($el->btn_styles);
@@ -154,17 +180,14 @@ var_dump($objWidget);
      	$el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]);
      	break;
      	case 'row_start':
+     	$el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]);
      	$el->row_data_attr_ftc = $this->splitArr($el->row_data_attr_ftc);
      	break;
      	case 'tab_start':
      	case 'tab_start_inside':
      	$el->tabs_align = $el->tabs_align;
      	break;
-     	case 'form': //form
-     	//var_dump($el);
-     	//$form=$this->getForm($el->id);
-     	//var_dump($form);
-     	
+     	case 'form':
      	
      	break;
      	
@@ -176,6 +199,52 @@ var_dump($objWidget);
      //var_dump($el->class);
      return $el;
      }
+     
+     
+     public function design_modules($el){
+               
+          $elModel = \ModuleModel::findByID($el->module);
+          
+          switch($elModel->type) {
+          	case 'customnav':
+          	case 'navigation':
+          	case 'offcanvas':
+			case 'search':
+          	$strClass = 'Module'.strtoupper(substr($elModel->type, 0, 1)).substr($elModel->type, 1, (strlen($elModel->type))-1); 
+          			
+          	$elModul = new $strClass($elModel);
+          	
+          	$el->cssID = unserialize($el->cssID);
+          	$ftc_classes = $this->getGridVars(unserialize($el->aktiv_preset_ftc)[0],$el->add_custom_settings,$el->custom_preset_ftc);
+   
+          	$elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
+          	$elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
+			//echo'<br>';
+//			$el->Template = new \FrontendTemplate('mod_'.$el->type.'_ftc');
+//			$el->Template->setData($el);
+	
+			//$el->compile();
+			//var_dump('--- ',$el->ftc_classes,$el->ftcID);
+			//$el->strTemplate = $el->strTemplate.'_ftc';
+			//echo'<br>';
+			$strBuffer = $elModul->generate();
+			return $strBuffer;
+         
+          
+          	break;
+          	
+          	default:
+          	return false;
+         	}
+          
+      }
+          
+     
+     
+     
+     
+     
+     
      
      public function design_fields($el){
      
@@ -198,6 +267,7 @@ var_dump($objWidget);
 	
 	//var_dump($el->type);
 	switch($el->type) {
+
 		case 'range_slider':
 		$el->rs_id = 'range_value_'.$el->id;
 		$el->ftc_rs_classes = $ftc['align_field'] = $this->splitArr($el->rs_classes);
@@ -268,13 +338,44 @@ var_dump($objWidget);
      	return $arrOptions;
      }
      
+     public function getGridVars($preset,$add_custom,$custom_preset){
+     
+     $ftc = array();
+     $GridArr = explode(',','small,medium,large,xlarge,xxlarge,pull,push');
+     if ($add_custom=='1') {$preset = $custom_preset;}
+     $preset = (!is_array($preset))?unserialize($preset):$preset;
+     
+     foreach ($GridArr as $v) {
+     if (isset($preset[$v])&&$preset[$v]!=='-') {
+     	$ftc[$v] = $v.'-'.$preset[$v];
+     }
+     	
+     }
+     //var_dump(count($ftc));
+     $ftc['columns'] = (count($ftc)==0)?'':$ftc_classes.' columns';
+     //FTC Classes 
+     $ftc['float_ftc'] = ($preset['float_ftc']!=='-')?$preset['float_ftc']:'';
+     
+     $ftc['align'] = ($preset['align']!==NULL)?$this->splitArr($preset['align']):'';
+     $ftc['custom'] = ($preset['custom']!==NULL)?$preset['custom']:'';
+     
+    
+     $ftc_classes = trim(implode(' ',$ftc));
+     unset( $preset);
+     return $ftc_classes;
+     
+     }
+     
+     
      public function splitArr($arr){
+     
      $str='';
-     	if ($arr==''||!is_array(unserialize($arr))) {
+     $arr = (!is_array($arr))?unserialize($arr):$arr;
+     	if ($arr==''||!is_array($arr)) {
      		return;
      	}
-     	foreach (unserialize($arr) as $class) {
-     		if ($class=='') {
+     	foreach ($arr as $class) {
+     		if ($class==''||$class=='-') {
      			return;
      		}
      		$str.=' '.$class;

@@ -37,5 +37,11 @@ class ContentAccStartInsideFTC extends \ContentElement
 		}
 		$this->Template->hl = $this->hl;
 		$this->Template->headline = $this->headline;
+		//var_dump($this->arrData['cssID']);
+		$css = $this->arrData['cssID'];
+		$css = (is_array($css))?$css:unserialize($css);
+		
+		$this->Template->ftcID = $css[0];
+		unset($css);
 	}
 }

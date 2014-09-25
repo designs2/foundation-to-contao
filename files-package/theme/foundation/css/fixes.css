@@ -1,0 +1,36 @@
+.top-bar-section input[type="text"]{
+	padding-top:0 ;
+	padding-bottom:0 ;
+	height: 1.78rem;
+}
+.invisible{
+	display: none;
+}
+ /* Quelle http://skybeam.de/blog/html5-input-email/
+  */
+::-webkit-validation-bubble-icon {display:none;}
+::-webkit-validation-bubble-message {
+	background-color:#d73e3e;
+	background-image:-webkit-linear-gradient(#d73e3e 50%, #c12828 100%);
+	border:1px solid #962222;
+	-webkit-border-radius:8px;
+	box-shadow:rgba(0,0,0,0.5) 0 1px 6px, inset rgba(255,51,46,0.8) 0 1px 0px;
+	color:#ececec;
+	font:13px "Segoe UI",Arial,sans-serif;
+	padding:8px;
+	text-shadow:#a12525 0 -1px 0;
+	top:-4px;
+	-webkit-user-select:none;  
+}
+::-webkit-validation-bubble-arrow {
+	background-color:#d73e3e;
+	border:1px solid #962222;
+	border-right:none;
+	border-bottom:none;
+	display:inline-block;
+	-webkit-box-shadow:none;
+	left:30px;
+	top:3px;
+	height:13px;
+	width:13px;	
+}

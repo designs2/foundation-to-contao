@@ -10,34 +10,26 @@
 * @license   LGPL
 * @copyright 2014 Monique Hahnefeld
  */
- 
- $ftc_grid = '{ftc_legend},small_ftc,large_ftc,float_ftc,align_ftc,data_attr_ftc;';
-  
- $palettes = $GLOBALS['TL_DCA']['tl_content']['palettes'];
- foreach ($palettes as $p => $str) {
- 	 
- 	 if ($p=='list') {
- 	 $str = str_replace("listitems","listitems,list_style_type",$str);	
- 	 }
- 	 $pallete_ftc = str_replace("{type_legend}",$ftc_grid."{type_legend}",$str);
- 	 $GLOBALS['TL_DCA']['tl_content']['palettes'][$p]=$pallete_ftc;
- }
-
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('MHAHNEFELD\FTC\Callbacks','content_onload');
+   
 $fieldsSize=count($GLOBALS['TL_DCA']['tl_content']['fields'])-1;
 $palettesSize=count($palettes)-1;
 $default = '{type_legend},type,headline;';
 $expert ='{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
+
+
+
 //add palettes for contentelements
 array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 (
-	'orbit'        =>  $ftc_grid.$default.'{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,numberOfItems;'.$expert,
-	'orbit_start'        => $ftc_grid.$default.$expert,
+	'orbit'        =>  $default.'{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,numberOfItems;'.$expert,
+	'orbit_start'        => $default.$expert,
 	'orbit_start_inside'        => $default.$expert,
 	'orbit_stop'        => $default.$expert,
 	'orbit_stop_inside'        => $default.$expert,
 	
-	'clearing'            => $ftc_grid.$default.'{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,perRow,perPage,numberOfItems;'.$expert,
+	'clearing'            => $default.'{source_legend},multiSRC,sortBy,useHomeDir;{image_legend},size,perRow,perPage,numberOfItems;'.$expert,
 	'button_ftc'            => '{type_legend},type,btn_name,cta_href,use_reveal;{button_legend},btn_size,btn_styles;'.$expert,
 	'button_bar_start_ftc'            => $default.$expert,
 	'button_bar_stop_ftc'            => '{type_legend},type;'.$expert,
@@ -51,43 +43,44 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 
 	'joyride'           => '{type_legend},type;{joyride_legend},joyride;'.$expert,
 	'alert_box'            => '{type_legend},type;{alert_legend},alert_kind,alert_style,alert_txt;'.$expert,
-	'reveal_modal_start'            =>   $ftc_grid.'{type_legend},type;'.$expert,
+	'reveal_modal_start'            =>   '{type_legend},type;'.$expert,
 	'reveal_modal_stop'            => '{type_legend},type;'.$expert,
-	
-	
 
 	'row_start'        => '{type_legend},type,headline,cssID,row_data_attr_ftc',
 	'row_stop'        => '{type_legend},type;'.$expert,
 	
-	'magellan_stop'            =>  $ftc_grid.$default.$expert,
+	'col_start'        => '{type_legend},type,headline;'.$expert,
+	'col_stop'        => '{type_legend},type;'.$expert,
+	
+	'magellan_stop'            =>  $default.$expert,
 	'magellan_nav'            => '{type_legend},type;{magellan_legend},magellan_nav;'.$expert,
 
-	'blockquote'            =>  $ftc_grid.$default.'{blockquote_legend},blockquote,cite;'.$expert,
-	'vcard'            => $ftc_grid.$default.'{vcard_legend},vcard;'.$expert,
-	'def_list'            => $ftc_grid.$default.'{list_legend},def_list;'.$expert,
+	'blockquote'            =>  $default.'{blockquote_legend},blockquote,cite;'.$expert,
+	'vcard'            => $default.'{vcard_legend},vcard;'.$expert,
+	'def_list'            => $default.'{list_legend},def_list;'.$expert,
 	
-	'progress_bar'            => $ftc_grid.'{type_legend},type,progress_size,btn_styles;'.$expert,
+	'progress_bar'            => '{type_legend},type,progress_size,btn_styles;'.$expert,
 	
-	'tab_ftc_start'  =>  $ftc_grid.$default.'{nav_legend},tabs_nav,tabs_align;'.$expert ,
+	'tab_ftc_start'  =>  $default.'{nav_legend},tabs_nav,tabs_align;'.$expert ,
 	'tab_ftc_stop'   => '{type_legend},type;'.$expert,
 	'tab_ftc_start_inside'  => $default.$expert,
 	'tab_ftc_stop_inside'   => '{type_legend},type;'.$expert,
 	
-	'acc_ftc_start'  =>  $ftc_grid.$default.$expert,
+	'acc_ftc_start'  =>  $default.$expert,
 	'acc_ftc_stop'   => '{type_legend},type;'.$expert,
 	'acc_ftc_start_inside'  => $default.$expert,
 	'acc_ftc_stop_inside'   => '{type_legend},type;'.$expert,
-	'price_table'        => $ftc_grid.$default.'{table_legend},price_table,cta_href;'.$expert,
+	'price_table'        => $default.'{table_legend},price_table,cta_href;'.$expert,
 	
-	'flex_video'        => $ftc_grid.$default.'{video_legend},use_youtube,vimeo,own_src;'.$expert,
-	'placeholder_image'                       => $ftc_grid.$default.'{placeholder_legend},is_bw,stamp,topic;{image_legend},alt,title,size,imagemargin,imageUrl,caption;'.$expert,
+	'flex_video'        => $default.'{video_legend},use_youtube,vimeo,own_src;'.$expert,
+	'placeholder_image'                       => $default.'{placeholder_legend},is_bw,stamp,topic;{image_legend},alt,title,size,imagemargin,imageUrl,caption;'.$expert,
 
   
   ));
   
   //selector
  
-  array_insert($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'] ,1,array('use_reveal','use_youtube','vimeo','own_src'));
+  array_insert($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'] ,1,array('add_custom_settings','use_reveal','use_youtube','vimeo','own_src'));
   //add subpalletes
   //var_dump($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__']);
   $subpalettes = $GLOBALS['TL_DCA']['tl_content']['subpalettes'];
@@ -95,66 +88,74 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
   //add palettes for contentelements
   array_insert($GLOBALS['TL_DCA']['tl_content']['subpalettes'], $subpalettesSize, array
   (
+  	'add_custom_settings' =>'custom_preset_ftc',
   	'use_reveal'        => 'modal_id',
   	'use_youtube'        => 'playerSize,autoplay,youtube_vimeo_id',
   	'vimeo'        => 'playerSize,autoplay,youtube_vimeo_id',
   	'own_src'        => 'playerSize,autoplay,posterSRC,video_src,track_src,flash_player_src,flash_video_src'
+  	
   
   ));
   
   
 	array_insert($GLOBALS['TL_DCA']['tl_content']['fields'], $fieldsSize, array
 	(
-	'small_ftc' => array
-			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['small_ftc'],
-				'default'                 => 'small-12',
-				//'options'=>array('topic',' '),
-				'exclude'                 => true,
+	'presets_ftc' => array
+				(
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['presets_ftc'],
+					'default'                 => '-',
+					//'options'=>array('topic',' '),
+					'exclude'                 => true,
+					 'sorting' 				  => true,
+					'filter'                  => true,
+					'inputType'               => 'select',
+					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
+					'load_callback'			 => array(
+					array('ftcPresetsModel', 'getSelectedPreset')
+						),
+					'save_callback'			 => array(
+						array('ftcPresetsModel', 'getAllSelectedPresets')
+							),	
+				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
+					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+					'sql'                     => "varchar(255) NOT NULL default '-'"
+				),
+		'aktiv_preset_ftc' => array
+				(
+					'label'                   => &$GLOBALS['TL_LANG']['tl_content']['aktiv_preset_ftc'],
+	
+					'exclude'                 => true,
+					'inputType'               => 'hidden',
+				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
+					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
+					
+					'sql'                     => "text NULL"
+				),
+		'custom_preset_ftc' => array
+				(
+					'label'                   => &$GLOBALS['TL_LANG']['tl_content']['custom_preset_ftc'],
+	
+					'exclude'                 => true,
+					'inputType'               => 'GridWizard',
+					//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
+					'eval' => array
+					(
+					    'tl_class'          => 'clr',
+					    'doNotShow' =>true
 				
-				'inputType'               => 'select',
-				'options_callback'        => array('ftcSettingsModel', 'getSmallOpitons'),
-				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['small_ftc_options'],
-				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-				'sql'                     => "varchar(255) NOT NULL default ''"
-			),
-	'large_ftc' => array
-			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['large_ftc'],
-				'default'                 => 'large-12',
-				//'options'=>array('topic',' '),
-				'exclude'                 => true,
-		
-				'inputType'               => 'select',
-				'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
-				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['large_ftc_options'],
-				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-				'sql'                     => "varchar(255) NOT NULL default ''"
-			),
-	'float_ftc' => array
-			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_content']['float_ftc'],
-				'default'                 => '',
-				'options'=>array(' ','left','right'),
-				'exclude'                 => true,
-			
-				'inputType'               => 'select',
-				'reference'               => &$GLOBALS['TL_LANG']['tl_content']['float_ftc_options'],
-				'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-				'sql'                     => "varchar(255) NOT NULL default ''"
-			),
-	 'align_ftc' => array
-	   		(
-	   			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['align_ftc'],
-	   			'default'                 => '',
-	   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
-	   			'exclude'                 => true,
-	   			
-	   			'inputType'               => 'select',
-	   			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['align_ftc_options'],
-	   			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
-	   			'sql'                     => "varchar(255) NOT NULL default ''"
-	   		),
+					    
+					),    
+					
+					'sql'                     => "text NULL"
+				),
+		'add_custom_settings' => array
+					(
+						'label'                   => &$GLOBALS['TL_LANG']['tl_content']['add_custom_settings'],
+						'exclude'                 => true,
+						'inputType'               => 'checkbox',
+						'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
+						'sql'                     => "char(1) NOT NULL default ''"
+					),
 	  'data_attr_ftc' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['data_attr_ftc'],
