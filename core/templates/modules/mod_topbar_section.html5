@@ -1,5 +1,0 @@
-<!-- indexer::stop -->
- <a href="<?php echo $this->request; ?>#<?php echo $this->skipId; ?>" class="invisible"><?php echo $this->skipNavigation; ?></a>
-	 <?php echo $this->items; ?>	
- <a id="<?php echo $this->skipId; ?>" class="invisible">&nbsp;</a>	
-<!-- indexer::continue -->
