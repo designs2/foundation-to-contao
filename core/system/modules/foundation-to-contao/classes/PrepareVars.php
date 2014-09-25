@@ -93,7 +93,9 @@ class PrepareVars extends \Controller
           
        //getArticle
 	 public function articles($objRow)    {   
-
+		if(!is_array(unserialize($objRow->aktiv_preset_ftc))){ 
+		return $objRow; 		
+			}
 		$ftc_classes = $this->getGridVars(unserialize($objRow->aktiv_preset_ftc)[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
 		//var_dump($objRow->aktiv_preset_ftc,'n');
 		//$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
