@@ -1,5 +1,5 @@
 {
-    "name":"foundation-to-contao/core",
+    "name":"designs2/foundation-to-contao",
     "description":"FTC - Foundation To Contao. The extension uses the Framework Foundation (Version 5) from Zurb. This Framework has a lot of awesome Plugins, many solutions for the daily work of a frontend designer.",
     "keywords":["contao", "foundation","framework","grid","system","zurb","responsive"],
     "type":"contao-module",
@@ -17,7 +17,7 @@
     "support":{
     		"issues":"https://github.com/designs2/foundation-to-contao/issues",
     		"wiki":"http://www.foundation-to-contao.de",
-    		"source":"https://github.com/designs2/foundation-to-contao/core"
+    		"source":"https://github.com/designs2/foundation-to-contao"
     	},
     "require":{
         "php":">=5.3.2",
@@ -35,7 +35,7 @@
                 "core/system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
             },
         "branch-alias": {
-        			"develop": "develop"
+        			"dev-develop": "develop"
         		}
         }
     }
