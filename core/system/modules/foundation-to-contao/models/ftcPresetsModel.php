@@ -108,7 +108,7 @@ class ftcPresetsModel extends \Model
      public function getDefaultPreset()
       {
 
-      	$Presets = ftcPresetsModel::findAll()->fetchAll();
+      	$Presets = (ftcPresetsModel::findAll()===NULL)?array():ftcPresetsModel::findAll()->fetchAll();
 
       	foreach ($Presets as $k => $v) {
       	if ($Presets[$k]['use_as_default_for']=='') {continue;}
