@@ -336,7 +336,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 	   			'filter'                  => true,
 	   			'search'                  => true,
 	   			'inputType'               => 'checkbox',
-	   			'options'        => array('modernizr','jquery','cookie','placeholder','fastclick','mediaelement_player'),
+	   			'options'        => array('modernizr','jquery','jquery.cookie','placeholder','fastclick','mediaelement_player'),
 	   			'reference'               => &$GLOBALS['TL_LANG']['tl_layout']['FTC_JS_options'],
 	   			'eval'                    => array('multiple'=>true,'class'=>'w50 m12'),
 	   			'sql'                     => "text NULL"
