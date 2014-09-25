@@ -51,8 +51,8 @@ $GLOBALS['TL_DCA']['tl_ftc_settings'] = array
 		),
 		'label' => array
 		(
-		    'fields'                  => array('name','id','theme_folder'),
-		    'format'                  => '%s | %s | %s'
+		    'fields'                  => array('name','id'),
+		    'format'                  => '%s | %s '
 		),
 		'global_operations' => array
 		(

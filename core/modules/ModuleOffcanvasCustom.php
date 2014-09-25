@@ -12,7 +12,7 @@
  
 namespace MHAHNEFELD\FTC;
 
-class ModuleOffcanvasCustom extends \ModuleExt
+class ModuleOffcanvasCustom extends \Module
 {
 
 	/**

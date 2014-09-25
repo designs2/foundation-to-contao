@@ -4,13 +4,12 @@
   Foundation.libs.equalizer = {
     name : 'equalizer',
 
-    version : '5.3.3',
+    version : '5.2.2',
 
     settings : {
       use_tallest: true,
       before_height_change: $.noop,
-      after_height_change: $.noop,
-      equalize_on_stack: false
+      after_height_change: $.noop
     },
 
     init : function (scope, method, options) {
@@ -28,12 +27,12 @@
     equalize: function(equalizer) {
       var isStacked = false,
           vals = equalizer.find('[' + this.attr_name() + '-watch]:visible'),
+          firstTopOffset = vals.first().offset().top,
           settings = equalizer.data(this.attr_name(true)+'-init');
 
       if (vals.length === 0) return;
-      var firstTopOffset = vals.first().offset().top;
       settings.before_height_change();
-      equalizer.trigger('before-height-change').trigger('before-height-change.fndth.equalizer');
+      equalizer.trigger('before-height-change');
       vals.height('inherit');
       vals.each(function(){
         var el = $(this);
@@ -41,13 +40,9 @@
           isStacked = true;
         }
       });
+      if (isStacked) return;
 
-      if (settings.equalize_on_stack === false) {
-        if (isStacked) return;
-      };
-
-      var heights = vals.map(function(){ return $(this).outerHeight(false) }).get();
-
+      var heights = vals.map(function(){ return $(this).outerHeight() }).get();
       if (settings.use_tallest) {
         var max = Math.max.apply(null, heights);
         vals.css('height', max);
@@ -56,7 +51,7 @@
         vals.css('height', min);
       }
       settings.after_height_change();
-      equalizer.trigger('after-height-change').trigger('after-height-change.fndtn.equalizer');
+      equalizer.trigger('after-height-change');
     },
 
     reflow : function () {
@@ -70,5 +65,4 @@
       });
     }
   };
-})(jQuery, window, window.document);
-
+}(jQuery, this, this.document));

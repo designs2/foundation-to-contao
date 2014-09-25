@@ -69,7 +69,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		'rwh_large_ftc' => array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['rwh_large_ftc'],
-					'default'                 => 'xxlarge-12',
+					'default'                 => 'large-12',
 					'exclude'                 => true,
 					'inputType'               => 'select',
 					'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
@@ -92,7 +92,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		   		(
 		   			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['rwh_align_ftc'],
 		   			'default'                 => '',
-		   			'options'=>array(' ','small-centered','small-uncentered','xxlarge-centered','xxlarge-uncentered'),
+		   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
 		   			'exclude'                 => true,
 		   			'inputType'               => 'select',
 		   			'reference'               => &$GLOBALS['TL_LANG']['tl_layout']['align_ftc_options'],
@@ -115,7 +115,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		   	'rwf_large_ftc' => array
 		   					(
 		   						'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['rwf_large_ftc'],
-		   						'default'                 => 'xxlarge-12',
+		   						'default'                 => 'large-12',
 		   						'exclude'                 => true,
 		   						'inputType'               => 'select',
 		   						'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
@@ -140,7 +140,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		   			   		(
 		   			   			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['rwf_align_ftc'],
 		   			   			'default'                 => '',
-		   			   			'options'=>array(' ','small-centered','small-uncentered','xxlarge-centered','xxlarge-uncentered'),
+		   			   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
 		   			   			'exclude'                 => true,
 		   			   		
 		   			   			'inputType'               => 'select',
@@ -167,7 +167,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		   'cll_large_ftc' => array
    							(
    								'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cll_large_ftc'],
-   								'default'                 => 'xxlarge-12',
+   								'default'                 => 'large-12',
    								'exclude'                 => true,
    								'inputType'               => 'select',
    								'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
@@ -190,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
    					   		(
    					   			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['cll_align_ftc'],
    					   			'default'                 => '',
-   					   			'options'=>array(' ','small-centered','small-uncentered','xxlarge-centered','xxlarge-uncentered'),
+   					   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
    					   			'exclude'                 => true,
    					   		
    					   			'inputType'               => 'select',
@@ -214,7 +214,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		   	'clr_large_ftc' => array
    							(
    								'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['clr_large_ftc'],
-   								'default'                 => 'xxlarge-12',
+   								'default'                 => 'large-12',
    								//'options'=>array('topic',' '),
    								'exclude'                 => true,
    								'inputType'               => 'select',
@@ -239,7 +239,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
    					   		(
    					   			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['clr_align_ftc'],
    					   			'default'                 => '',
-   					   			'options'=>array(' ','small-centered','small-uncentered','xxlarge-centered','xxlarge-uncentered'),
+   					   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
    					   			'exclude'                 => true,
    					   			'inputType'               => 'select',
    					   			'reference'               => &$GLOBALS['TL_LANG']['tl_layout']['align_ftc_options'],
@@ -263,7 +263,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 	    	'main_large_ftc' => array
 							(
 								'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['main_large_ftc'],
-								'default'                 => 'xxlarge-12',
+								'default'                 => 'large-12',
 								'exclude'                 => true,
 								'inputType'               => 'select',
 								'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
@@ -289,7 +289,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 					   		(
 					   			'label'                   => &$GLOBALS['TL_LANG']['tl_layout']['main_align_ftc'],
 					   			'default'                 => '',
-					   			'options'=>array(' ','small-centered','small-uncentered','xxlarge-centered','xxlarge-uncentered'),
+					   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
 					   			'exclude'                 => true,
 					   			
 					   			

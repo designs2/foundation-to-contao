@@ -96,20 +96,6 @@
  $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['large-10'] ="10";
  $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['large-11'] ="11";
  $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['large-12'] ="12";
- 
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-1'] ="1";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-1'] ="2";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-2'] ="2";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-3'] ="3";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-4'] ="4";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-5'] ="5";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-6'] ="6";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-7'] ="7";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-8'] ="8";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-9'] ="9";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-10'] ="10";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-11'] ="11";
- $GLOBALS['TL_LANG']['tl_layout']['large_ftc_options']['xxlarge-12'] ="12";
 
 
 

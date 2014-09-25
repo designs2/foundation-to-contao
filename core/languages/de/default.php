@@ -10,32 +10,6 @@
  * @copyright 2014 Monique Hahnefeld
  */
  
- // ContaoElements FTC BE
- //GROUPS for dma
-// $GLOBALS['TL_LANG']['CTE']['ftc_magellan'] ="Magellan Scroll/Anker Navigation";
-// $GLOBALS['TL_LANG']['CTE']['ftc_content'] ="Inhalt";
-// $GLOBALS['TL_LANG']['CTE']['ftc_callouts_prompts'] ="Pop-Ups";
-// $GLOBALS['TL_LANG']['CTE']['ftc_buttons'] ="Buttons";
-// $GLOBALS['TL_LANG']['CTE']['ftc_links'] ="Links";
-// $GLOBALS['TL_LANG']['CTE']['ftc_row'] ="Reihe / Zeile";
-// $GLOBALS['TL_LANG']['CTE']['ftc_col'] ="Spalte";
-// $GLOBALS['TL_LANG']['CTE']['ftc_media'] ="Media";
-// $GLOBALS['TL_LANG']['CTE']['ftc_tab'] ="Tab";
-// $GLOBALS['TL_LANG']['CTE']['ftc_accordion'] ="Accordion";
-// $GLOBALS['TL_LANG']['CTE']['ftc_clearing'] ="Clearing";
-// $GLOBALS['TL_LANG']['CTE']['ftc_orbit'] ="Orbit";
-// $GLOBALS['TL_LANG']['CTE']['ftc_code'] ="Code";
- 
- /*ftc grid*/
-
-$GLOBALS['TL_LANG']['MSC']['presets_ftc'][0] = 'Designvorgabe';
-$GLOBALS['TL_LANG']['MSC']['presets_ftc'][1] = 'Wählen Sie die Designvorgabe.';
-$GLOBALS['TL_LANG']['MSC']['aktiv_preset_ftc'][0] = 'test -> geht';
-$GLOBALS['TL_LANG']['MSC']['add_custom_settings'][0] = 'Individuelle Einstellungen verwenden'; 
-$GLOBALS['TL_LANG']['MSC']['custom_preset_ftc'][0] = 'Auswahl der Displaybreiten als Spaltenanzahl und weitere Einstellungen';
-$GLOBALS['TL_LANG']['MSC']['custom_preset_ftc'][1] = 'Breakpoints: small=...';
-
- 
 
 $GLOBALS['TL_LANG']['MOD']['ftc'] = "FTC";
 $GLOBALS['TL_LANG']['MOD']['tl_ftc_intro'] = array("FTC Intro","Foundation To Contao");
@@ -52,7 +26,7 @@ $GLOBALS['TL_LANG']['MSC']['foundation_to_contao_more']='Mehr erfahren';
 $GLOBALS['TL_LANG']['MSC']['news_more']='&raquo; Mehr';
 
 
-$GLOBALS['TL_LANG']['MSC']['ftc_version'] = '1.0 Beta';
+$GLOBALS['TL_LANG']['MSC']['ftc_version'] = '1.0.0 RC1';
 $GLOBALS['TL_LANG']['MSC']['config_theme'] = 'FTC – Foundation To Contao (Version: %s)';
 
 $GLOBALS['TL_LANG']['MSC']['ftcIntroduction']['donate'] = 'Diese Erweiterung ist eine Arbeit von Monique Hahnefeld. <br>Eine kleine Spende ist natürlich immer willkommen.'; 

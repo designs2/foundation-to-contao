@@ -26,22 +26,19 @@ ClassLoader::addNamespaces(array
  */
 ClassLoader::addClasses(array
 (
-	//Wizard
-	'MHAHNEFELD\FTC\GridWizard' => 'system/modules/foundation-to-contao/widgets/GridWizard.php',
+	
 	//HOOKs
 	'MHAHNEFELD\FTC\PrepareVars' => 'system/modules/foundation-to-contao/classes/PrepareVars.php',
 	'MHAHNEFELD\FTC\PrepareWidgets' => 'system/modules/foundation-to-contao/classes/PrepareWidgets.php',
-	'MHAHNEFELD\FTC\Callbacks' => 'system/modules/foundation-to-contao/classes/Callbacks.php',
 	
 	// Models
 	'MHAHNEFELD\FTC\ftcSettingsModel' => 'system/modules/foundation-to-contao/models/ftcSettingsModel.php',
-	'MHAHNEFELD\FTC\ftcPresetsModel' => 'system/modules/foundation-to-contao/models/ftcPresetsModel.php',
 
 	// Modules
-	'MHAHNEFELD\FTC\ModuleExt'  => 'system/modules/foundation-to-contao/modules/ModuleExt.php',
+	'MHAHNEFELD\FTC\Module'  => 'system/modules/foundation-to-contao/modules/Module.php',
 	'MHAHNEFELD\FTC\ModuleOffcanvasCustom'  => 'system/modules/foundation-to-contao/modules/ModuleOffcanvasCustom.php',
 	'MHAHNEFELD\FTC\ModuleOffcanvas'  => 'system/modules/foundation-to-contao/modules/ModuleOffcanvas.php',
-	//'Contao\Module'  => 'system/modules/foundation-to-contao/modules/Module.php',
+	'Contao\Module'  => 'system/modules/foundation-to-contao/modules/Module.php',
 	//topbar
 	'MHAHNEFELD\FTC\ModuleTopbarStart'  => 'system/modules/foundation-to-contao/modules/ModuleTopbarStart.php',
 	'MHAHNEFELD\FTC\ModuleTopbarStop'  => 'system/modules/foundation-to-contao/modules/ModuleTopbarStop.php',
@@ -51,9 +48,6 @@ ClassLoader::addClasses(array
 	//Classes
 	'MHAHNEFELD\FTC\Intro'  => 'system/modules/foundation-to-contao/classes/Intro.php',
 	'MHAHNEFELD\FTC\Themes'  => 'system/modules/foundation-to-contao/classes/Themes.php',
-	'MHAHNEFELD\FTC\Presets'  => 'system/modules/foundation-to-contao/classes/Presets.php',
-	
-	
 	
 	//Elements magellan
 	'MHAHNEFELD\FTC\ContentMagellanNav'  => 'system/modules/foundation-to-contao/elements/magellan/ContentMagellanNav.php',
@@ -71,9 +65,6 @@ ClassLoader::addClasses(array
 	//Elements row
 	'MHAHNEFELD\FTC\ContentRowStart'  => 'system/modules/foundation-to-contao/elements/row/ContentRowStart.php',
 	'MHAHNEFELD\FTC\ContentRowStop'  => 'system/modules/foundation-to-contao/elements/row/ContentRowStop.php',
-	//Elements col
-	'MHAHNEFELD\FTC\ContentColStart'  => 'system/modules/foundation-to-contao/elements/col/ContentColStart.php',
-	'MHAHNEFELD\FTC\ContentColStop'  => 'system/modules/foundation-to-contao/elements/col/ContentColStop.php',
 	//Elements Content
 	'MHAHNEFELD\FTC\ContentListFTC'  => 'system/modules/foundation-to-contao/elements/content/ContentListFTC.php',
 	'MHAHNEFELD\FTC\ContentDefList'  => 'system/modules/foundation-to-contao/elements/content/ContentDefList.php',
@@ -123,7 +114,7 @@ ClassLoader::addClasses(array
 TemplateLoader::addFiles(array
 (	
 	'be_main' => 'system/modules/foundation-to-contao/templates/backend',
-	//'be_wildcard' => 'system/modules/foundation-to-contao/templates/backend',
+	'be_wildcard' => 'system/modules/foundation-to-contao/templates/backend',
 	'be_ftc_introduction' => 'system/modules/foundation-to-contao/templates/backend',
 	'be_ftc_overview' => 'system/modules/foundation-to-contao/templates/backend',
 	
@@ -139,18 +130,8 @@ TemplateLoader::addFiles(array
 	'mod_breadcrumb' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_search_simple_topbar' => 'system/modules/foundation-to-contao/templates/modules',
 	'search_default_topbar' => 'system/modules/foundation-to-contao/templates/modules',
-	//core
-	'mod_article_ftc' => 'system/modules/foundation-to-contao/templates/modules',
-	'mod_breadcrumb_ftc' => 'system/modules/foundation-to-contao/templates/modules',
-	'mod_navigation_ftc' => 'system/modules/foundation-to-contao/templates/modules',
-	'mod_search_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	
-	//links
-	'ce_download_ftc' => 'system/modules/foundation-to-contao/templates/links',
-	'ce_downloads_ftc' => 'system/modules/foundation-to-contao/templates/links',
-	'ce_hyperlink_ftc' => 'system/modules/foundation-to-contao/templates/links',
-	'ce_hyperlink_image_ftc' => 'system/modules/foundation-to-contao/templates/links',
-	'ce_toplink_ftc' => 'system/modules/foundation-to-contao/templates/links',
+	
 	
 	//elements
 	'ce_magellan_nav'  => 'system/modules/foundation-to-contao/templates/magellan',
@@ -173,8 +154,6 @@ TemplateLoader::addFiles(array
 	
 	'ce_row_start' => 'system/modules/foundation-to-contao/templates/row',
 	'ce_row_stop' => 'system/modules/foundation-to-contao/templates/row',
-	'ce_col_start' => 'system/modules/foundation-to-contao/templates/col',
-	'ce_col_stop' => 'system/modules/foundation-to-contao/templates/col',
 	
 	'ce_list_ftc' => 'system/modules/foundation-to-contao/templates/content',
 	'ce_def_list' => 'system/modules/foundation-to-contao/templates/content',
@@ -204,7 +183,7 @@ TemplateLoader::addFiles(array
 	'pagination_ftc' => 'system/modules/foundation-to-contao/templates/clearing',
 		
 	'ce_flex_video' => 'system/modules/foundation-to-contao/templates/media',
-	'ce_image_ftc' => 'system/modules/foundation-to-contao/templates/media',
+	'ce_image' => 'system/modules/foundation-to-contao/templates/media',
 	'ce_placeholder_image' => 'system/modules/foundation-to-contao/templates/media',
 	
 	'ce_reveal_modal_start' => 'system/modules/foundation-to-contao/templates/callouts_prompts',

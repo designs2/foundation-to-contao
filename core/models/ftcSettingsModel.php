@@ -17,42 +17,6 @@ class ftcSettingsModel extends \Model
 
     protected static $strTable = 'tl_ftc_settings';
     
-    
-    //get grid value and generate options
-    public function getColOpitons()
-     {
-
-     $GridSize=$this->getMaxCols();
-     $optionsArr=array();
-     $optionsArr[0]='-';
-    	  //ftc setting size of columns (default=12) 
-    	  for ($i = 1; $i <= $GridSize; $i++) {
-    	  	$optionsArr[$i]= (string) $i;
-    	  }
-     
-     return $optionsArr;
-     	
-     }
-     
-     //get align value and generate options
-     public function getAlignOpitons()
-      {
-     
-          $breakpoints='small,medium,large,xlarge,xxlarge';
-          $optionsArr=array();
-          $optionsArr[0]='-';
-        //ftc uncentered centered
-         $i = 1	;  
-         foreach (explode(',', $breakpoints) as $bp) {
-         		$optionsArr[$i]= ($bp).'-centered';
-         		 $i++;
-         		$optionsArr[$i]= ($bp).'-uncentered';
-         		 $i++;
-         }	     
-         	  
-          return $optionsArr;
-          	
-      }
     //get grid value and generate options
     public function getSmallOpitons()
      {
@@ -76,7 +40,7 @@ class ftcSettingsModel extends \Model
      $optionsArr[0]='';
     	  //ftc setting size of columns (default=12) 
     	  for ($i = 1; $i <= $GridSize; $i++) {
-    	  	$optionsArr[$i]='xxlarge-'.($i);
+    	  	$optionsArr[$i]='large-'.($i);
     	  }
      
      return $optionsArr;

@@ -20,11 +20,14 @@ class PrepareWidgets extends \Widget
        //loadFormField
       public function ffl($objWidget,$strForm, $arrForm){   
           		
-          // get templates ftc
+          		// get templates ftc
           	$template = $objWidget->__get('template');
+//          	echo'<pre>XXX';
+//          	var_dump($template);
 
-
-      	switch($template) {
+      		switch($template) {
+      	
+      		
       		case 'form_radio':
       		case 'form_checkbox':
       		$objWidget->arrOptions = $this->getOpt($objWidget);
@@ -48,6 +51,7 @@ class PrepareWidgets extends \Widget
       		case 'form_widget':
       			$type = $objWidget->__get('type');
       			$strClass = $GLOBALS['TL_FFL'][$type];
+      			//var_dump($type);
       			$objWidgetNew = new $strClass($objWidget);
       			switch ($type) {
       			case 'text':
@@ -59,20 +63,23 @@ class PrepareWidgets extends \Widget
       			case 'select':
       			$objWidget->__set('template','form_select_ftc');
       			break;
+
       			default:
+  	
+//      			var_dump($objWidget);
       			}
       			unset($objWidgetNew);
       		break;
       		default:
       			
-      	}
+      		}
     
 
-        return $objWidget; 
+         	return $objWidget; 
           			
                    
-     }
-       
+           }
+           // getFrontendModule
             
      
      /**
@@ -83,7 +90,10 @@ class PrepareWidgets extends \Widget
      
      public function getOpt($arr) {
      $arrOptions = array();
-
+//     if ($arr->mandadory)
+//     {
+//     	$arr->arrAttributes['required'] = 'required';
+//     }
    
      // Generate options Checkbox
      foreach ($arr->arrOptions as $i =>$arrOpt)
@@ -101,6 +111,7 @@ class PrepareWidgets extends \Widget
      	);
      }
       // Generate options Radio
+    	
      	return $arrOptions;
      }
      

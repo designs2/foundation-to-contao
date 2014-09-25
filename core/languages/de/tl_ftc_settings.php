@@ -216,8 +216,8 @@ $GLOBALS['TL_LANG']['tl_ftc_settings']['cols']['var_scss'] = '$total-columns';
 
 $GLOBALS['TL_LANG']['tl_ftc_settings']['breakpoint']['var_scss'] = '$small-range-b'; //(a,b)
 $GLOBALS['TL_LANG']['tl_ftc_settings']['breakpoint']['post_scss'] = 'em';
-$GLOBALS['TL_LANG']['tl_ftc_settings']['max_width']['var_scss'] = '$row-width'; //$row-width: rem-calc(1000) !default;
-$GLOBALS['TL_LANG']['tl_ftc_settings']['max_width']['post_scss'] = 'rem';
+$GLOBALS['TL_LANG']['tl_ftc_settings']['max_width']['var_scss'] = '$large-range-a';
+$GLOBALS['TL_LANG']['tl_ftc_settings']['max_width']['post_scss'] = 'em';
 
 $GLOBALS['TL_LANG']['tl_ftc_settings']['gap']['var_scss'] = '$column-gutter';
 $GLOBALS['TL_LANG']['tl_ftc_settings']['gap']['post_scss'] = 'em';

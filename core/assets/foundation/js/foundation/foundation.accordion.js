@@ -4,13 +4,12 @@
   Foundation.libs.accordion = {
     name : 'accordion',
 
-    version : '5.3.3',
+    version : '5.2.2',
 
     settings : {
       active_class: 'active',
       multi_expand: false,
-      toggleable: true,
-      callback : function () {}
+      toggleable: true
     },
 
     init : function (scope, method, options) {
@@ -22,28 +21,21 @@
       var S = this.S;
       S(this.scope)
       .off('.fndtn.accordion')
-      .on('click.fndtn.accordion', '[' + this.attr_name() + '] > dd > a', function (e) {
+      .on('click.fndtn.accordion', '[' + this.attr_name() + '] dd > a', function (e) {
         var accordion = S(this).closest('[' + self.attr_name() + ']'),
-            groupSelector = self.attr_name() + '=' + accordion.attr(self.attr_name()),
-            settings = accordion.data(self.attr_name(true) + '-init'),
             target = S('#' + this.href.split('#')[1]),
-            aunts = $('> dd', accordion),
-            siblings = aunts.children('.content'),
-            active_content = siblings.filter('.' + settings.active_class);
+            siblings = S('dd > .content', accordion),
+            aunts = $('dd', accordion),
+            settings = accordion.data(self.attr_name(true) + '-init'),
+            active_content = S('dd > .content.' + settings.active_class, accordion),
+            active_parent = S('dd.' + settings.active_class, accordion);
         e.preventDefault();
 
-        if (accordion.attr(self.attr_name())) {
-          siblings = siblings.add('[' + groupSelector + '] dd > .content');
-          aunts = aunts.add('[' + groupSelector + '] dd');
-        }
+        if (! S(this).closest('dl').is(accordion)) { return; }
 
         if (settings.toggleable && target.is(active_content)) {
-          target.parent('dd').toggleClass(settings.active_class, false);
-          target.toggleClass(settings.active_class, false);
-          settings.callback(target);
-          target.triggerHandler('toggled', [accordion]);
-          accordion.triggerHandler('toggled', [target]);
-          return;
+          active_parent.toggleClass(settings.active_class, false);
+          return target.toggleClass(settings.active_class, false);
         }
 
         if (!settings.multi_expand) {
@@ -52,9 +44,6 @@
         }
 
         target.addClass(settings.active_class).parent().addClass(settings.active_class);
-        settings.callback(target);
-        target.triggerHandler('toggled', [accordion]);
-        accordion.triggerHandler('toggled', [target]);
       });
     },
 
@@ -62,4 +51,4 @@
 
     reflow : function () {}
   };
-}(jQuery, window, window.document));
+}(jQuery, this, this.document));

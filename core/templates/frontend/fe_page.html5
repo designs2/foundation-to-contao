@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="<?php echo $this->language; ?>" class="no-js">
+<html lang="<?php echo $this->language; ?>">
 <head>
 
   <meta charset="<?php echo $this->charset; ?>">
@@ -32,12 +32,16 @@
   $rightClasses=' '.$this->layout->clr_small_ftc.' '.$this->layout->clr_large_ftc.' '.$this->layout->clr_float_ftc.' '.splitArr($this->layout->rwh_align_clr).' columns';
   
    $arrFTC_JS = unserialize($this->layout->FTC_JS);
-   $arrFoundationJS = (is_array(unserialize($this->layout->FoundationJS)))?unserialize($this->layout->FoundationJS):array();
+   $arrFoundationJS = unserialize($this->layout->FoundationJS);
   	$pathFTC = 'system/modules/foundation-to-contao/assets/';
 
  
   ?>
- <?php echo $this->viewport; ?>
+ <link rel="stylesheet" href="<?php ?>">
+
+
+ 
+  <?php echo $this->viewport; ?>
   <?php //echo $this->framework; ?>
   <?php echo $this->stylesheets; ?>
   <?php //echo $this->mooScripts; ?>
@@ -68,35 +72,31 @@
 
     <?php echo $this->getCustomSections('before'); ?>
 
-    <div id="container" class=" small-12 xxlarge-12 columns">
-      <div class="row" data-equalizer>
-    <?php if ($this->left): ?>
-      <aside id="left" class="<?php echo $leftClasses; ?>" data-equalizer-watch>
-        
-          <?php echo $this->left; ?>
-        
-      </aside>
-    <?php endif; ?>
-    
-      <div id="main" class="<?php echo $mainClasses; ?>" data-equalizer-watch>
-          <div class="row">
+    <div id="container" class="row">
+      <div id="main" class="<?php echo $mainClasses; ?>">
+        <div class="row">
           <?php echo $this->main; ?>
-        
+        </div>
         <?php echo $this->getCustomSections('main'); ?>
       </div>
-      </div>
 
-     
+      <?php if ($this->left): ?>
+        <aside id="left" class="<?php echo $leftClasses; ?>">
+          <div class="row">
+            <?php echo $this->left; ?>
+          </div>
+        </aside>
+      <?php endif; ?>
 
       <?php if ($this->right): ?>
-        <aside id="right" class="<?php echo $rightClasses; ?>" data-equalizer-watch>
-          
+        <aside id="right" class="<?php echo $rightClasses; ?>">
+          <div class="row">
             <?php echo $this->right; ?>
-          
+          </div>
         </aside>
       <?php endif; ?>
     </div>
-	</div>
+
     <?php echo $this->getCustomSections('after'); ?>
 
     <?php if ($this->footer): ?>
@@ -123,14 +123,14 @@
 		$arrPlugs =array();
 		foreach ($arrFTC_JS as $k => $FTCscript) {
 			if ($FTCscript!=='mediaelement_player') {
-			echo  '<script src="'.$pathFTC.'foundation/js/vendor/'.$FTCscript.'.js"></script>'."\n";
+			echo  '<script src="'.$pathFTC.'foundation/js/vendor/'.$FTCscript.'.js"></script>';
 			}
 			$arrPlugs[$FTCscript] =true;
 		}
-		echo  '<script src="'.$pathFTC.'foundation/js/foundation/foundation.js"></script>'."\n";
+		echo  '<script src="'.$pathFTC.'foundation/js/foundation.min.js"></script>';
 		
 		foreach ($arrFoundationJS as $k => $js_plugin) {
-			echo  '<script src="'.$pathFTC.'foundation/js/foundation/foundation.'.$js_plugin.'.js"."\n"></script>';
+			echo  '<script src="'.$pathFTC.'foundation/js/foundation/foundation.'.$js_plugin.'.js"></script>';
 			$arrPlugs[$js_plugin] =true;
 			}
 		echo '<script>
@@ -167,7 +167,7 @@
 			</script>";
 						
  			if ($arrPlugs['mediaelement_player']) {
- 			echo'<script src="'.$pathFTC.'/mediaelement/mediaelement-and-player.min.js"></script>'."\n";
+ 			echo'<script src="'.$pathFTC.'/mediaelement/mediaelement-and-player.min.js"></script>';
  			echo "<script>
  				$('video,audio').mediaelementplayer(/* Options */);
  				</script>";
