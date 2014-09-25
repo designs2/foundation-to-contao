@@ -31,7 +31,7 @@
     },
     "extra":{
         "contao": {
-            "symlinks":{
+            "sources":{
                 "core/system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
             },
         "branch-alias": {
