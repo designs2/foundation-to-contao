@@ -122,7 +122,7 @@ ClassLoader::addClasses(array
  */
 TemplateLoader::addFiles(array
 (	
-	'be_main' => 'system/modules/foundation-to-contao/templates/backend',
+	//'be_main' => 'system/modules/foundation-to-contao/templates/backend',
 	//'be_wildcard' => 'system/modules/foundation-to-contao/templates/backend',
 	'be_ftc_introduction' => 'system/modules/foundation-to-contao/templates/backend',
 	'be_ftc_overview' => 'system/modules/foundation-to-contao/templates/backend',
