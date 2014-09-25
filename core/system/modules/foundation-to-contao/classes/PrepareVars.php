@@ -128,8 +128,15 @@ class PrepareVars extends \Controller
 			$strClass = 'Module'.strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1); 
 			//var_dump($strClass );
 			$objEl = new $strClass($objRow);
+			if(!is_array(unserialize($objRow->aktiv_preset_ftc))){ 
+			$akt_preset=array();
+			return $strBuffer; 		
+				}else{
+			$akt_preset=unserialize($objRow->aktiv_preset_ftc);		
+				
+			}
 			
-			$ftc_classes = $this->getGridVars(unserialize($objRow->aktiv_preset_ftc)[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
+			$ftc_classes = $this->getGridVars($akt_preset[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
 
 			
 			$objEl->cssID = unserialize($objRow->cssID);
@@ -158,7 +165,14 @@ class PrepareVars extends \Controller
      public function design_elements($el){
           
      //FTC Classes 
-     $ftc_classes = $this->getGridVars(unserialize($el->aktiv_preset_ftc)[0],$el->add_custom_settings,$el->custom_preset_ftc);
+     	if(!is_array(unserialize($el->aktiv_preset_ftc))){ 
+	$akt_preset=array();
+	return $el; 		
+		}else{
+	$akt_preset=unserialize($el->aktiv_preset_ftc);		
+		
+	}
+     $ftc_classes = $this->getGridVars($akt_preset[0],$el->add_custom_settings,$el->custom_preset_ftc);
      //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
     // $el->cssID = unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
@@ -221,7 +235,14 @@ class PrepareVars extends \Controller
           	$elModul = new $strClass($elModel);
           	
           	$el->cssID = unserialize($el->cssID);
-          	$ftc_classes = $this->getGridVars(unserialize($el->aktiv_preset_ftc)[0],$el->add_custom_settings,$el->custom_preset_ftc);
+  		if(!is_array(unserialize($el->aktiv_preset_ftc))){ 
+		$akt_preset=array();
+		return $el; 		
+			}else{
+		$akt_preset=unserialize($el->aktiv_preset_ftc);		
+			
+		}
+          	$ftc_classes = $this->getGridVars($akt_preset[0],$el->add_custom_settings,$el->custom_preset_ftc);
    
           	$elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
           	$elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
