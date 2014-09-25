@@ -11,8 +11,8 @@
  */
  
 namespace MHAHNEFELD\FTC;
-
-class ModuleOffcanvas extends \Module
+//use MHAHNEFELD\FTC\ModuleExt;
+class ModuleOffcanvas extends \ModuleExt
 {
 
 	/**
@@ -20,7 +20,13 @@ class ModuleOffcanvas extends \Module
 	 * @var string
 	 */
 	protected $strTemplate = 'mod_navigation_offcanvas';
-
+	
+	/**
+		 * Compile the current element
+		 */
+		//abstract protected function compile();
+	
+	
 
 	/**
 	 * Do not display the module if there are no menu items
@@ -89,6 +95,20 @@ class ModuleOffcanvas extends \Module
 		$this->Template->request = ampersand(\Environment::get('indexFreeRequest'));
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->items = $this->renderNavigation($trail[$level], 1, $host, $lang);
+		
+//		$nnn = new ModuleExt($this, $strColumn='main');
+//		$mmm= new ModuleOffcanvas;
+		$this->Template->items = $this->renderNavigationFTC($trail[$level], 1, $host, $lang);
+		
+		$prepVars = new PrepareVars;
+		$ftc_classes = $prepVars->getGridVars(unserialize($this->aktiv_preset_ftc)[0],$this->add_custom_settings,$this->custom_preset_ftc);
+			
+		$this->Template->cssID = $this->cssID;
+//		var_dump($this->Template->cssID);
+		$this->Template->ftc_classes = trim($this->typePrefix.$this->type.' '.$this->Template->cssID[1]).' '.$ftc_classes;
+		$this->Template->ftcID = ($this->Template->cssID[0] != '') ? ' id="' . $this->Template->cssID[0] . '"' : '';
+		
+		
+		
 	}
 }

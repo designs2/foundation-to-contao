@@ -138,7 +138,8 @@ $GLOBALS['TL_LANG']['CTE']['ftc_content'] ="Inhalt";
 $GLOBALS['TL_LANG']['CTE']['ftc_callouts_prompts'] ="Pop-Ups";
 $GLOBALS['TL_LANG']['CTE']['ftc_buttons'] ="Buttons";
 $GLOBALS['TL_LANG']['CTE']['ftc_links'] ="Links";
-$GLOBALS['TL_LANG']['CTE']['ftc_row'] ="Reihe";
+$GLOBALS['TL_LANG']['CTE']['ftc_row'] ="Reihe / Zeile";
+$GLOBALS['TL_LANG']['CTE']['ftc_col'] ="Spalte";
 $GLOBALS['TL_LANG']['CTE']['ftc_media'] ="Media";
 $GLOBALS['TL_LANG']['CTE']['ftc_tab'] ="Tab";
 $GLOBALS['TL_LANG']['CTE']['ftc_accordion'] ="Accordion";
@@ -157,8 +158,10 @@ $GLOBALS['TL_LANG']['CTE']['tab_ftc_stop'][0] ="Tab Stop";
 $GLOBALS['TL_LANG']['CTE']['tab_ftc_start_inside'][0] ="Tab Div Start";
 $GLOBALS['TL_LANG']['CTE']['tab_ftc_stop_inside'][0] ="Tab Div Stop";
 
-$GLOBALS['TL_LANG']['CTE']['row_start'][0] ="Reihe Beginn";
-$GLOBALS['TL_LANG']['CTE']['row_stop'][0] ="Reihe Ende";
+$GLOBALS['TL_LANG']['CTE']['row_start'][0] ="Beginn der Reihe";
+$GLOBALS['TL_LANG']['CTE']['row_stop'][0] ="Ende der Reihe";
+$GLOBALS['TL_LANG']['CTE']['col_start'][0] ="Beginn der Spalte";
+$GLOBALS['TL_LANG']['CTE']['col_stop'][0] ="Ende der Spalte";
 
 $GLOBALS['TL_LANG']['CTE']['orbit'][0] ="Orbit Bilder Slider";
 $GLOBALS['TL_LANG']['CTE']['orbit_start'][0] ="Orbit Inhalt Slider Start";

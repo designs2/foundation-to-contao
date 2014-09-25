@@ -1,1 +1,4 @@
-<div id="<?php echo $this->cssID; ?>" class="row <?php echo $this->class; ?>" <?php echo $this->row_data_attr_ftc; ?>>
+<div class="<?php echo $this->ftc_classes; ?> row block"<?php echo $this->ftcID; ?>  <?php echo $this->row_data_attr_ftc; ?>>
+<?php if($this->headline!==''): ?>
+<div class="columns small-12"><<?php echo $this->hl; ?> class="left small-12"><?php echo $this->headline; ?></<?php echo $this->hl; ?>></div>
+<?php endif; ?>

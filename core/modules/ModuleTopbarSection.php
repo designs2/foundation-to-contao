@@ -12,7 +12,7 @@
  
 namespace MHAHNEFELD\FTC;
 
-class ModuleTopbarSection extends \Module
+class ModuleTopbarSection extends \ModuleExt
 {
 
 	/**
@@ -89,6 +89,6 @@ class ModuleTopbarSection extends \Module
 		$this->Template->request = ampersand(\Environment::get('indexFreeRequest'));
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);
-		$this->Template->items = $this->renderNavigation($trail[$level], 1, $host, $lang);
+		$this->Template->items = $this->renderNavigationFTC($trail[$level], 1, $host, $lang);
 	}
 }

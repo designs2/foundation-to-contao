@@ -12,7 +12,7 @@
  
 namespace MHAHNEFELD\FTC;
 
-class ModuleTopbarSectionCustom extends \Module
+class ModuleTopbarSectionCustom extends \ModuleExt
 {
 
 	/**

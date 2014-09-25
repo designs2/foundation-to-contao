@@ -1,6 +1,7 @@
 <!-- indexer::stop -->
+<?php //var_dump($this); ?>
 <?php   if ($this->top_bar=='1'):?>
-	 <nav class="tab-bar">
+	 <nav class="tab-bar" >
 
      <?php   if ($this->top_bar_left=='1'):?>
 	<section class="left-small">
@@ -26,7 +27,7 @@
     
     <?php   if ($this->items):?> 
 	  <?php   if ($this->offcanvas_align=='left') {
-	  	echo '<aside class="left-off-canvas-menu">';
+	  	echo '<aside class="left-off-canvas-menu" '.$this->ftcID.'>';
 	  }else {
 	  	 	echo '<aside class="right-off-canvas-menu">';
 	  }
