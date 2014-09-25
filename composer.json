@@ -34,6 +34,9 @@
             "sources":{
                 "core/system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
             },
+         "userfiles": {
+            "files-package/theme/foundation": "themes/foundation"
+        },
         "branch-alias": {
         			"dev-develop": "develop"
         		}
