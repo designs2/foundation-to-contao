@@ -25,17 +25,14 @@
         "contao-community-alliance/composer-installer": "*"
         "menatwork/contao-multicolumnwizard": "~3.2"
     },
-    "replace": {
-        "designs2/foundation-to-contao": "*"
-    },
     "autoload": {
-        "classmap":[""]
+        "classmap":["core"]
         } 
     },
     "extra":{
         "contao": {
             "sources":{
-                "system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
+                "core/system/modules/foundation-to-contao": "system/modules/foundation-to-contao"
             },
         "branch-alias": {
         			"dev-dev": "1.1.x-dev"
