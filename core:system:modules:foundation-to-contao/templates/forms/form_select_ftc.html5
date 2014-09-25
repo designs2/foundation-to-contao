@@ -1,0 +1,74 @@
+<?php
+	$fixStr =true;
+if ($this->label_role=='postfix'||$this->label_role=='prefix') {
+	$fixStr ='<div class=" '.$this->ftc_fix_classes.'">';
+	$fixStr .='<span class="'.$this->class.' '.$this->label_role.'">';
+	$fixStr .= $this->post_pre_fix;
+	
+	if ($this->mandatory){
+	  $fixStr .='<span class="invisible">'.$this->mandatoryField.'</span> ';
+	  $fixStr .= '<span class="mandatory">*</span>';
+		
+	}
+	$fixStr .= '</span></div>';
+
+}else {
+	$fixStr =false;
+}
+
+if (preg_match("/no-style/",$this->label_style)||$this->label_style=='') {
+	echo '<label for="ctrl_'.$this->id.'" >';
+}else {
+	echo '<label for="ctrl_'.$this->id.'" class="label '.$this->label_style.' ">';
+	//echo '<label for="ctrl_'.$this->id.'" >';
+}
+if ($this->mandatory&&!$fixStr){
+  	echo '<span class="invisible">'.$this->mandatoryField.'</span> ';
+  	echo '<span class="mandatory">*</span>';
+	
+}
+	echo $this->label;
+	echo '</label>';
+	
+	if ($this->label_role=='prefix') {
+		echo $fixStr;
+		
+	}
+	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+
+?>
+
+<select name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="<?php echo $this->class; ?>"<?php echo $this->getAttributes(); ?>>
+    <?php foreach ($this->options as $option): ?>
+      <?php if ($option['type'] == 'group_start'): ?>
+        <optgroup label="<?php echo $option['label']; ?>">
+      <?php endif; ?>
+
+      <?php if ($option['type'] == 'option'): ?>
+        <option value="<?php echo $option['value']; ?>"<?php echo $option['selected']; ?>><?php echo $option['label']; ?></option>
+      <?php endif; ?>
+
+      <?php if ($option['type'] == 'group_end'): ?>
+        </optgroup>
+      <?php endif; ?>
+    <?php endforeach; ?>
+  </select>
+<?php if ($this->hasErrors()): ?>
+   <small class="error"><?php echo $this->getErrorAsString(); ?></small>
+<?php endif; ?>
+
+  <?php if ($this->addSubmit): ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
+  <?php endif; ?>
+
+
+<?php
+	echo '</div>';
+	if ($this->label_role=='postfix') {
+		echo $fixStr;
+		
+	}
+?>
+ 
+
+

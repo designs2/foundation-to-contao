@@ -1,0 +1,48 @@
+<?php
+//var_dump($this);
+
+
+if (preg_match("/no-style/",$this->label_style)) {
+	echo '<label for="ctrl_'.$this->id.'" >';
+}else {
+	echo '<label for="ctrl_'.$this->id.'" class="label '.$this->label_style.' ">';
+	//echo '<label for="ctrl_'.$this->id.'" >';
+}
+if ($this->mandatory){
+  	echo '<span class="invisible">'.$this->mandatoryField.'</span> ';
+  	echo '<span class="mandatory">*</span>';
+	
+}
+	echo $this->label;
+	echo '</label>';
+	
+
+	echo '<div class="'.$this->ftc_field_classes.' " >';
+
+
+?>
+<?php if ($this->rs_show_value): ?><div class="row ">
+<div class="small-10 large-10 columns"><?php endif; ?>
+<div class="range-slider <?php echo $this->ftc_rs_classes;?>" data-slider data-options="start:<?php echo $this->rs_start; ?>; end: <?php echo $this->rs_end; ?>; step: <?php echo $this->rs_step; ?>; <?php if ($this->rs_show_value): ?>display_selector:#<?php echo $this->rs_id; ?>;<?php endif; ?>">
+  <span class="range-slider-handle"></span>
+  <span class="range-slider-active-segment"></span>
+  <input type="<?php echo $this->type; ?>" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="hidden" value="<?php echo specialchars($this->value); ?>"<?php echo $this->getAttributes(); ?>>
+  </div>
+  <?php if ($this->rs_show_value): ?>
+</div>
+ <div class="small-2 large-2 columns ">
+    <span  id="<?php echo $this->rs_id; ?>" class="value" style="display: block;margin-top: 17px;"></span> <span  class="unity"><?php echo $this->rs_unity; ?></span>
+  </div>
+  </div>
+  <?php endif; ?>
+
+
+
+  
+  
+	<?php if ($this->hasErrors()): ?>
+	  <small class="error"><?php echo $this->getErrorAsString(); ?></small>
+	<?php endif; ?>
+
+</div>
+ 

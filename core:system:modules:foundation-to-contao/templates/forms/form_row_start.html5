@@ -1,0 +1,5 @@
+<?php if (!$this->is_collapse): ?>
+  <div class="row">
+  <?php else: ?>
+  <div class="row collapse">
+<?php endif; ?>

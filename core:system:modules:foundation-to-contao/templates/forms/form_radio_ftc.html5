@@ -1,0 +1,49 @@
+<?php 
+if (preg_match("/no-style/",$this->label_style)||$this->label_style=='') {
+	echo '<label for="ctrl_'.$this->id.'" >';
+}else {
+	echo '<label for="ctrl_'.$this->id.'" class="label '.$this->label_style.' ">';
+
+}
+if ($this->mandatory){
+  	echo '<span class="invisible">'.$this->mandatoryField.'</span> ';
+  	echo '<span class="mandatory">*</span>';
+	
+}
+	echo $this->label;
+	echo '</label>';
+	
+	
+	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+
+	foreach ($this->arrOptions as $i => $arrOpt) {
+	
+		echo '  <input type="radio" name="'.$arrOpt['name'].'" id="ctrl_'.$arrOpt['id'].'" class="radio';
+		if ($arrOpt['class']) {
+		echo ' '.$arrOpt['class'];
+		}
+		echo '" value="'.specialchars($arrOpt['value']).'" '.$arrOpt['attributes'];
+		if ($arrOpt['checked']=='checked') {
+		echo ' checked="checked"';	
+		}
+		echo '>';
+		echo '<label for="ctrl_'.$arrOpt['id'].'" ';
+			if ($this->hasErrors()){
+			echo ' class="error" ';
+			}
+		echo '>';
+		echo $arrOpt['label'].'</label>';
+}
+?>
+
+	<?php if ($this->hasErrors()): ?>
+	   <small class="error"><?php echo $this->getErrorAsString(); ?></span>
+	<?php endif; ?>
+  <?php if ($this->addSubmit): ?>
+    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
+  <?php endif; ?>
+
+<?php
+	echo '</div>';
+
+?>

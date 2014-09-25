@@ -1,0 +1,1 @@
+<div class="reveal-modal class="<?php echo $this->ftc_classes; ?> block"<?php echo $this->ftcID; ?>  data-reveal>

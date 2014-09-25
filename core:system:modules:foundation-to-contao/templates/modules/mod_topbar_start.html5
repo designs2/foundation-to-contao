@@ -1,0 +1,26 @@
+<!-- indexer::stop -->
+
+ <?php   if ($this->topbar_locate=='fixed'):?>
+	<div class="fixed">
+	<?php  endif; ?>
+	 <?php   if ($this->topbar_locate=='sticky'):?>
+	 <div class="contain-to-grid sticky">
+	 <?php  else: ?>
+	<div class="contain-to-grid">
+	 <?php  endif; ?>
+	
+	  <nav class="top-bar" data-topbar data-options="<?php echo $this->topbar_options; ?>">
+
+		<ul class="title-area">
+		  <li class="name">
+		     <?php if ($this->headline): ?>
+		      <<?php echo $this->hl; ?> class="title" ><a href="#"><?php echo $this->headline; ?></a></<?php echo $this->hl; ?>>
+		     <?php endif; ?>
+		  </li>
+		   <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+		  <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+		</ul>
+
+	<section class="top-bar-section">
+		<ul >
+<!-- indexer::continue -->

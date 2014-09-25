@@ -1,0 +1,19 @@
+<?php if ($this->fsType == 'fsStart'): ?>
+<?php 
+echo '<fieldset class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+
+if ($this->label){
+	if (preg_match("/no-style/",$this->label_style)) {
+		echo '<legend>';
+	}else {
+		echo '<legend class="label '.$this->label_style.' ">';
+
+	}
+
+	echo $this->label;
+	echo '</legend>';
+}
+?>
+<?php else: ?>
+</fieldset>
+<?php endif; ?>

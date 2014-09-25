@@ -1,0 +1,19 @@
+<!-- indexer::stop -->
+<li class="has-form" >
+<form<?php if ($this->action): ?> action="<?php echo $this->action; ?>"<?php endif; ?> method="get" >
+<div class="row collapse">
+  <div class="large-8 small-9 columns">
+    <?php if ($this->id): ?>
+      <input type="hidden" name="id" value="<?php echo $this->id; ?>">
+    <?php endif; ?>
+   
+    <input type="text" name="keywords" id="ctrl_keywords_<?php echo $this->uniqueId; ?>" value="<?php echo $this->keyword; ?>" placeholder="Find Stuff">
+     </div>
+     <div class="large-4 small-3 columns">
+    <input type="submit" id="ctrl_submit_<?php echo $this->uniqueId; ?>" class="submit alert button expand" value="<?php echo specialchars($GLOBALS['TL_LANG']['MSC']['searchLabel']); ?>">
+  </div>
+   </div>
+</form>
+
+</li>
+<!-- indexer::continue -->

@@ -1,0 +1,10 @@
+<?php
+	if ($this->ftc_field_classes!==''||!isset($this->ftc_field_classes)) {
+		echo '<div class="headline '.$this->ftc_field_classes.' '.$this->class.'" >';
+		
+	}else {
+		echo '<div class="headline '.$this->class.'" >';
+		
+	}
+	echo $this->text; ?>
+  </div>

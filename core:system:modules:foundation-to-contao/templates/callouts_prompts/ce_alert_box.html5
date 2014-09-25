@@ -1,0 +1,4 @@
+<div data-alert class="<?php echo $this->ftc_classes; ?> block"<?php echo $this->ftcID; ?> >
+  <?php echo $this->alert_txt; ?>
+  <a href="#" class="close">&times;</a>
+</div>

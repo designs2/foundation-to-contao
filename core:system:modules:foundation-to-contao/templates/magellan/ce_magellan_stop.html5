@@ -1,0 +1,4 @@
+<a name="<?php echo $this->ftcID; ?>">&nbsp;</a>
+<<?php echo $this->hl; ?> class="<?php echo $this->class; ?>" <?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?> data-magellan-destination="<?php echo $this->ftcID; ?>">
+  <?php echo $this->headline; ?>
+</<?php echo $this->hl; ?>>

@@ -1,0 +1,10 @@
+<ol class="joyride-list" data-joyride>
+    <?php 
+     if (!is_array($this->items)) {return;}
+    foreach ($this->items as $item): ?>
+      <li data-id="<?php echo $item['id']; ?>"  data-text="<?php echo $item['txt']; ?>"  data-options="<?php echo $item['options']; ?>">
+      <?php echo $item['content']; ?>
+      </li>
+    <?php endforeach; ?>
+
+</ol>
