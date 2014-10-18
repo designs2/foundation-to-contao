@@ -85,7 +85,7 @@ class PrepareWidgets extends \Widget
      $arrOptions = array();
 
    
-     // Generate options Checkbox
+     // Generate options from Checkbox
      foreach ($arr->arrOptions as $i =>$arrOpt)
      {
     	

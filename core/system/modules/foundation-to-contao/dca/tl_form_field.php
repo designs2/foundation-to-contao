@@ -11,21 +11,22 @@
 * @copyright 2014 Monique Hahnefeld
  */
  
-
- $palettes = $GLOBALS['TL_DCA']['tl_form_field']['palettes'];
-
- foreach ($palettes as $p => $str) {
- 	 $pallete_ftc = str_replace("{type_legend}","{ftc_legend},small_ftc,large_ftc,float_ftc,align_ftc;{label_legend},label_classes;{fix_legend},post_pre_fix,label_role,label_small_ftc,label_large_ftc;{type_legend}",$str);
- 	 	$GLOBALS['TL_DCA']['tl_form_field']['palettes'][$p]=$pallete_ftc;
- }
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_start']='{type_legend},type;{row_legend},is_collapse;{template_legend:hide},customTpl';
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_stop']='{type_legend},type;{template_legend:hide},customTpl';
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['range_slider']='{ftc_legend},small_ftc,large_ftc,float_ftc,align_ftc;{label_legend},label,label_classes;{type_legend},type;{slider_legend},rs_classes,rs_start,rs_end,rs_step,rs_show_value,rs_unity;{template_legend:hide},customTpl';
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array('MHAHNEFELD\FTC\Callbacks','formfield_onload');
    
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['submit']='{ftc_legend},small_ftc,large_ftc,float_ftc,align_ftc;{type_legend},type,slabel;{button_legend}, btn_styles,btn_size,label_role;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey,tabindex;{template_legend:hide},customTpl'; 
+$fieldsSize=count($GLOBALS['TL_DCA']['tl_form_field']['fields'])-1;
+$palettesSize=count($palettes)-1;
+$default = '{type_legend},type;';
+$expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
+
+
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_start']=$default.'{row_legend},is_collapse;{template_legend:hide},customTpl';
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_stop']=$default.'{template_legend:hide},customTpl';
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['range_slider']=$default.'{slider_legend},rs_classes,rs_start,rs_end,rs_step,rs_show_value,rs_unity;{template_legend:hide},customTpl';
+   
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['submit']='{type_legend},type,slabel;{button_legend}, btn_styles,btn_size,label_role;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey,tabindex;{template_legend:hide},customTpl'; 
     
     
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['fieldsetfsStart']  ='{ftc_legend},small_ftc,large_ftc,float_ftc,align_ftc;{label_legend},label_classes;{type_legend},type;{fconfig_legend},fsType,label;{template_legend:hide},customTpl';
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['fieldsetfsStart']  = $default.'{fconfig_legend},fsType,label;{template_legend:hide},customTpl';
   
  $fieldsSize=count($GLOBALS['TL_DCA']['tl_form_field']['fields'])-1;
 
@@ -33,62 +34,95 @@
 	  
 	array_insert($GLOBALS['TL_DCA']['tl_form_field']['fields'], $fieldsSize, array
 	(
-	'small_ftc' => array
-			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['small_ftc'],
-				'default'                 => 'small-12',
-				
-				'exclude'                 => true,
-				 
-				
-				'inputType'               => 'select',
-				'options_callback'        => array('ftcSettingsModel', 'getSmallOpitons'),
-				'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['small_ftc_options'],
-				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-				'sql'                     => "varchar(255) NOT NULL default ''"
-			),
-		'large_ftc' => array
+	'ftc_preset_id' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['large_ftc'],
-					'default'                 => 'large-12',
-					
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
+					'default'                 => '-',
+					//'options'=>array('topic',' '),
 					'exclude'                 => true,
-					 
-					
+					 'sorting' 				  => true,
+					'filter'                  => true,
 					'inputType'               => 'select',
-					'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
-					'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['large_ftc_options'],
-					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-					'sql'                     => "varchar(255) NOT NULL default ''"
+					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
+					'load_callback'			 => array(
+					array('ftcPresetsModel', 'getSelectedPreset')
+						),
+					'save_callback'			 => array(
+						array('ftcPresetsModel', 'getAllSelectedPresets')
+							),	
+				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
+					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+					'sql'                     => "varchar(255) NOT NULL default '-'",
+					'combined'	=>'ftc_preset_full'
 				),
-		'float_ftc' => array
+		'ftc_preset_full' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['float_ftc'],
-					'default'                 => '',
-					'options'=>array(' ','left','right'),
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'],
+	
 					'exclude'                 => true,
-					 
+					'inputType'               => 'hidden',
+				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
+					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
 					
-					'inputType'               => 'select',
-				
-					'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['float_ftc_options'],
-					'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-					'sql'                     => "varchar(255) NOT NULL default ''"
+					'sql'                     => "text NULL"
 				),
-		   'align_ftc' => array
-		   		(
-		   			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['align_ftc'],
-		   			'default'                 => '',
-		   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
-		   			'exclude'                 => true,
-		   			 
-		   			
-		   			'inputType'               => 'select',
-		   		
-		   			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['align_ftc_options'],
-		   			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
-		   			'sql'                     => "varchar(255) NOT NULL default ''"
-		   		),
+			'ftc_preset_id_label' => array
+				(
+					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['ftc_preset_id_label'],
+					'default'                 => '-',
+					//'options'=>array('topic',' '),
+					'exclude'                 => true,
+					 'sorting' 				  => true,
+					'filter'                  => true,
+					'inputType'               => 'select',
+					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
+					'load_callback'			 => array(
+					array('ftcPresetsModel', 'getSelectedPreset')
+						),
+					'save_callback'			 => array(
+						array('ftcPresetsModel', 'getAllSelectedPresets')
+							),	
+				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
+					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
+					'sql'                     => "varchar(255) NOT NULL default '-'",
+					'combined'	=>'ftc_preset_full_label'
+				),
+		'ftc_preset_full_label' => array
+				(
+					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['ftc_preset_full_label'],
+	
+					'exclude'                 => true,
+					'inputType'               => 'hidden',
+				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
+					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
+					
+					'sql'                     => "text NULL"
+				),		
+		// 'ftc_preset_custom' => array
+		// 		(
+		// 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
+	
+		// 			'exclude'                 => true,
+		// 			'inputType'               => 'GridWizard',
+		// 			//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
+		// 			'eval' => array
+		// 			(
+		// 			    'tl_class'          => 'clr',
+		// 			    'doNotShow' =>true
+				
+					    
+		// 			),    
+					
+		// 			'sql'                     => "text NULL"
+		// 		),
+		// 'ftc_preset_add_custom' => array
+		// 			(
+		// 				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
+		// 				'exclude'                 => true,
+		// 				'inputType'               => 'checkbox',
+		// 				'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
+		// 				'sql'                     => "char(1) NOT NULL default ''"
+		// 			),
 		   		
 		   //ftc post or prefix
 		   'post_pre_fix' => array
@@ -112,70 +146,21 @@
 		      			'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
 		      			'sql'                     => "varchar(255) NOT NULL default ''"
 		      		),
-		     'btn_styles' => array
-		        		(
-		        			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['btn_styles'],
-		        			'default'                 => '',
-		        			'options'=>array(' ','alert','success','secondary','radius','round','disabled','expand'),
-		        			'exclude'                 => true,
-		        			
-		        			'inputType'               => 'select',
-		        			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['btn_styles_options'],
-		        			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
-		        			'sql'                     => "varchar(255) NOT NULL default ''"
-		        		),
+	     'btn_styles' => array
+	        		(
+	        			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['btn_styles'],
+	        			'default'                 => '',
+	        			'options'=>array(' ','alert','success','secondary','radius','round','disabled','expand'),
+	        			'exclude'                 => true,
+	        			
+	        			'inputType'               => 'select',
+	        			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['btn_styles_options'],
+	        			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
+	        			'sql'                     => "varchar(255) NOT NULL default ''"
+	        		),
 		   	
 		  //ftc label
-		  'label_small_ftc' => array
-		  		(
-		  			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['label_small_ftc'],
-		  			'default'                 => 'small-12',
-		  			'exclude'                 => true,
-		  			 
-		  			'inputType'               => 'select',
-		  			'options_callback'        => array('ftcSettingsModel', 'getSmallOpitons'),
-		  			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['label_small_ftc_options'],
-		  			'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-		  			'sql'                     => "varchar(255) NOT NULL default 'small-12'"
-		  		),
-		  	'label_large_ftc' => array
-		  			(
-		  				'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['label_large_ftc'],
-		  				'default'                 => 'large-12',
-		  			
-		  				'exclude'                 => true,
-		  				'inputType'               => 'select',
-		  				'options_callback'        => array('ftcSettingsModel', 'getLargeOpitons'),
-		  				'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['label_large_ftc_options'],
-		  				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-		  				'sql'                     => "varchar(255) NOT NULL default 'large-12'"
-		  			),
-		  	'label_float_ftc' => array
-		  			(
-		  				'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['label_float_ftc'],
-		  				'default'                 => '',
-		  				'options'=>array(' ','left','right'),
-		  				'exclude'                 => true,
-		  				 
-		  				
-		  				'inputType'               => 'select',
-		  				'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['label_float_ftc_options'],
-		  				'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
-		  				'sql'                     => "varchar(255) NOT NULL default ''"
-		  			),
-		  	   'label_align_ftc' => array
-		  	   		(
-		  	   			'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['label_align_ftc'],
-		  	   			'default'                 => '',
-		  	   			'options'=>array(' ','small-centered','small-uncentered','large-centered','large-uncentered'),
-		  	   			'exclude'                 => true,
-		  	   			 
-		  	   			
-		  	   			'inputType'               => 'select',
-		  	   			'reference'               => &$GLOBALS['TL_LANG']['tl_form_field']['label_align_ftc_options'],
-		  	   			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
-		  	   			'sql'                     => "varchar(255) NOT NULL default ''"
-		  	   		),
+		 
 		   	//ftc row			
 		   	'is_collapse' => array
 		   	(
@@ -265,6 +250,14 @@
 		   				'eval'                    => array('tl_class'=>'w50 ','placeholder'=>' e.g. pieces'),
 		   				'sql'                     => "varchar(64) NOT NULL default ''"
 		   			)
+		   	//  'use_fieldset_as_row' => array
+		   	// (
+		   	// 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['use_fieldset_as_row'],
+		   	// 	'exclude'                 => true,
+		   	// 	'inputType'               => 'checkbox',
+		   	// 	'eval'                    => array('submitOnChange'=>true),
+		   	// 	'sql'                     => "char(1) NOT NULL default '1'"
+		   	// )		
 		      
 		   
 	  ));

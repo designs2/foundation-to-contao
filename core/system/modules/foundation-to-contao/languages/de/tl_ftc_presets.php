@@ -20,6 +20,19 @@ xxlarge ab 1024
 *
 */
 
+$GLOBALS['TL_LANG']['tl_ftc_presets']['new'][0] = 'Neue Designsvorgabe';
+/* legends */
+$GLOBALS['TL_LANG']['tl_ftc_presets']['type_legend'] = 'Basiseinstellungen';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['use_legend'] = 'Standardwerte';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['breakpoint_legend'] = 'Bildschirmbreiten/ Breakpoints';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['classes_legend'] = 'Erweiterte Einstellungen & CSS-Klassen';
+
+$GLOBALS['TL_LANG']['tl_ftc_presets']['name'][0] = 'Bezeichnung';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['preview'][0] = 'Vorschaubild (Noch nicht fertig)';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['description'][0] = 'Beschreibung';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['show_in_sections'][0] = 'Zur Verfügung stellen in';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for'][0] = 'Als Standard nutzen für';
+$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for'][1] = 'Es kann nur eine Standard-Einstellung pro Bereich geben.';
 
 $GLOBALS['TL_LANG']['tl_ftc_presets']['small'][0] = 'Klein - bis 320 Pixel';
 $GLOBALS['TL_LANG']['tl_ftc_presets']['medium'][0] = 'Medium - ab 320 Pixel';

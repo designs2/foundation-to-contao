@@ -304,6 +304,7 @@ foreach (explode(',', $core_key) as $ckey) {
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('PrepareVars', 'templates');
 $GLOBALS['TL_HOOKS']['getContentElement'][] = array('PrepareVars', 'elements');
 $GLOBALS['TL_HOOKS']['compileFormFields'][] = array('PrepareVars', 'forms');
+$GLOBALS['TL_HOOKS']['loadFormField'][] = array('PrepareVars', 'formfieldtemplates');
 //$GLOBALS['TL_HOOKS']['outputFrontendTemplate'][] = array('PrepareVars', 'modules');
 $GLOBALS['TL_HOOKS']['getArticle'][] = array('PrepareVars', 'articles');
 $GLOBALS['TL_HOOKS']['getFrontendModule'][] = array('PrepareVars', 'modules');

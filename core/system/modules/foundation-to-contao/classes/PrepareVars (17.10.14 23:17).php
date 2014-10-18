@@ -94,15 +94,15 @@ class PrepareVars extends \Controller
           
        //getArticle
 	 public function articles($objRow)    {   
-		if(!is_array(unserialize($objRow->ftc_preset_full))){ 
+		if(!is_array(unserialize($objRow->aktiv_preset_ftc))){ 
 		$akt_preset=array();
 		return $objRow; 		
 			}else{
-		$akt_preset=unserialize($objRow->ftc_preset_full);		
+		$akt_preset=unserialize($objRow->aktiv_preset_ftc);		
 			
 		}
-		$ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
-		//var_dump($objRow->ftc_preset_full,'n');
+		$ftc_classes = $this->getGridVars($akt_preset[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
+		//var_dump($objRow->aktiv_preset_ftc,'n');
 		//$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
 		$objRow->cssID = unserialize($objRow->cssID);
 		$objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
@@ -129,15 +129,15 @@ class PrepareVars extends \Controller
 			$strClass = 'Module'.strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1); 
 			//var_dump($strClass );
 			$objEl = new $strClass($objRow);
-			if(!is_array(unserialize($objRow->ftc_preset_full))){ 
+			if(!is_array(unserialize($objRow->aktiv_preset_ftc))){ 
 			$akt_preset=array();
 			return $strBuffer; 		
 				}else{
-			$akt_preset=unserialize($objRow->ftc_preset_full);		
+			$akt_preset=unserialize($objRow->aktiv_preset_ftc);		
 				
 			}
 			
-			$ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
+			$ftc_classes = $this->getGridVars($akt_preset[0],$objRow->add_custom_settings,$objRow->custom_preset_ftc);
 
 			
 			$objEl->cssID = unserialize($objRow->cssID);
@@ -166,14 +166,14 @@ class PrepareVars extends \Controller
      public function design_elements($el){
           
      //FTC Classes 
-     	if(!is_array(unserialize($el->ftc_preset_full))){ 
+     	if(!is_array(unserialize($el->aktiv_preset_ftc))){ 
 	$akt_preset=array();
 	return $el; 		
 		}else{
-	$akt_preset=unserialize($el->ftc_preset_full);		
+	$akt_preset=unserialize($el->aktiv_preset_ftc);		
 		
 	}
-     $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
+     $ftc_classes = $this->getGridVars($akt_preset[0],$el->add_custom_settings,$el->custom_preset_ftc);
      //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
     // $el->cssID = unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
@@ -236,14 +236,14 @@ class PrepareVars extends \Controller
           	$elModul = new $strClass($elModel);
           	
           	$el->cssID = unserialize($el->cssID);
-    		if(!is_array(unserialize($el->ftc_preset_full))){ 
+    		if(!is_array(unserialize($el->aktiv_preset_ftc))){ 
   		    $akt_preset=array();
   		     return $el; 		
   			}else{
-  		    $akt_preset=unserialize($el->ftc_preset_full);		
+  		    $akt_preset=unserialize($el->aktiv_preset_ftc);		
   			
   		  }
-          	$ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
+          	$ftc_classes = $this->getGridVars($akt_preset[0],$el->add_custom_settings,$el->custom_preset_ftc);
    
           	$elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
           	$elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
@@ -279,35 +279,29 @@ class PrepareVars extends \Controller
      $ftc = array();
      
        //FTC Classes 
-      if(!is_array(unserialize($el->ftc_preset_full))){ 
+      if(!is_array(unserialize($el->aktiv_preset_ftc))){ 
       $akt_preset=array();
       //return $objRow;     
         }else{
-      $akt_preset=unserialize($el->ftc_preset_full);   
+      $akt_preset=unserialize($el->aktiv_preset_ftc);   
         
       }
-       if(!is_array(unserialize($el->ftc_preset_full_label))){ 
+       if(!is_array(unserialize($el->aktiv_preset_ftc_label))){ 
       $akt_preset_label=array();
      // return $objRow;     
         }else{
-      $akt_preset_label=unserialize($el->ftc_preset_full_label);   
+      $akt_preset_label=unserialize($el->aktiv_preset_ftc_label);   
         
       }
-      // var_dump(unserialize($el->ftc_preset_full));
-      //  echo'<br><pre>';
-      //  var_dump($el);
-      // echo'<br>';
-        $ftc_classes = $this->getGridVars($akt_preset,'',NULL);
-        $ftc_classes_label = $this->getGridVars($akt_preset_label,'',NULL);
+      //var_dump(unserialize($el->aktiv_preset_ftc),unserialize($el->aktiv_preset_ftc_label));
+        $ftc_classes = $this->getGridVars($akt_preset[0],'',NULL);
+        $ftc_classes_label = $this->getGridVars($akt_preset_label[0],'',NULL);
 
        $ftc['style_label'] = $this->splitArr($el->label_classes);  
        $ftc['data_attr'] = $this->splitArr($el->data_attr_ftc);
-       
-       $el->class = $strClass;
-       $el->ftc_field_classes = $ftc_classes;
-       $el->ftc_fix_classes = $ftc_classes_label;
-       $el->label_style = $ftc['style_label'];
-      //var_dump( $ftc_classes,$ftc_classes_label);
+  
+	     //var_dump($el->type);
+      
       	switch($el->type) {
 
       		case 'range_slider':
@@ -329,21 +323,19 @@ class PrepareVars extends \Controller
       		
       		default:
     		}
-      
+       $el->class = $strClass;
+       $el->ftc_field_classes = $ftc_classes;
+       $el->ftc_fix_classes = $ftc_classes_label;
+       $el->label_style = $ftc['style_label'];
 
-     unset($ftc);
-     
-     return $el;
-     }
-     public function formfieldtemplates($objWidget, $formId, $arrData, $_this){
-      // var_dump('test',$objWidget);
-      // exit;
-         switch($objWidget->type) {
+        switch($el->type) {
 
           //formfields
           case 'text':
-            $objWidget->__set('template','form_textfield_ftc');
-
+          $el->Template = new \FrontendTemplate('form_textfield_ftc');
+          $el->Template->setData($el);
+         // $el->parse();
+           var_dump( $el->Template);
           break;
           case 'select':
           case 'upload':
@@ -354,16 +346,23 @@ class PrepareVars extends \Controller
           case 'password':
           case 'radio':
           case 'submit':
-          case 'textarea':   
+          case 'textarea':
+        
           case 'captcha':
           case 'message':
-            $objWidget->__set('template','form_'.$objWidget->type.'_ftc');
+            $el->Template = new \FrontendTemplate('form_'.$el->type.'_ftc');
+            $el->Template->setData($el);
+            // $el->Template->compile();
+            break;
 
-          break;
+          
           default:
           }
 
-      return $objWidget;
+     
+     unset($ftc);
+     
+     return $el->Template;
      }
 
      public function getOptions($arr) {

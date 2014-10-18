@@ -56,9 +56,11 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
 		),
 		'global_operations' => array
 		(
+			
+		
 			'all' => array
 			(
-				'label'               => &$GLOBALS['TL_LANG']['all'],
+				'label'               => &$GLOBALS['TL_LANG']['MSC']['all'],
 				'href'                => 'act=select',
 				'class'               => 'header_edit_all',
 				'attributes'          => 'onclick="Backend.getScrollOffset()" accesskey="e"'
@@ -170,7 +172,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
 		),
 		'preview' => array
 		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_presets']['name'],
+			'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_presets']['preview'],
 			'exclude'                 => true,
 			'inputType'               => 'text',	
 			'eval'                    => array('maxlength'=>32,'tl_class'=>'w50'),
@@ -309,7 +311,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    					'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_presets']['show_in_sections'],
    					'exclude'                 => true,
    					'inputType'               => 'checkbox',
-   					'options'				=>array('layout','module','article','content','form','formfield'),
+   					'options'				=>array('layout','module','article','content','form_field'),
    					'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['show_in_sections_options'],
    					'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12'),
    					'sql'                     => "varchar(255) NULL"
@@ -319,7 +321,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    						'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for'],
    						'exclude'                 => true,
    						'inputType'               => 'checkbox',
-   						'options'				=>array('layout','module','article','content','form','formfield'),
+   						'options'				=>array('layout','module','article','content','form_field'),
    						'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for_options'],
    						'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12'),
    						'sql'                     => "varchar(255) NULL"

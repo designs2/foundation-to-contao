@@ -9,7 +9,7 @@
 * @license   LGPL
 * @copyright 2014 Monique Hahnefeld
  */
-$ftc_grid = '{ftc_legend},presets_ftc,aktiv_preset_ftc,add_custom_settings;';
+$ftc_grid = '{ftc_legend},ftc_preset_id,ftc_preset_full,ftc_preset_add_custom;';
 $default = '{title_legend},name,headline,type;';
 $expert ='{template_legend:hide},navigationTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
@@ -30,11 +30,11 @@ $GLOBALS['TL_DCA']['tl_module']['palettes']['ftc_topbar_section_custom']  = $def
 
 
 //selector
- array_insert($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'] ,1,array('top_bar','add_custom_settings'));
+ array_insert($GLOBALS['TL_DCA']['tl_module']['palettes']['__selector__'] ,1,array('top_bar','ftc_preset_add_custom'));
  
  //subpalettes
 $GLOBALS['TL_DCA']['tl_module']['subpalettes']['top_bar']='top_bar_left,top_bar_right';
-$GLOBALS['TL_DCA']['tl_module']['subpalettes']['add_custom_settings']='custom_preset_ftc';
+$GLOBALS['TL_DCA']['tl_module']['subpalettes']['ftc_preset_add_custom']='ftc_preset_custom';
 
 
 $palettes = $GLOBALS['TL_DCA']['tl_module']['palettes'];
@@ -117,9 +117,9 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 		'eval'                    => array('submitOnChange'=>false, 'tl_class'=>'w50'),
 		'sql'                     => "char(1) NOT NULL default ''"
 	),
-	'presets_ftc' => array
+	'ftc_preset_id' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['MSC']['presets_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 				'default'                 => '-',
 				//'options'=>array('topic',' '),
 				'exclude'                 => true,
@@ -137,9 +137,9 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 				'sql'                     => "varchar(255) NOT NULL default '-'"
 			),
-	'aktiv_preset_ftc' => array
+	'ftc_preset_full' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['MSC']['aktiv_preset_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'],
 
 				'exclude'                 => true,
 				'inputType'               => 'hidden',
@@ -148,9 +148,9 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 				
 				'sql'                     => "text NULL"
 			),
-	'custom_preset_ftc' => array
+	'ftc_preset_custom' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['MSC']['custom_preset_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
 
 				'exclude'                 => true,
 				'inputType'               => 'GridWizard',
@@ -165,9 +165,9 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 				
 				'sql'                     => "text NULL"
 			),
-	'add_custom_settings' => array
+	'ftc_preset_add_custom' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['MSC']['add_custom_settings'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
 				'exclude'                 => true,
 				'inputType'               => 'checkbox',
 				'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),

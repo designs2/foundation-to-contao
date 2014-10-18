@@ -1,4 +1,5 @@
 <?php
+
 	$fixStr =true;
 if ($this->label_role=='postfix'||$this->label_role=='prefix') {
 	$fixStr ='<div class=" '.$this->ftc_fix_classes.'">';
@@ -34,9 +35,9 @@ if ($this->mandatory&&!$fixStr){
 		echo $fixStr;
 		
 	}
-	echo '<div class="'.$this->ftc_field_classes.'" '.$this->ftcID.'" >';
+	echo '<div class="'.$this->ftc_field_classes.'" >';
 
-
+//var_dump($this->ftc_field_classes,$this->ftc_fix_classes);
 ?>
 
   <input type="<?php echo $this->type; ?>" name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="text<?php if ($this->hideInput) echo ' password'; ?>" value="<?php echo specialchars($this->value); ?>"<?php echo $this->getAttributes(); ?>>

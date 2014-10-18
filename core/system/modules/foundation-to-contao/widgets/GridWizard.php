@@ -79,9 +79,9 @@ class GridWizard extends \Widget
 		
 		$DoModel = $strClass::findByID(\Input::get('id'));
 		
-		$arrPreset = $DoModel->aktiv_preset_ftc;
-		if ($DoModel->add_custom_settings=='1') {
-			$arrPreset = $DoModel->custom_preset_ftc;
+		$arrPreset = $DoModel->ftc_preset_full;
+		if ($DoModel->ftc_preset_add_custom=='1') {
+			$arrPreset = $DoModel->ftc_preset_custom;
 
 		}
 		return unserialize($arrPreset);

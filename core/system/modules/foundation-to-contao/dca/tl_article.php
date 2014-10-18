@@ -13,9 +13,9 @@
  
  
  $palettes = $GLOBALS['TL_DCA']['tl_article']['palettes']['default'];
- array_push($GLOBALS['TL_DCA']['tl_article']['palettes']['__selector__'],'add_custom_settings');
- $GLOBALS['TL_DCA']['tl_article']['subpalettes']['add_custom_settings']='custom_preset_ftc';
- $pallete_ftc = str_replace("{teaser_legend:hide}","{ftc_legend},presets_ftc,aktiv_preset_ftc,add_custom_settings;{teaser_legend:hide}",$palettes);//,add_ftc_settings
+ array_push($GLOBALS['TL_DCA']['tl_article']['palettes']['__selector__'],'ftc_preset_add_custom');
+ $GLOBALS['TL_DCA']['tl_article']['subpalettes']['ftc_preset_add_custom']='ftc_preset_custom';
+ $pallete_ftc = str_replace("{teaser_legend:hide}","{ftc_legend},ftc_preset_id,ftc_preset_full,ftc_preset_add_custom;{teaser_legend:hide}",$palettes);//,add_ftc_settings
  $fieldsSize=count($GLOBALS['TL_DCA']['tl_article']['fields'])-1;
 
  
@@ -23,9 +23,9 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 	  
 	array_insert($GLOBALS['TL_DCA']['tl_article']['fields'], $fieldsSize, array
 	(
-	'presets_ftc' => array
+	'ftc_preset_id' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_article']['presets_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 				'default'                 => '-',
 				//'options'=>array('topic',' '),
 				'exclude'                 => true,
@@ -43,9 +43,9 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 				'sql'                     => "varchar(255) NOT NULL default '-'"
 			),
-	'aktiv_preset_ftc' => array
+	'ftc_preset_full' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_article']['aktiv_preset_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'],
 
 				'exclude'                 => true,
 				'inputType'               => 'hidden',
@@ -54,9 +54,9 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 				
 				'sql'                     => "text NULL"
 			),
-	'custom_preset_ftc' => array
+	'ftc_preset_custom' => array
 			(
-				'label'                   => &$GLOBALS['TL_LANG']['tl_article']['custom_preset_ftc'],
+				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
 
 				'exclude'                 => true,
 				'inputType'               => 'GridWizard',
@@ -74,15 +74,15 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 	
    'add_ftc_settings' => array
    				(
-   					'label'                   => &$GLOBALS['TL_LANG']['tl_article']['add_ftc_settings'],
+   					'label'                   => &$GLOBALS['TL_LANG']['MSC']['add_ftc_settings'],
    					'exclude'                 => true,
    					'inputType'               => 'checkbox',
    					'eval'                    => array('submitOnChange'=>false, 'tl_class'=>'w50'),
    					'sql'                     => "char(1) NOT NULL default ''"
    				),
-	'add_custom_settings' => array
+	'ftc_preset_add_custom' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['tl_article']['add_custom_settings'],
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
 					'exclude'                 => true,
 					'inputType'               => 'checkbox',
 					'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),

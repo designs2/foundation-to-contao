@@ -28,16 +28,17 @@
  
  /*ftc grid*/
 
-$GLOBALS['TL_LANG']['MSC']['presets_ftc'][0] = 'Designvorgabe';
-$GLOBALS['TL_LANG']['MSC']['presets_ftc'][1] = 'Wählen Sie die Designvorgabe.';
-$GLOBALS['TL_LANG']['MSC']['aktiv_preset_ftc'][0] = 'test -> geht';
-$GLOBALS['TL_LANG']['MSC']['add_custom_settings'][0] = 'Individuelle Einstellungen verwenden'; 
-$GLOBALS['TL_LANG']['MSC']['custom_preset_ftc'][0] = 'Auswahl der Displaybreiten als Spaltenanzahl und weitere Einstellungen';
-$GLOBALS['TL_LANG']['MSC']['custom_preset_ftc'][1] = 'Breakpoints: small=...';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'][0] = 'Designvorgabe';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'][1] = 'Wählen Sie die Designvorgabe.';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'][0] = 'test -> geht';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'][0] = 'Individuelle Einstellungen verwenden'; 
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'][0] = 'Auswahl der Displaybreiten als Spaltenanzahl und weitere Einstellungen';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'][1] = 'Breakpoints: small=...';
 
  
 
 $GLOBALS['TL_LANG']['MOD']['ftc'] = "FTC";
+$GLOBALS['TL_LANG']['MOD']['tl_ftc_presets'] = array("FTC Designvorgaben","Designvorgaben einstellen");
 $GLOBALS['TL_LANG']['MOD']['tl_ftc_intro'] = array("FTC Intro","Foundation To Contao");
 $GLOBALS['TL_LANG']['MOD']['tl_ftc_settings'] = array("FTC Einstellungen","FTC SASS Variablen einstellen");
 

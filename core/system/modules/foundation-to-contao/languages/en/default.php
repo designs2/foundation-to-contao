@@ -10,6 +10,14 @@
  * @copyright 2014 Monique Hahnefeld
  */
 
+ /*ftc grid*/
+
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'][0] = 'Design preset';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'][1] = 'Chose a design.';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'][0] = 'hidden';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'][0] = 'Custom Settings'; 
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'][0] = 'Chose width of display. It\'s unit is count of columns. Also you can add further settings.';
+$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'][1] = 'Breakpoints: small=...';
 
 $GLOBALS['TL_LANG']['MOD']['ftc'] = "FTC";
 $GLOBALS['TL_LANG']['MOD']['tl_ftc_intro'] = array("FTC Intro","Foundation To Contao");

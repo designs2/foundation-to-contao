@@ -60,16 +60,16 @@ class ftcPresetsModel extends \Model
      public function getSelectedPreset($val,$dc,$custom=false)
       {
 		
-		$addCustom = $dc->__get('activeRecord')->ftc_preset_add_custom;
+		$addCustom = $dc->__get('activeRecord')->add_custom_settings;
 		
 		if ($val=='') {
-			$val=($dc->__get('activeRecord')->ftc_preset_id=='')?'-':$dc->__get('activeRecord')->ftc_preset_id;
+			$val=($dc->__get('activeRecord')->presets_ftc=='')?'-':$dc->__get('activeRecord')->presets_ftc;
 		}
 		if($val=='-') {
 		
 		 $this->getDefaultPreset(); 
 		 if ($addCustom=='1') {
-		 	$Preset = $dc->__get('activeRecord')->ftc_preset_custom;
+		 	$Preset = $dc->__get('activeRecord')->custom_preset_ftc;
 		 	
 		 	if ($Preset=='') {
 		 	$this->getDefaultPreset();
@@ -158,33 +158,32 @@ class ftcPresetsModel extends \Model
       		}
       		if (\Input::get('act')=='editAll'&&$dc!==false) { }
 
-      		if ($DoModel->ftc_preset_custom=='') {$custom=true;}
+      		if ($DoModel->custom_preset_ftc=='') {$custom=true;}
       		
-      		if($DoModel->ftc_preset_add_custom==''){//$DoModel->ftc_preset_id!=='-'&&
+      		if($DoModel->add_custom_settings==''){//$DoModel->presets_ftc!=='-'&&
             //Case form_field
-            if(isset($_POST["ftc_preset_id_label"])) {
+            if(isset($_POST["presets_ftc_label"])) {
 
-              $objPresetLabel = ftcPresetsModel::findByID($dc->__get('activeRecord')->ftc_preset_id_label);
+              $objPresetLabel = ftcPresetsModel::findByID($dc->__get('activeRecord')->presets_ftc_label);
               
               $PresetLabel = $objPresetLabel->row();
-              $DoModel->ftc_preset_full_label=(is_array($PresetLabel))?serialize($PresetLabel):$PresetLabel;
+              $DoModel->aktiv_preset_ftc_label=(is_array($PresetLabel))?serialize($PresetLabel):$PresetLabel;
 
             }
-              $objPreset = ftcPresetsModel::findByID($dc->__get('activeRecord')->ftc_preset_id);
+              $objPreset = ftcPresetsModel::findByID($dc->__get('activeRecord')->presets_ftc);
               
               $Preset = $objPreset->row();
-              $DoModel->ftc_preset_full=(is_array($Preset))?serialize($Preset):$Preset;
-              // var_dump($DoModel->ftc_preset_full_label ,'tesr',$DoModel->ftc_preset_full);
+              $DoModel->aktiv_preset_ftc=(is_array($Preset))?serialize($Preset):$Preset;
+              // var_dump($DoModel->aktiv_preset_ftc_label ,'tesr',$DoModel->aktiv_preset_ftc);
                // exit;
               $DoModel->save(true);
-              echo "<pre>";
                var_dump($dc->__get('activeRecord'));
 	      		return;
       		}
       		
-      		if ($DoModel->ftc_preset_add_custom=='1'&&$custom) {
+      		if ($DoModel->add_custom_settings=='1'&&$custom) {
       		
-      			$DoModel->ftc_preset_custom = (is_array($Preset))?serialize($Preset):$Preset;
+      			$DoModel->custom_preset_ftc = (is_array($Preset))?serialize($Preset):$Preset;
      			
       			$DoModel->save(true);
 

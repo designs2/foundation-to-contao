@@ -80,7 +80,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
   
   //selector
  
-  array_insert($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'] ,1,array('add_custom_settings','use_reveal','use_youtube','vimeo','own_src'));
+  array_insert($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'] ,1,array('ftc_preset_add_custom','use_reveal','use_youtube','vimeo','own_src'));
   //add subpalletes
   //var_dump($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__']);
   $subpalettes = $GLOBALS['TL_DCA']['tl_content']['subpalettes'];
@@ -88,7 +88,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
   //add palettes for contentelements
   array_insert($GLOBALS['TL_DCA']['tl_content']['subpalettes'], $subpalettesSize, array
   (
-  	'add_custom_settings' =>'custom_preset_ftc',
+  	'ftc_preset_add_custom' =>'ftc_preset_custom',
   	'use_reveal'        => 'modal_id',
   	'use_youtube'        => 'playerSize,autoplay,youtube_vimeo_id',
   	'vimeo'        => 'playerSize,autoplay,youtube_vimeo_id',
@@ -100,9 +100,9 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
   
 	array_insert($GLOBALS['TL_DCA']['tl_content']['fields'], $fieldsSize, array
 	(
-	'presets_ftc' => array
+	'ftc_preset_id' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['MSC']['presets_ftc'],
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 					'default'                 => '-',
 					//'options'=>array('topic',' '),
 					'exclude'                 => true,
@@ -120,9 +120,9 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'"
 				),
-		'aktiv_preset_ftc' => array
+		'ftc_preset_full' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['tl_content']['aktiv_preset_ftc'],
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'],
 	
 					'exclude'                 => true,
 					'inputType'               => 'hidden',
@@ -131,9 +131,9 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 					
 					'sql'                     => "text NULL"
 				),
-		'custom_preset_ftc' => array
+		'ftc_preset_custom' => array
 				(
-					'label'                   => &$GLOBALS['TL_LANG']['tl_content']['custom_preset_ftc'],
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
 	
 					'exclude'                 => true,
 					'inputType'               => 'GridWizard',
@@ -148,9 +148,9 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 					
 					'sql'                     => "text NULL"
 				),
-		'add_custom_settings' => array
+		'ftc_preset_add_custom' => array
 					(
-						'label'                   => &$GLOBALS['TL_LANG']['tl_content']['add_custom_settings'],
+						'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
 						'exclude'                 => true,
 						'inputType'               => 'checkbox',
 						'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
@@ -812,10 +812,10 @@ class tl_ftc_content extends \tl_content
 					$data .=  'ATTR: '.$this->splitArr($arrRow['data_attr']).' '.$this->splitArr($arrRow['row_data_attr_ftc']).' |';
 				}
 				if ($CssID[0]!==''){				
-					$data .= ' ID: '.$CssID[0].' |';
+				//	$data .= ' ID: '.$CssID[0].' |';
 				}
 				
-				$data .= ' CLASS: '.$CssClass;
+			//	$data .= ' CLASS: '.$CssClass;
 				
 				$data .='</span>';
 			}else {

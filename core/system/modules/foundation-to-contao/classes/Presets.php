@@ -25,33 +25,46 @@ class Presets extends \Backend
 		if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
 		$Rel='id';
 		$PresetsArr = $this->getPresets($this->model,$Rel,$_GET['id']);
-		
+			//var_dump($PresetsArr);
 		
 		foreach (unserialize($PresetsArr[0]['show_in_sections']) as $key) {
-			if ($key=='layout'||$key=='form'||$key=='formfield') {continue;}
+		
+			if ($key=='layout') {continue;}
 				$strModel = $this->getStrClass($key);
-			$arrModelsDC=$this->getModels($strModel,'presets_ftc',$_GET['id']);
+			$arrModelsDC=$this->getModels($strModel,'ftc_preset_id',$_GET['id']);
 //			var_dump($_GET['id'],$arrModelsDC);
 //			exit;
 			foreach ($arrModelsDC as $m) {
 				$defM = $strModel::findBy('id',$m['id']);
-				$defM->aktiv_preset_ftc = serialize($this->getDefaultPreset($_GET['id']));
+				$defM->ftc_preset_full = serialize($this->getDefaultPreset($_GET['id']));
 				$defM->save();
-//				var_dump($strModel,$defM->id,$defM->aktiv_preset_ftc);
+//				var_dump($strModel,$defM->id,$defM->ftc_preset_full);
 //				echo'<br>';
 				
 			}
 			unset($arrModels);
 		}
 		foreach (unserialize($PresetsArr[0]['use_as_default_for']) as $key) {
-			if ($key=='layout'||$key=='form'||$key=='formfield') {continue;}
+			if ($key=='layout') {continue;}
+		
+			
 			$strModel = $this->getStrClass($key);
-			$arrModelsDEF=$this->getModels($strModel,'presets_ftc','-');
+
+			$arrModelsDEF=$this->getModels($strModel,'ftc_preset_id','-');
+
 			foreach ($arrModelsDEF as $mdf) {
-				//var_dump($m['presets_ftc']);
+				//var_dump($m['ftc_preset_id']);
 				$defM = $strModel::findBy('id',$mdf['id']);
-				$defM->aktiv_preset_ftc = serialize($this->getDefaultPreset($_GET['id']));
-				$defM->save();
+				//$defM->ftc_preset_id= $_GET['id'];
+				$defM->ftc_preset_full = serialize($this->getDefaultPreset($_GET['id']));
+
+
+				if ($key=='form_field'&&$defM->type!=='fieldset'){
+				//var_dump($arrModelsDEF,serialize($this->getDefaultPreset($_GET['id'])) );
+				//exit;
+			
+				}
+				$defM->save(true);
 				
 				
 			}
@@ -76,7 +89,8 @@ class Presets extends \Backend
 	
 	public function getStrClass($key)
 	 {	
-	     if($key=='tl_formfield') {
+	    var_dump($key);
+	     if($key=='form_field') {
 	     	$strClass = 'FormFieldModel';
 	     }else {
 	    	$strClass = strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1).'Model';	
