@@ -33,7 +33,8 @@ class GridWizard extends \Widget
 	public $fieldsArr = 'small,medium,large,xlarge,xxlarge,float_ftc,align,pull,push';
 
 
-	public function getFields() {
+	//$varValue = array
+	public function getFields($dc_id,$varValue) {
 		$this->loadDataContainer('tl_ftc_presets');
 		$this->loadLanguageFile('tl_ftc_presets'); 
 		//Mediaquery settings
@@ -41,8 +42,12 @@ class GridWizard extends \Widget
 		$fieldDCA = $GLOBALS['TL_DCA']['tl_ftc_presets']['fields'];
 		$fields = array();
 
-		$Settings = $this->setVals();
-		//var_dump($Settings);
+		if($varValue===Null||$varValue==''){
+			$PostFieldsArr = $this->getPostArr();	
+		}else{
+			$PostFieldsArr = $varValue;
+		}
+		
 		$fieldsStr = '';
 		
 		foreach(explode(',',$this->fieldsArr) as $field)
@@ -54,7 +59,7 @@ class GridWizard extends \Widget
 			
 				
 		
-		$objWidget->value = $Settings[$field];
+		$objWidget->value = $PostFieldsArr[$field];
 
 		$objWidget->label = ($objWidget->label=='')?$objWidget->name:$objWidget->label;
 		$fields[$field]['label'] = $objWidget->generateLabel();
@@ -64,40 +69,40 @@ class GridWizard extends \Widget
 
 		}
 
-		$submit = ($_GET['table']===NULL)?'tl_'.$_GET['do']:$_GET['table'];//'tl_'.$_GET['do']
+		$submit = ($_GET['table']===NULL)?'tl_'.$_GET['do']:$_GET['table'];
 
 		if (\Input::post('FORM_SUBMIT') == $submit){
-		
-				$this->saveFields();
+				$this->setCustomPreset($dc_id,serialize($PostFieldsArr));
 		}	
 		return $fieldsStr;
 	}
 	
-	public function setVals() {
+	public function setCustomPreset($dc_id,$PostFieldsArr) {
 		$ftcPM = new ftcPresetsModel;
 		$strClass = $ftcPM->getStrClass();
 		
-		$DoModel = $strClass::findByID(\Input::get('id'));
-		
-		$arrPreset = $DoModel->ftc_preset_full;
+		$DoModel = $strClass::findByID($dc_id);
+
 		if ($DoModel->ftc_preset_add_custom=='1') {
-			$arrPreset = $DoModel->ftc_preset_custom;
+			$arrPreset = $PostFieldsArr;
+			$DoModel->ftc_preset_custom = $arrPreset;
+			$DoModel->save(true);	
 
 		}
-		return unserialize($arrPreset);
+
 	}
 
-	public function saveFields() {
+	public function getPostArr() {
 	
-		$arrSettings = array();
+		$PostFieldsArr = array();
+		
 		foreach(explode(',',$this->fieldsArr) as $field)
 				{
-					$arrSettings[$field] = (\Input::post($field)===NULL)?'-':\Input::post($field);
+					//var_dump(\Input::post($field));
+					$PostFieldsArr[$field] = (\Input::post($field)===NULL)?'-':\Input::post($field);
 				}
 				
-		$ftcPM = new ftcPresetsModel;
-		$ftcPM->setPresets($arrSettings,true);
-
+		return $PostFieldsArr;
 	}
 
 
@@ -106,10 +111,10 @@ class GridWizard extends \Widget
 	 * @return string
 	 */
 	public function generate()
-	{
-		return $this->getFields();
-		
-					
+	
+		$dc_id = $this->currentRecord;
+		return $this->getFields($dc_id,$this->varValue);
+				
 	}
 
 

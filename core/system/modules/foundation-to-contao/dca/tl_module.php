@@ -14,9 +14,6 @@ $default = '{title_legend},name,headline,type;';
 $expert ='{template_legend:hide},navigationTpl,customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
-
-//$GLOBALS['TL_DCA']['tl_module']['palettes']['mh_foundation_to_contao']    = '{title_legend},name,headline,type;
-//{expert_legend:hide},cssID,space';
 $GLOBALS['TL_DCA']['tl_module']['palettes']['ftc_offcanvas']    = $default.'{nav_legend},levelOffset,showLevel,hardLimit,showProtected,offcanvas_align,top_bar;{reference_legend:hide},defineRoot;'.$expert;
 $GLOBALS['TL_DCA']['tl_module']['palettes']['ftc_offcanvas_custom']    = $default.'{nav_legend},pages,showProtected,offcanvas_align,top_bar;'.$expert;
 
@@ -121,7 +118,6 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 				'default'                 => '-',
-				//'options'=>array('topic',' '),
 				'exclude'                 => true,
 				 'sorting' 				  => true,
 				'filter'                  => true,
@@ -130,10 +126,6 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 				'load_callback'			 => array(
 				array('ftcPresetsModel', 'getSelectedPreset')
 					),
-				'save_callback'			 => array(
-					array('ftcPresetsModel', 'getAllSelectedPresets')
-						),	
-			//	'reference'               => &$GLOBALS['TL_LANG']['tl_module']['options'],
 				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 				'sql'                     => "varchar(255) NOT NULL default '-'"
 			),
@@ -143,9 +135,7 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 
 				'exclude'                 => true,
 				'inputType'               => 'hidden',
-			//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 				'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
-				
 				'sql'                     => "text NULL"
 			),
 	'ftc_preset_custom' => array
@@ -154,13 +144,10 @@ array_insert($GLOBALS['TL_DCA']['tl_module']['fields'], $fieldsSize, array
 
 				'exclude'                 => true,
 				'inputType'               => 'GridWizard',
-				//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 				'eval' => array
 				(
 				    'tl_class'          => 'clr',
 				    'doNotShow' =>true
-			
-				    
 				),    
 				
 				'sql'                     => "text NULL"

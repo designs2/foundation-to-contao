@@ -38,7 +38,6 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 					'default'                 => '-',
-					//'options'=>array('topic',' '),
 					'exclude'                 => true,
 					 'sorting' 				  => true,
 					'filter'                  => true,
@@ -49,8 +48,7 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 						),
 					'save_callback'			 => array(
 						array('ftcPresetsModel', 'getAllSelectedPresets')
-							),	
-				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
+							),
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'",
 					'combined'	=>'ftc_preset_full'
@@ -61,7 +59,6 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 	
 					'exclude'                 => true,
 					'inputType'               => 'hidden',
-				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
 					
 					'sql'                     => "text NULL"
@@ -70,7 +67,6 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['ftc_preset_id_label'],
 					'default'                 => '-',
-					//'options'=>array('topic',' '),
 					'exclude'                 => true,
 					 'sorting' 				  => true,
 					'filter'                  => true,
@@ -79,50 +75,19 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 					'load_callback'			 => array(
 					array('ftcPresetsModel', 'getSelectedPreset')
 						),
-					'save_callback'			 => array(
-						array('ftcPresetsModel', 'getAllSelectedPresets')
-							),	
-				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
-					'sql'                     => "varchar(255) NOT NULL default '-'",
-					'combined'	=>'ftc_preset_full_label'
+					'sql'                     => "varchar(255) NOT NULL default '-'"
 				),
-		'ftc_preset_full_label' => array
+			'ftc_preset_full_label' => array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['ftc_preset_full_label'],
 	
 					'exclude'                 => true,
 					'inputType'               => 'hidden',
-				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
 					
 					'sql'                     => "text NULL"
-				),		
-		// 'ftc_preset_custom' => array
-		// 		(
-		// 			'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
-	
-		// 			'exclude'                 => true,
-		// 			'inputType'               => 'GridWizard',
-		// 			//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
-		// 			'eval' => array
-		// 			(
-		// 			    'tl_class'          => 'clr',
-		// 			    'doNotShow' =>true
-				
-					    
-		// 			),    
-					
-		// 			'sql'                     => "text NULL"
-		// 		),
-		// 'ftc_preset_add_custom' => array
-		// 			(
-		// 				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
-		// 				'exclude'                 => true,
-		// 				'inputType'               => 'checkbox',
-		// 				'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
-		// 				'sql'                     => "char(1) NOT NULL default ''"
-		// 			),
+				),
 		   		
 		   //ftc post or prefix
 		   'post_pre_fix' => array
@@ -249,15 +214,7 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 		   				'inputType'               => 'text',
 		   				'eval'                    => array('tl_class'=>'w50 ','placeholder'=>' e.g. pieces'),
 		   				'sql'                     => "varchar(64) NOT NULL default ''"
-		   			)
-		   	//  'use_fieldset_as_row' => array
-		   	// (
-		   	// 	'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['use_fieldset_as_row'],
-		   	// 	'exclude'                 => true,
-		   	// 	'inputType'               => 'checkbox',
-		   	// 	'eval'                    => array('submitOnChange'=>true),
-		   	// 	'sql'                     => "char(1) NOT NULL default '1'"
-		   	// )		
+		   			)	
 		      
 		   
 	  ));

@@ -104,19 +104,14 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 					'default'                 => '-',
-					//'options'=>array('topic',' '),
 					'exclude'                 => true,
-					 'sorting' 				  => true,
+					'sorting' 				       => true,
 					'filter'                  => true,
 					'inputType'               => 'select',
 					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
 					'load_callback'			 => array(
 					array('ftcPresetsModel', 'getSelectedPreset')
-						),
-					'save_callback'			 => array(
-						array('ftcPresetsModel', 'getAllSelectedPresets')
-							),	
-				//	'reference'               => &$GLOBALS['TL_LANG']['tl_content']['options'],
+						)	,
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'"
 				),
@@ -126,7 +121,6 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 	
 					'exclude'                 => true,
 					'inputType'               => 'hidden',
-				//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
 					
 					'sql'                     => "text NULL"
@@ -137,13 +131,10 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 	
 					'exclude'                 => true,
 					'inputType'               => 'GridWizard',
-					//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 					'eval' => array
 					(
 					    'tl_class'          => 'clr',
-					    'doNotShow' =>true
-				
-					    
+					    'doNotShow' =>true   
 					),    
 					
 					'sql'                     => "text NULL"
@@ -164,7 +155,6 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 			'exclude'                 => true,
 			
 			'inputType'               => 'select',
-		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['data_attr_ftc_options'],
 			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -177,7 +167,6 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 			'exclude'                 => true,
 
 			'inputType'               => 'select',
-		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
 			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['row_data_attr_ftc_options'],
 			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
 			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -225,7 +214,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
    			'exclude'                 => true,
    		
    			'inputType'               => 'select',
-   		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+  
    			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['tabs_align_options'],
    			'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
    			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -239,7 +228,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
    			'exclude'                 => true,
 
    			'inputType'               => 'select',
-   		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+  
    			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['list_style_type_options'],
    			'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
    			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -378,7 +367,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
    			'exclude'                 => true,
    		
    			'inputType'               => 'select',
-   		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+  
    			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['btn_size_options'],
    			'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
    			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -391,7 +380,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
      			'exclude'                 => true,
      			
      			'inputType'               => 'select',
-     		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+    
      			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['btn_styles_options'],
      			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50 m12'),
      			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -413,7 +402,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
       			'exclude'                 => true,
       		
       			'inputType'               => 'select',
-      		//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+    
       			'reference'               => &$GLOBALS['TL_LANG']['tl_content']['drop_align_options'],
       			'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
       			'sql'                     => "varchar(255) NOT NULL default ''"
@@ -443,7 +432,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
       		'exclude'                 => true,
       	
       		'inputType'               => 'select',
-      	//	'options_callback'        => array('tl_content', 'getSmallOpitons'),
+  
       		'reference'               => &$GLOBALS['TL_LANG']['tl_content']['alert_kind'],
       		'eval'                    => array('helpwizard'=>false, 'chosen'=>false, 'submitOnChange'=>false, 'tl_class'=>'w50'),
       		'sql'                     => "varchar(64) NOT NULL default ''"

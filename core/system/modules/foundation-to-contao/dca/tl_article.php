@@ -27,7 +27,6 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 			(
 				'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 				'default'                 => '-',
-				//'options'=>array('topic',' '),
 				'exclude'                 => true,
 				 'sorting' 				  => true,
 				'filter'                  => true,
@@ -35,11 +34,7 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 				'options_callback'        => array('ftcPresetsModel', 'getPresets'),
 				'load_callback'			 => array(
 				array('ftcPresetsModel', 'getSelectedPreset')
-					),
-				'save_callback'			 => array(
-					array('ftcPresetsModel', 'getAllSelectedPresets')
-						),	
-			//	'reference'               => &$GLOBALS['TL_LANG']['tl_article']['options'],
+					),	
 				'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 				'sql'                     => "varchar(255) NOT NULL default '-'"
 			),
@@ -49,7 +44,6 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 
 				'exclude'                 => true,
 				'inputType'               => 'hidden',
-			//	'options_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 				'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
 				
 				'sql'                     => "text NULL"
@@ -60,18 +54,14 @@ $GLOBALS['TL_DCA']['tl_article']['palettes']['default'] = $pallete_ftc;
 
 				'exclude'                 => true,
 				'inputType'               => 'GridWizard',
-				//'load_callback'        => array('ftcSettingsModel', 'getSelectedPreset'),
 				'eval' => array
 				(
 				    'tl_class'          => 'clr',
 				    'doNotShow' =>true
-			
-				    
 				),    
 				
 				'sql'                     => "text NULL"
 			),
-	
    'add_ftc_settings' => array
    				(
    					'label'                   => &$GLOBALS['TL_LANG']['MSC']['add_ftc_settings'],

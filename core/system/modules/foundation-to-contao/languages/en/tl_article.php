@@ -10,12 +10,7 @@
  * @copyright 2014 Monique Hahnefeld
  */
  
- //Content
- $GLOBALS['TL_LANG']['tl_article']['small_ftc'][0] ="Cols on small displays";
- $GLOBALS['TL_LANG']['tl_article']['large_ftc'][0] ="Cols on small displays";
- $GLOBALS['TL_LANG']['tl_article']['align_ftc'][0] ="Center alignment";
- $GLOBALS['TL_LANG']['tl_article']['float_ftc'][0] ="Elementalignment";
- 
+  
  //cols 
   $GLOBALS['TL_LANG']['tl_article']['ftc_legend']='Settings for the Grid with 12 Columns';
 
