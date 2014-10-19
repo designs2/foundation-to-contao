@@ -120,7 +120,7 @@ class PrepareVars extends \Controller
   //outputFrontendTemplate, $strContent, $strTemplate
   // getFrontendModule
   public function modules($objRow, $strBuffer, $objModule){   
- 		 		var_dump($objRow->type);
+ 		 		//var_dump($objRow->type);
 		switch ($objRow->type) {
         case 'navigation':
         case 'customnav':
