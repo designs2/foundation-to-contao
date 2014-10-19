@@ -175,7 +175,7 @@ class PrepareVars extends \Controller
      //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
     // $el->cssID = unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
-     $el->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
+     $el->ftcID = ($el->cssID[0] != '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
      $el->data_attr = $this->splitArr($el->data_attr_ftc);
      
      switch($el->type) {
@@ -445,7 +445,7 @@ class PrepareVars extends \Controller
 
       if (is_array($PluginArr)&&!empty($PluginArr)){
           
-          $objCombiner->add($pathFTC.'foundation/js/foundation.min/foundation.js');
+          $objCombiner->add($pathFTC.'foundation/js/foundation/foundation.js');
           foreach ($PluginArr as $plugin){
             $objCombiner->add($pathFTC.'foundation/js/foundation/foundation.'.$plugin.'.js');
             $arrPlugs[$plugin] =true;

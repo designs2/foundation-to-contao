@@ -798,7 +798,7 @@ class tl_ftc_content extends \tl_content
 				
 				if ($arrRow['data_attr']==''&&$arrRow['row_data_attr_ftc']=='') {
 				}else {
-					$data .=  'ATTR: '.$this->splitArr($arrRow['data_attr']).' '.$this->splitArr($arrRow['row_data_attr_ftc']).' |';
+				//	$data .=  'ATTR: '.$this->splitArr($arrRow['data_attr']).' '.$this->splitArr($arrRow['row_data_attr_ftc']).' |';
 				}
 				if ($CssID[0]!==''){				
 				//	$data .= ' ID: '.$CssID[0].' |';
@@ -861,10 +861,10 @@ class tl_ftc_content extends \tl_content
 				$class .=  ' h64';
 			}
 //	var_dump($arrRow);
-//	exit;
+//	exit;  <div class="' . trim($class) . '">'.$data.'<span class="headline">'.$headline['value'].'</span>
 			return '
 	<div class="cte_type ' . $key . $CssClass.'">' . $type . '</div>
-	<div class="' . trim($class) . '">'.$data.'<span class="headline">'.$headline['value'].'</span>
+ <div class="' . trim($class) . '">
 	' . $this->getContentElement($arrRow['id']) . '
 	</div>' . "\n";
 		}

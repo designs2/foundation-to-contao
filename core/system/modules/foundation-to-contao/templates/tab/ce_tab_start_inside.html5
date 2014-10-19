@@ -1,1 +1,1 @@
-<div id="<?php echo $this->cssID; ?>" class="content row <?php echo $this->class; ?>">
+<div class="content row <?php echo $this->class; ?> "<?php echo $this->ftcID; ?>>
