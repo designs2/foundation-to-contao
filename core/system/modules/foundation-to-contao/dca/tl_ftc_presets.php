@@ -321,7 +321,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    						'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for'],
    						'exclude'                 => true,
    						'inputType'               => 'checkbox',
-   						'options'				=>array('layout','module','article','content','form_field'),
+   						'options'				=>array('module','article','content','form_field'),
    						'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for_options'],
    						'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12'),
    						'sql'                     => "varchar(255) NULL"

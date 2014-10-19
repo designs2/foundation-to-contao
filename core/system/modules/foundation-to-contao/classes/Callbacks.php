@@ -15,16 +15,11 @@ namespace MHAHNEFELD\FTC;
 class Callbacks extends \Backend
 {
 
-
 	public function content_onload($dc) 
 	{
-		
-		//var_dump( $GLOBALS['TL_DCA']['tl_content']['palettes']);
 		 $ftc_grid = '{ftc_legend},ftc_preset_id,ftc_preset_full,data_attr_ftc,ftc_preset_add_custom;';
 		  
 		 $palettes = $GLOBALS['TL_DCA']['tl_content']['palettes'];
-		// array_push($GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'],'ftc_preset_add_custom');
-		  //$GLOBALS['TL_DCA']['tl_content']['subpalettes']['ftc_preset_add_custom']='ftc_preset_custom';
 		 $exception = array('row_start','row_stop','col_stop');
 		 foreach ($palettes as $p => $str) {
 		 	// echo '<br>$p '.$p;
@@ -35,11 +30,6 @@ class Callbacks extends \Backend
 		 	 $pallete_ftc = str_replace("{type_legend}",$ftc_grid."{type_legend}",$str);
 		 	 $GLOBALS['TL_DCA']['tl_content']['palettes'][$p]=$pallete_ftc;
 		 }
-		
-//		$fieldsSize=count($GLOBALS['TL_DCA']['tl_content']['fields'])-1;
-//		$palettesSize=count($palettes)-1;
-//		$default = '{type_legend},type,headline;';
-//		$expert ='{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 	}
 	public function formfield_onload($dc) 
 	{
@@ -55,8 +45,7 @@ class Callbacks extends \Backend
 		 	 $pallete_ftc = str_replace("{type_legend}",$ftc_grid."{type_legend}",$str);
 		 	 $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$p]=$pallete_ftc;
 		 }
-	}
-//	
+	}	
 	
-
 }
+?>

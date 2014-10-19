@@ -46,9 +46,7 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
 					'load_callback'			 => array(
 					array('ftcPresetsModel', 'getSelectedPreset')
 						),
-					'save_callback'			 => array(
-						array('ftcPresetsModel', 'getAllSelectedPresets')
-							),
+		
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'",
 					'combined'	=>'ftc_preset_full'

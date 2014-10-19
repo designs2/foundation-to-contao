@@ -20,11 +20,11 @@ array_insert($GLOBALS['BE_MOD']['design'],3,array(
 	'tl_ftc_presets' => array
 	    (
      'tables'            => array('tl_ftc_presets'),
-     'icon'           => 'system/modules/foundation-to-contao/assets/icons/icon.png'),
+     'icon'           => 'system/modules/foundation-to-contao/assets/icons/ftc-presets.png'),
 	'tl_ftc_settings' => array
 	     (
 	  'tables'            => array('tl_ftc_settings'),
-	  'icon'           => 'system/modules/foundation-to-contao/assets/icons/icon.png'
+	  'icon'           => 'system/modules/foundation-to-contao/assets/icons/ftc-settings.png'
     
 	)));
 /**

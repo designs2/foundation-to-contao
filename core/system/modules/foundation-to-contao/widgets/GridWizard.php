@@ -110,7 +110,7 @@ class GridWizard extends \Widget
 	 * Generate the widget and return it as string
 	 * @return string
 	 */
-	public function generate()
+	public function generate(){
 	
 		$dc_id = $this->currentRecord;
 		return $this->getFields($dc_id,$this->varValue);

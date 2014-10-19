@@ -19,67 +19,53 @@ class Presets extends \Backend
 	protected $model = 'ftcPresetsModel';
 	
 	
-	public function update($dc) 
+	public function update($table,$id,$dc) 
 	{
-		
-		if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
-		$Rel='id';
-		$PresetsArr = $this->getPresets($this->model,$Rel,$_GET['id']);
-			//var_dump($PresetsArr);
-		
-		foreach (unserialize($PresetsArr[0]['show_in_sections']) as $key) {
+		//var_dump($table,$id,$dc->__get('activeRecord')->row());
+		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
+
+		$PresetsArr = $dc->__get('activeRecord')->row();
+				
+		foreach (unserialize($PresetsArr['show_in_sections']) as $key) {
 		
 			if ($key=='layout') {continue;}
 				$strModel = $this->getStrClass($key);
-			$arrModelsDC=$this->getModels($strModel,'ftc_preset_id',$_GET['id']);
-//			var_dump($_GET['id'],$arrModelsDC);
-//			exit;
+				$arrModelsDC=$this->getModels($strModel,'ftc_preset_id',$dc->__get('activeRecord')->id);
 			foreach ($arrModelsDC as $m) {
 				$defM = $strModel::findBy('id',$m['id']);
-				$defM->ftc_preset_full = serialize($this->getDefaultPreset($_GET['id']));
+				$defM->ftc_preset_full = $this->getDefaultPreset($PresetsArr);
 				$defM->save();
-//				var_dump($strModel,$defM->id,$defM->ftc_preset_full);
-//				echo'<br>';
+				// var_dump($strModel,$defM->id,$defM->ftc_preset_full);
+				// echo'<br>';
 				
 			}
 			unset($arrModels);
 		}
-		foreach (unserialize($PresetsArr[0]['use_as_default_for']) as $key) {
+		foreach (unserialize($PresetsArr['use_as_default_for']) as $key) {
 			if ($key=='layout') {continue;}
-		
-			
+
 			$strModel = $this->getStrClass($key);
 
 			$arrModelsDEF=$this->getModels($strModel,'ftc_preset_id','-');
-
+			//var_dump($arrModelsDEF);
 			foreach ($arrModelsDEF as $mdf) {
-				//var_dump($m['ftc_preset_id']);
-				$defM = $strModel::findBy('id',$mdf['id']);
-				//$defM->ftc_preset_id= $_GET['id'];
-				$defM->ftc_preset_full = serialize($this->getDefaultPreset($_GET['id']));
 
+				$defM = $strModel::findBy('id',$mdf['id']);
+				$defM->ftc_preset_full = $this->getDefaultPreset($PresetsArr);
 
 				if ($key=='form_field'&&$defM->type!=='fieldset'){
-				//var_dump($arrModelsDEF,serialize($this->getDefaultPreset($_GET['id'])) );
-				//exit;
+				$defM->ftc_preset_full_label = $this->getDefaultPreset($PresetsArr);
 			
 				}
 				$defM->save(true);
 				
-				
 			}
 			unset($arrModelsDEF);
 		}
-		
+		//exit;
 
 	}
 	
-//	
-	public function getPresets($model,$Rel,$Val) 
-	{	
-		$arrModel = $model::findBy($Rel,$Val)->fetchAll();
-	 	return $arrModel; 
-	} 
 	
 	public function getModels($strModel,$Rel,$Val) 
 	{	
@@ -89,24 +75,20 @@ class Presets extends \Backend
 	
 	public function getStrClass($key)
 	 {	
-	    var_dump($key);
 	     if($key=='form_field') {
 	     	$strClass = 'FormFieldModel';
 	     }else {
 	    	$strClass = strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1).'Model';	
-	    	//var_dump($strClass);
 	     }
 	     return $strClass;
 	 } 
 	 	       
 	 //get default options
-     public function getDefaultPreset($id)
+     public function getDefaultPreset($Preset)
       {
-
-      	$Preset = ftcPresetsModel::findByID($id)->fetchAll();
-      	unset($Preset[0]['use_as_default_for'],$Preset[0]['show_in_sections'],$Preset[0]['tstamp'],$Preset[0]['name'],$Preset[0]['description'],$Preset[0]['preview']);
+      	unset($Preset['use_as_default_for'],$Preset['show_in_sections'],$Preset['tstamp'],$Preset['name'],$Preset['description'],$Preset['preview']);
       
-      	return $Preset;
+      	return serialize($Preset);
       }
 
 }

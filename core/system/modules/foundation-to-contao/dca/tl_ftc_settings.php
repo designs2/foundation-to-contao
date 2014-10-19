@@ -287,60 +287,22 @@ visibility,visibility_vars'
 			'eval'                    => array('maxlength'=>32,'tl_class'=>'w50'),
 			'sql'                     => "char(16) NOT NULL default 'ltr'"
 		),
-		//fonts
-		'icon_fonts' => array
-		(
-			'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['icon_fonts'],
-			'exclude'                 => true,
-			'inputType'               => 'text',	
-			'eval'                    => array('maxlength'=>32,'tl_class'=>'w50'),
-			'sql'                     => "varchar(32) NOT NULL default ''"
-		),
+
 		'icon_fonts' => array
 		       (
 		           'label'                 => &$GLOBALS['TL_LANG']['tl_ftc_settings']['icon_fonts'],
 		           'exclude'               => true,
-		           'inputType'             => 'multiColumnWizard',
-		           'default' =>'chose your files',
-		           'eval' => array
-		           (
-		               'tl_class'          => 'clr w50 ',
-		               'columnFields' => array
-		               (
-		                 
-		                   'src' => array
-		                   (
-		                       'label'     => &$GLOBALS['TL_LANG']['tl_ftc_settings']['icon_fonts_src']['src'],
-		                       'inputType'               => 'fileTree',
-		                       'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio',  'tl_class'=>'tl_text_1'),
-		                     
-		                   )
-		               ),
-		           ),
-		           'sql'                   => "blob NULL",
+		          'inputType'               => 'fileTree',
+		           'eval'                    => array('multiple'=>true, 'filesOnly'=>true,'fieldType'=>'checkbox'),
+		           'sql'                   => "blob NULL"
 		       ),  
 		'fonts' => array
 		(
 			'label'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['fonts'],
 			'exclude'               => true,
-		    'inputType'             => 'multiColumnWizard',
-		    'default' =>'chose your files',
-		    'eval' => array
-		    (
-		        'tl_class'          => 'w50 ',
-		        'columnFields' => array
-		        (
-		          
-		            'src' => array
-		            (
-		                'label'     => &$GLOBALS['TL_LANG']['tl_ftc_settings']['fonts_src']['src'],
-		                'inputType'               => 'fileTree',
-		                'eval'                    => array('filesOnly'=>true, 'fieldType'=>'radio',  'tl_class'=>'tl_text_1'),
-		              
-		            )
-		        ),
-		    ),
-		    'sql'                   => "blob NULL",
+			'inputType'               => 'fileTree',
+			'eval'                    => array('multiple'=>true, 'filesOnly'=>true,'fieldType'=>'checkbox'),
+			'sql'                   => "blob NULL"
 		), 
 		//grid cols,breakpoint,max_width,gap,radius
 		'cols' => array
@@ -1141,7 +1103,9 @@ visibility,visibility_vars'
 			'pre_scss'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['block_grid_vars']['pre_scss'],
 			'post_scss'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['block_grid_vars']['post_scss'],
 			'exclude'                 => true,
-			'default'				=>' ',
+			'default'				=>' $include-m-html-grid-classes: true;
+$include-xl-html-grid-classes: true;
+$include-xxl-html-grid-classes: true;',
 			'inputType'               => 'textarea',	
 			'eval'                    => array('maxlength'=>3000,'tl_class'=>'w75','cols'=>30,'rows'=>4),
 			'sql'                     => "text NULL"
@@ -1161,7 +1125,9 @@ visibility,visibility_vars'
 			'pre_scss'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['grid_vars']['pre_scss'],
 			'post_scss'                   => &$GLOBALS['TL_LANG']['tl_ftc_settings']['grid_vars']['post_scss'],
 			'exclude'                 => true,
-			'default'				=>' ',
+			'default'				=>' $include-m-html-grid-classes: true;
+$include-xl-html-grid-classes: true;
+$include-xxl-html-grid-classes: true;',
 			'inputType'               => 'textarea',	
 			'eval'                    => array('maxlength'=>3000,'tl_class'=>'w75','cols'=>30,'rows'=>4),
 			'sql'                     => "text NULL"

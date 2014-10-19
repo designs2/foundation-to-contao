@@ -175,20 +175,6 @@ class ftcPresetsModel extends \Model
       		return;
       		      		
       }
-      
-     // public function getAllSelectedPresets($val,$dc)
-     // {
-     // 	if (\Input::get('act')=='editAll'){
-     // 	$this->getSelectedPreset($val,$dc);
-     // 	}
-    	// elseif (\Input::get('act')=='edit'){
-    	// $this->getSelectedPreset($val,$dc);
-    	// }
-     
-     // 	return $val;
-
-     // } 
-     
      
     
 

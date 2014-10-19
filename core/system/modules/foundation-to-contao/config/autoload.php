@@ -127,7 +127,7 @@ TemplateLoader::addFiles(array
 	'be_ftc_introduction' => 'system/modules/foundation-to-contao/templates/backend',
 	'be_ftc_overview' => 'system/modules/foundation-to-contao/templates/backend',
 	
-	'fe_page' => 'system/modules/foundation-to-contao/templates/frontend',
+	'fe_page_ftc' => 'system/modules/foundation-to-contao/templates/frontend',
 	
 	//modules
 	'mod_topbar_start' => 'system/modules/foundation-to-contao/templates/modules',
