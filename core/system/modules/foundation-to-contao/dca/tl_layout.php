@@ -212,7 +212,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		'clearing', 'orbit','dropdown','tooltip','alert', 'reveal',
 		'tab', 'joyride','equalizer','slider','topbar','offcanvas','magellan'),
 		'reference'               => &$GLOBALS['TL_LANG']['tl_layout']['FoundationJS_options'],
-		'eval'                    => array('multiple'=>true,'class'=>'w50 m12'),
+		'eval'                    => array('multiple'=>true,'class'=>'w50 m12" style="height:auto'),
 		'sql'                     => "text NULL"
 	),
 	'FTC_JS' => array
@@ -224,7 +224,7 @@ $GLOBALS['TL_DCA']['tl_layout']['subpalettes']['addFoundation']='FoundationJS,FT
 		'inputType'               => 'checkbox',
 		'options'        => array('modernizr','jquery','jquery.cookie','placeholder','fastclick','mediaelement_player'),
 		'reference'               => &$GLOBALS['TL_LANG']['tl_layout']['FTC_JS_options'],
-		'eval'                    => array('multiple'=>true,'class'=>'w50 m12'),
+		'eval'                    => array('multiple'=>true,'class'=>'w50 m12" style="height:auto'),
 		'sql'                     => "text NULL"
 	)
 

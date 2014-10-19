@@ -318,6 +318,9 @@ class PrepareVars extends \Controller
           //formfields
           case 'text':
           case 'email':
+          case 'number':
+          case 'tel':
+          case 'url':
             $objWidget->__set('template','form_textfield_ftc');
             break;
           case 'select':

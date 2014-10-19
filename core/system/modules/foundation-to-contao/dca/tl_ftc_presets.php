@@ -265,7 +265,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    			'inputType'               => 'select',
    			'options_callback'        => array('ftcSettingsModel', 'getAlignOpitons'),
    			'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['options'],
-   			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false,  'tl_class'=>'w50 m12'),
+   			'eval'                    => array('multiple'=>true,'helpwizard'=>false, 'chosen'=>false,  'tl_class'=>'w50 m12" style="height:auto'),
    			'sql'                     => "varchar(2000) NOT NULL default '-'"
    		),
    	'pull' => array
@@ -313,7 +313,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    					'inputType'               => 'checkbox',
    					'options'				=>array('layout','module','article','content','form_field'),
    					'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['show_in_sections_options'],
-   					'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12'),
+   					'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12" style="height:auto'),
    					'sql'                     => "varchar(255) NULL"
    				),
    	'use_as_default_for' => array
@@ -323,7 +323,7 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
    						'inputType'               => 'checkbox',
    						'options'				=>array('module','article','content','form_field'),
    						'reference'               => &$GLOBALS['TL_LANG']['tl_ftc_presets']['use_as_default_for_options'],
-   						'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12'),
+   						'eval'                    => array('multiple'=>true,'tl_class'=>'w50 m12" style="height:auto'),
    						'sql'                     => "varchar(255) NULL"
    					)	
 			      
