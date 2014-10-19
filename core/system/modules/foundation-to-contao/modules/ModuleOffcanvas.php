@@ -100,8 +100,8 @@ class ModuleOffcanvas extends \ModuleExt
 //		$mmm= new ModuleOffcanvas;
 		$this->Template->items = $this->renderNavigationFTC($trail[$level], 1, $host, $lang);
 		
-		$prepVars = new PrepareVars;
-		$ftc_classes = $prepVars->getGridVars(unserialize($this->aktiv_preset_ftc)[0],$this->add_custom_settings,$this->custom_preset_ftc);
+	//	$prepVars = new PrepareVars;
+	//	$ftc_classes = $prepVars->getGridVars(unserialize($this->aktiv_preset_ftc)[0],$this->add_custom_settings,$this->custom_preset_ftc);
 			
 		$this->Template->cssID = $this->cssID;
 //		var_dump($this->Template->cssID);
