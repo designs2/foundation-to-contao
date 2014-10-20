@@ -25,8 +25,8 @@ class Presets extends \Backend
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
 
 		$PresetsArr = $dc->__get('activeRecord')->row();
-				
-		foreach (unserialize($PresetsArr['show_in_sections']) as $key) {
+		if($PresetsArr['show_in_sections'] ==''){return;}		
+		foreach (unserialize($PresetsArr['show_in_sections'])as $key) {
 		
 			if ($key=='layout') {continue;}
 				$strModel = $this->getStrClass($key);
@@ -41,6 +41,7 @@ class Presets extends \Backend
 			}
 			unset($arrModels);
 		}
+		if($PresetsArr['use_as_default_for'] ==''){return;}
 		foreach (unserialize($PresetsArr['use_as_default_for']) as $key) {
 			if ($key=='layout') {continue;}
 
@@ -92,3 +93,4 @@ class Presets extends \Backend
       }
 
 }
+?>
