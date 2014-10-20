@@ -25,11 +25,14 @@ class PrepareVars extends \Controller
       switch($template) {
       		
       		case 'fe_page':
+           $obj->setName($template.'_ftc');
+          case 'fe_page_multitoggle':
+          case 'fe_page_ftc':
             if($obj->layout->__get("addFoundation")=='1'){
 
               $obj->__get("layout")->__set("gridCSS",(array)$this->getGridArr($obj->layout));
               $obj->__get("layout")->__set("ftcJS",(string)$this->getScriptStr($obj->layout));
-              $obj->setName($template.'_ftc');
+             
              //var_dump('test',$obj->layout);
             }
             break;
@@ -423,8 +426,8 @@ class PrepareVars extends \Controller
     $GridClassesArr["header"] = ($objLayout->__get("ftc_preset_full_rwh")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_rwh"),'',array());
     $GridClassesArr["footer"] = ($objLayout->__get("ftc_preset_full_rwf")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_rwf"),'',array());
     $GridClassesArr["main"] = ($objLayout->__get("ftc_preset_full_main")===NULL)?'': $this->getGridVars($objLayout->__get("ftc_preset_full_main"),'',array());
-    $GridClassesArr["left"] = ($objLayout->__get("ftc_preset_full_left")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_left"),'',array());
-    $GridClassesArr["right"] = ($objLayout->__get("ftc_preset_full_right")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_right"),'',array());
+    $GridClassesArr["left"] = ($objLayout->__get("ftc_preset_full_cll")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_cll"),'',array());
+    $GridClassesArr["right"] = ($objLayout->__get("ftc_preset_full_clr")===NULL)?'':$this->getGridVars($objLayout->__get("ftc_preset_full_clr"),'',array());
 
     return $GridClassesArr;
   }
@@ -453,10 +456,12 @@ class PrepareVars extends \Controller
             $objCombiner->add($pathFTC.'foundation/js/foundation/foundation.'.$plugin.'.js');
             $arrPlugs[$plugin] =true;
           }
-
-          $ScriptStr .= "\n" . \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml);
-
-
+        if ((floatval(VERSION)>=3.3)) {
+          $ScriptStr .= "\n" . \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml); //>=3.3.0
+        }else{
+           $ScriptStr .= "\n" . '<script src="'.$objCombiner->getCombinedFile().'"></script>';
+        }
+         
           $ScriptStr .= "\n" . '<script>
         $(document).ready(function(){' ;
             if ($arrPlugs['tooltip']) {
