@@ -541,7 +541,7 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
        		(
        			'label'                   => &$GLOBALS['TL_LANG']['tl_content']['vcard'],
        		'exclude'               => true,
-       		'default'=>'a:6:{i:0;a:2:{s:7:"content";s:17:"Monique Hahnefeld";s:5:"class";s:2:"fn";}i:1;a:2:{s:7:"content";s:13:"Austraße 138";s:5:"class";s:14:"street-address";}i:2;a:2:{s:7:"content";s:18:"Baden-Würthemberg";s:5:"class";s:8:"locality";}i:3;a:2:{s:7:"content";s:9:"Stuttgart";s:5:"class";s:5:"state";}i:4;a:2:{s:7:"content";s:5:"70376";s:5:"class";s:3:"zip";}i:5;a:2:{s:7:"content";s:25:"info@monique-hahnefeld.de";s:5:"class";s:5:"email";}}',
+       		'default'=>'a:6:{i:0;a:2:{s:7:"content";s:17:"Monique Hahnefeld";s:5:"class";s:2:"fn";}i:1;a:2:{s:7:"content";s:26:"Friedrich-Karl-Straße 20A";s:5:"class";s:14:"street-address";}i:2;a:2:{s:7:"content";s:6:"Berlin";s:5:"class";s:8:"locality";}i:3;a:2:{s:7:"content";s:6:"Berlin";s:5:"class";s:5:"state";}i:4;a:2:{s:7:"content";s:5:"12103";s:5:"class";s:3:"zip";}i:5;a:2:{s:7:"content";s:25:"info@monique-hahnefeld.de";s:5:"class";s:5:"email";}}',
        		    'inputType'             => 'multiColumnWizard',
        		    'eval' => array
        		    (

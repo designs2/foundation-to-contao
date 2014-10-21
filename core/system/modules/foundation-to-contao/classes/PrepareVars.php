@@ -218,7 +218,7 @@ class PrepareVars extends \Controller
           break;
 
         default:
-      
+      //var_dump($el);
       }
      
      unset($ftc);
@@ -344,9 +344,12 @@ class PrepareVars extends \Controller
           case 'textarea':   
           case 'captcha':
           case 'message':
+     
             $objWidget->__set('template','form_'.$objWidget->type.'_ftc');
             break;
           default:
+          
+            break;
                      
           }
 

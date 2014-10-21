@@ -25,8 +25,9 @@ class Presets extends \Backend
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
 
 		$PresetsArr = $dc->__get('activeRecord')->row();
-		if($PresetsArr['show_in_sections'] ==''){return;}		
-		foreach (unserialize($PresetsArr['show_in_sections'])as $key) {
+		if($PresetsArr['show_in_sections'] ==''){return;}	
+		$PresetsArr['show_in_sections']=(is_array($PresetsArr['show_in_sections']))?$PresetsArr['show_in_sections']:unserialize($PresetsArr['show_in_sections']);	
+		foreach ($PresetsArr['show_in_sections'] as $key) {
 		
 			if ($key=='layout') {continue;}
 				$strModel = $this->getStrClass($key);
@@ -42,7 +43,8 @@ class Presets extends \Backend
 			unset($arrModels);
 		}
 		if($PresetsArr['use_as_default_for'] ==''){return;}
-		foreach (unserialize($PresetsArr['use_as_default_for']) as $key) {
+		$PresetsArr['use_as_default_for']=(is_array($PresetsArr['use_as_default_for']))?$PresetsArr['use_as_default_for']:unserialize($PresetsArr['use_as_default_for']);	
+		foreach ($PresetsArr['use_as_default_for'] as $key) {
 			if ($key=='layout') {continue;}
 
 			$strModel = $this->getStrClass($key);
