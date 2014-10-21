@@ -25,8 +25,9 @@ class PrepareVars extends \Controller
       switch($template) {
           
           case 'fe_page':
+           case 'fe_page_multitoggle':
            $obj->setName($template.'_ftc');
-          case 'fe_page_multitoggle':
+          case 'fe_page_multitoggle_ftc':
           case 'fe_page_ftc':
             if($obj->layout->__get("addFoundation")=='1'){
 
