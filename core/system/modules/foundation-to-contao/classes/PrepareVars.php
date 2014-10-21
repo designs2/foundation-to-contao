@@ -44,6 +44,7 @@ class PrepareVars extends \Controller
       		case 'mod_navigation':
       		case 'mod_breadcrumb':
       		case 'mod_search':
+          case 'form':
       		case 'ce_download':
       		case 'ce_downloads':
       		case 'ce_hyperlink':
@@ -65,17 +66,25 @@ class PrepareVars extends \Controller
 		// $objRow->type is the type of the Element e.g. 'row_start'
 		/* $objElement */ 
 		if($objRow->type=='module'){
-			//var_dump($strBuffer);
+
 			$NewBuffer = $this->design_modules($objRow);
 			$strBuffer = (!$NewBuffer)?$strBuffer:$NewBuffer;
 		return $strBuffer;
 		
 		}
 		if ($objRow->type=='form') {
-		//var_dump($objRow);
+
+      $strClass = $this->findContentElement($objRow->type); 
+      $objEl = new $strClass($objRow);
 			$this->design_elements($objRow);
-			
-			}else {
+      $objEl->cssID = $objRow->cssID;
+      $objEl->ftc_classes = $objRow->ftc_classes;
+      $objEl->ftcID = $objRow->ftcID;
+      $objEl->data_attr = $objRow->data_attr;
+
+      $strBuffer = $objEl->generate();
+
+		}else {
 			$strClass = $this->findContentElement($objRow->type); //get the registrated Classname
 			$objEl = new $strClass($objRow);
 			
@@ -169,14 +178,14 @@ class PrepareVars extends \Controller
      //FTC Classes 
      if(!is_array(unserialize($el->ftc_preset_full))){ 
   	   $akt_preset=array();
-  	   return $el; 		
+  	   return $el;	
 		  }else{
     	 $akt_preset=unserialize($el->ftc_preset_full);	
     	}
 
      $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
-     //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
-    // $el->cssID = unserialize($el->cssID);
+
+     $el->cssID = unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
      $el->ftcID = ($el->cssID[0] != '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
      $el->data_attr = $this->splitArr($el->data_attr_ftc);
@@ -207,16 +216,12 @@ class PrepareVars extends \Controller
         case 'tab_start_inside':
           $el->tabs_align = $el->tabs_align;
           break;
-        case 'form':
-
-        break;
 
         default:
      	
     	}
      
      unset($ftc);
-     //var_dump($el->class);
      return $el;
   }
      
@@ -276,7 +281,7 @@ class PrepareVars extends \Controller
       $akt_preset_label=unserialize($el->ftc_preset_full_label);   
 
       }
-      // var_dump(unserialize($el->ftc_preset_full));
+      //var_dump(unserialize($el->ftc_preset_full));
       //  echo'<br><pre>';
       //  var_dump($el);
       // echo'<br>';

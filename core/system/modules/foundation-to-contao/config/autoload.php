@@ -53,8 +53,6 @@ ClassLoader::addClasses(array
 	'MHAHNEFELD\FTC\Themes'  => 'system/modules/foundation-to-contao/classes/Themes.php',
 	'MHAHNEFELD\FTC\Presets'  => 'system/modules/foundation-to-contao/classes/Presets.php',
 	
-	
-	
 	//Elements magellan
 	'MHAHNEFELD\FTC\ContentMagellanNav'  => 'system/modules/foundation-to-contao/elements/magellan/ContentMagellanNav.php',
 	'MHAHNEFELD\FTC\ContentMagellanStop'  => 'system/modules/foundation-to-contao/elements/magellan/ContentMagellanStop.php',
@@ -159,7 +157,7 @@ TemplateLoader::addFiles(array
 	'ce_text_ftc' => 'system/modules/foundation-to-contao/templates/content',
 	'mod_mh_foundation-to-contao' => 'system/modules/foundation-to-contao/templates',
 	//forms
-	'form' => 'system/modules/foundation-to-contao/templates/forms',
+	'form_ftc' => 'system/modules/foundation-to-contao/templates/forms',
 	//acc
 	'ce_acc_start' => 'system/modules/foundation-to-contao/templates/accordion',
 	'ce_acc_stop' => 'system/modules/foundation-to-contao/templates/accordion',
