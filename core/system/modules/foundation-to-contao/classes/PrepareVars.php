@@ -15,16 +15,16 @@ namespace MHAHNEFELD\FTC;
 
 class PrepareVars extends \Controller
 {
-		
-		
-	//parseFrontendTemplate
-	public function templates($obj){   
-		
-		$template = $obj->getName();
-		//var_dump($template);
+    
+    
+  //parseFrontendTemplate
+  public function templates($obj){   
+    
+    $template = $obj->getName();
+    //var_dump($template);
       switch($template) {
-      		
-      		case 'fe_page':
+          
+          case 'fe_page':
            $obj->setName($template.'_ftc');
           case 'fe_page_multitoggle':
           case 'fe_page_ftc':
@@ -37,46 +37,46 @@ class PrepareVars extends \Controller
             }
             break;
           case 'ce_headline':
-      		case 'ce_text':
-      		case 'ce_image':
-      		case 'ce_list':
-      		case 'mod_article':
-      		case 'mod_navigation':
-      		case 'mod_breadcrumb':
-      		case 'mod_search':
+          case 'ce_text':
+          case 'ce_image':
+          case 'ce_list':
+          case 'mod_article':
+          case 'mod_navigation':
+          case 'mod_breadcrumb':
+          case 'mod_search':
           case 'form':
-      		case 'ce_download':
-      		case 'ce_downloads':
-      		case 'ce_hyperlink':
-      		case 'ce_hyperlink_image':
-      		case 'ce_toplink':
+          case 'ce_download':
+          case 'ce_downloads':
+          case 'ce_hyperlink':
+          case 'ce_hyperlink_image':
+          case 'ce_toplink':
            $obj->setName($template.'_ftc');
           //var_dump($template);
              break;
           
-      		default:
+          default:
 
-    		}  		
+        }     
 
-	 } 	
-		
-		//getContentElement
-	public function elements($objRow, $strBuffer, $objElement)    {   
-		
-		// $objRow->type is the type of the Element e.g. 'row_start'
-		/* $objElement */ 
-		if($objRow->type=='module'){
+   }  
+    
+    //getContentElement
+  public function elements($objRow, $strBuffer, $objElement)    {   
+    
+    // $objRow->type is the type of the Element e.g. 'row_start'
+    /* $objElement */ 
+    if($objRow->type=='module'){
 
-			$NewBuffer = $this->design_modules($objRow);
-			$strBuffer = (!$NewBuffer)?$strBuffer:$NewBuffer;
-		return $strBuffer;
-		
-		}
-		if ($objRow->type=='form') {
+      $NewBuffer = $this->design_modules($objRow);
+      $strBuffer = (!$NewBuffer)?$strBuffer:$NewBuffer;
+    return $strBuffer;
+    
+    }
+    if ($objRow->type=='form') {
 
       $strClass = $this->findContentElement($objRow->type); 
       $objEl = new $strClass($objRow);
-			$this->design_elements($objRow);
+      $this->design_elements($objRow);
       $objEl->cssID = $objRow->cssID;
       $objEl->ftc_classes = $objRow->ftc_classes;
       $objEl->ftcID = $objRow->ftcID;
@@ -84,56 +84,56 @@ class PrepareVars extends \Controller
 
       $strBuffer = $objEl->generate();
 
-		}else {
-			$strClass = $this->findContentElement($objRow->type); //get the registrated Classname
-			$objEl = new $strClass($objRow);
-			
-			$this->design_elements($objEl);
-			$strBuffer = $objEl->generate();
-			
-		}
+    }else {
+      $strClass = $this->findContentElement($objRow->type); //get the registrated Classname
+      $objEl = new $strClass($objRow);
+      
+      $this->design_elements($objEl);
+      $strBuffer = $objEl->generate();
+      
+    }
 
-		unset($objEl);
-		
-		return $strBuffer; 
+    unset($objEl);
+    
+    return $strBuffer; 
       
   } 
   //compileFormFields
   public function forms($arrFields, $formId){   
 
-		foreach ($arrFields as $k => $field) {
-		$this->design_fields($field);
-		}
-		
-		return $arrFields; 
+    foreach ($arrFields as $k => $field) {
+    $this->design_fields($field);
+    }
+    
+    return $arrFields; 
  
   } 
      
           
   //getArticle
-	public function articles($objRow)    {   
-		if(!is_array(unserialize($objRow->ftc_preset_full))){ 
-		$akt_preset=array();
-		return $objRow; 		
-			}else{
-		$akt_preset=unserialize($objRow->ftc_preset_full);		
-			
-		}
-		$ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
-		//var_dump($objRow->ftc_preset_full,'n');
-		//$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
-		$objRow->cssID = unserialize($objRow->cssID);
-		$objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
-		$objRow->ftcID = ($objRow->cssID[0] != '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
-		
-		return $objRow; 
-		
-	} 
+  public function articles($objRow)    {   
+    if(!is_array(unserialize($objRow->ftc_preset_full))){ 
+    $akt_preset=array();
+    return $objRow;     
+      }else{
+    $akt_preset=unserialize($objRow->ftc_preset_full);    
+      
+    }
+    $ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
+    //var_dump($objRow->ftc_preset_full,'n');
+    //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
+    $objRow->cssID = unserialize($objRow->cssID);
+    $objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
+    $objRow->ftcID = ($objRow->cssID[0] != '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
+    
+    return $objRow; 
+    
+  } 
   //outputFrontendTemplate, $strContent, $strTemplate
   // getFrontendModule
   public function modules($objRow, $strBuffer, $objModule){   
- 		 		//var_dump($objRow->type);
-		switch ($objRow->type) {
+        //var_dump($objRow->type);
+    switch ($objRow->type) {
         case 'navigation':
         case 'customnav':
         case 'search':
@@ -149,26 +149,26 @@ class PrepareVars extends \Controller
           $objEl = new $strClass($objRow);
           if(!is_array(unserialize($objRow->ftc_preset_full))){ 
           $akt_preset=array();
-          return $strBuffer; 		
+          return $strBuffer;    
           }else{
-          $akt_preset=unserialize($objRow->ftc_preset_full);			
+          $akt_preset=unserialize($objRow->ftc_preset_full);      
           }
 
           $ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
           $objEl->cssID = unserialize($objRow->cssID);
           $objEl->ftc_classes = trim($objRow->typePrefix.$objRow->type.' '.$objEl->cssID[1]).' '.$ftc_classes;
           $objEl->ftcID = ($objEl->cssID[0] != '') ? ' id="' . $objEl->cssID[0] . '"' : '';
-          			
+                
           $strBuffer = $objEl->generate();
           unset($objEl);
           break;
 
         default:
           break;
-	  }
-	
- 		
- 		return $strBuffer; 
+    }
+  
+    
+    return $strBuffer; 
    
   } 
                       
@@ -177,15 +177,15 @@ class PrepareVars extends \Controller
           
      //FTC Classes 
      if(!is_array(unserialize($el->ftc_preset_full))){ 
-  	   $akt_preset=array();
-  	   return $el;	
-		  }else{
-    	 $akt_preset=unserialize($el->ftc_preset_full);	
-    	}
+       $akt_preset=array();
+       return $el;  
+      }else{
+       $akt_preset=unserialize($el->ftc_preset_full); 
+      }
 
      $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
-
-     $el->cssID = unserialize($el->cssID);
+//var_dump($el->cssID,($el->cssID==''));
+     $el->cssID = (is_array($el->cssID))?$el->cssID : unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
      $el->ftcID = ($el->cssID[0] != '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
      $el->data_attr = $this->splitArr($el->data_attr_ftc);
@@ -218,8 +218,8 @@ class PrepareVars extends \Controller
           break;
 
         default:
-     	
-    	}
+      
+      }
      
      unset($ftc);
      return $el;
@@ -235,29 +235,29 @@ class PrepareVars extends \Controller
           case 'navigation':
           case 'offcanvas':
           case 'search':
-          	$strClass = 'Module'.strtoupper(substr($elModel->type, 0, 1)).substr($elModel->type, 1, (strlen($elModel->type))-1); 		
-          	$elModul = new $strClass($elModel);
-          	
-          	$el->cssID = unserialize($el->cssID);
-        		if(!is_array(unserialize($el->ftc_preset_full))){ 
-      		    $akt_preset=array();
-      		     return $el; 		
-      			}else{
-      		    $akt_preset=unserialize($el->ftc_preset_full);
-      		  }
-          	$ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
+            $strClass = 'Module'.strtoupper(substr($elModel->type, 0, 1)).substr($elModel->type, 1, (strlen($elModel->type))-1);    
+            $elModul = new $strClass($elModel);
+            
+            $el->cssID = unserialize($el->cssID);
+            if(!is_array(unserialize($el->ftc_preset_full))){ 
+              $akt_preset=array();
+               return $el;    
+            }else{
+              $akt_preset=unserialize($el->ftc_preset_full);
+            }
+            $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
    
-          	$elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
-          	$elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
-//			$el->Template = new \FrontendTemplate('mod_'.$el->type.'_ftc');
-//			$el->Template->setData($el);
+            $elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
+            $elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
+//      $el->Template = new \FrontendTemplate('mod_'.$el->type.'_ftc');
+//      $el->Template->setData($el);
 //      $el->compile();
-      			$strBuffer = $elModul->generate();
-      			return $strBuffer;
-          	break;
-          	
+            $strBuffer = $elModul->generate();
+            return $strBuffer;
+            break;
+            
           default:
-          	return false;
+            return false;
         }         
   }
           
@@ -298,21 +298,21 @@ class PrepareVars extends \Controller
       //var_dump( $ftc_classes,$ftc_classes_label);
       switch($el->type) {
 
-      		case 'range_slider':
-        		$el->rs_id = 'range_value_'.$el->id;
-        		$el->ftc_rs_classes = $this->splitArr($el->rs_classes);
-        		break;
-      		case 'submit':
-        		$ftc['button_classes'] = $this->splitArr($el->btn_styles).' '.$el->btn_size;
-        		$el->btn_classes = $ftc['button_classes'];
-        		break;
-      		case 'select':
-        		$arrOptions = unserialize($el->options);
-        		$el->arrOptions = $this->getOptions($arrOptions);
-        		break;
-      		
-      		default:
-    	}
+          case 'range_slider':
+            $el->rs_id = 'range_value_'.$el->id;
+            $el->ftc_rs_classes = $this->splitArr($el->rs_classes);
+            break;
+          case 'submit':
+            $ftc['button_classes'] = $this->splitArr($el->btn_styles).' '.$el->btn_size;
+            $el->btn_classes = $ftc['button_classes'];
+            break;
+          case 'select':
+            $arrOptions = unserialize($el->options);
+            $el->arrOptions = $this->getOptions($arrOptions);
+            break;
+          
+          default:
+      }
      unset($ftc);
      
      return $el;
@@ -356,46 +356,46 @@ class PrepareVars extends \Controller
   public function getOptions($arr) {
      $arrOption = array();
      // Generate options
-     		foreach ($arr as $arrOption)
-     		{
-     			if ($arrOption['group'])
-     			{
-     				if ($blnHasGroups)
-     				{
-     					$arrOptions[] = array
-     					(
-     						'type' => 'group_end'
-     					);
-     				}
+        foreach ($arr as $arrOption)
+        {
+          if ($arrOption['group'])
+          {
+            if ($blnHasGroups)
+            {
+              $arrOptions[] = array
+              (
+                'type' => 'group_end'
+              );
+            }
      
-     				$arrOptions[] = array
-     				(
-     					'type'  => 'group_start',
-     					'label' => specialchars($arrOption['label'])
-     				);
+            $arrOptions[] = array
+            (
+              'type'  => 'group_start',
+              'label' => specialchars($arrOption['label'])
+            );
      
-     				$blnHasGroups = true;
-     			}
-     			else
-     			{
-     				$arrOptions[] = array
-     				(
-     					'type'     => 'option',
-     					'value'    => $arrOption['value'],
-     					'selected' =>($arrOption['default'])? 'selected':'',
-     					'label'    => $arrOption['label'],
-     				);
-     			}
-     		}
+            $blnHasGroups = true;
+          }
+          else
+          {
+            $arrOptions[] = array
+            (
+              'type'     => 'option',
+              'value'    => $arrOption['value'],
+              'selected' =>($arrOption['default'])? 'selected':'',
+              'label'    => $arrOption['label'],
+            );
+          }
+        }
      
-     		if ($blnHasGroups)
-     		{
-     			$arrOptions[] = array
-     			(
-     				'type' => 'group_end'
-     			);
-     		}
-     	return $arrOptions;
+        if ($blnHasGroups)
+        {
+          $arrOptions[] = array
+          (
+            'type' => 'group_end'
+          );
+        }
+      return $arrOptions;
   }
      
   public function getGridVars($preset,$add_custom,$custom_preset){
@@ -407,9 +407,9 @@ class PrepareVars extends \Controller
      
      foreach ($GridArr as $v) {
      if (isset($preset[$v])&&$preset[$v]!=='-') {
-     	$ftc[$v] = $v.'-'.$preset[$v];
+      $ftc[$v] = $v.'-'.$preset[$v];
      }
-     	
+      
      }
      //var_dump($ftc_classes,'teesst',count($ftc));
      $ftc['columns'] = (count($ftc)==0)?'':'columns';
@@ -517,16 +517,16 @@ class PrepareVars extends \Controller
      
      $str='';
      $arr = (!is_array($arr))?unserialize($arr):$arr;
-     	if ($arr==''||!is_array($arr)) {
-     		return;
-     	}
-     	foreach ($arr as $class) {
-     		if ($class==''||$class=='-') {
-     			return;
-     		}
-     		$str.=' '.$class;
-     	}
-     	return $str;
+      if ($arr==''||!is_array($arr)) {
+        return;
+      }
+      foreach ($arr as $class) {
+        if ($class==''||$class=='-') {
+          return;
+        }
+        $str.=' '.$class;
+      }
+      return $str;
   }
           
 }
