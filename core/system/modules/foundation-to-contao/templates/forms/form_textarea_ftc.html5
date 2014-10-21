@@ -34,13 +34,11 @@ if ($this->mandatory&&!$fixStr){
 		echo $fixStr;
 		
 	}
-	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+	echo '<div class="'.$this->ftc_field_classes.'" >';
 
 
 ?>
-
-
-  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea<?php if ($this->class) echo ' ' . $this->class; ?>" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->fieldAttributes; ?>><?php echo $this->fieldValues; ?></textarea>
+  <textarea name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="textarea" rows="<?php echo $this->rows; ?>" cols="<?php echo $this->cols; ?>"<?php echo $this->fieldAttributes; ?>><?php echo $this->fieldValues; ?></textarea>
 	<?php if ($this->hasErrors()): ?>
 	    <small class="error"><?php echo $this->getErrorAsString(); ?></small>
 	<?php endif; ?>

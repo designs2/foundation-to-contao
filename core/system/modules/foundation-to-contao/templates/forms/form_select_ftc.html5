@@ -34,11 +34,11 @@ if ($this->mandatory&&!$fixStr){
 		echo $fixStr;
 		
 	}
-	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
+	echo '<div class="'.$this->ftc_field_classes.'" >';
 
 ?>
 
-<select name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" class="<?php echo $this->class; ?>"<?php echo $this->getAttributes(); ?>>
+<select name="<?php echo $this->name; ?>" id="ctrl_<?php echo $this->id; ?>" <?php echo $this->getAttributes(); ?>>
     <?php foreach ($this->options as $option): ?>
       <?php if ($option['type'] == 'group_start'): ?>
         <optgroup label="<?php echo $option['label']; ?>">

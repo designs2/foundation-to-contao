@@ -281,17 +281,14 @@ class PrepareVars extends \Controller
       $akt_preset_label=unserialize($el->ftc_preset_full_label);   
 
       }
-      //var_dump(unserialize($el->ftc_preset_full));
-      //  echo'<br><pre>';
-      //  var_dump($el);
-      // echo'<br>';
+    
       $ftc_classes = $this->getGridVars($akt_preset,'',NULL);
       $ftc_classes_label = $this->getGridVars($akt_preset_label,'',NULL);
 
       $ftc['style_label'] = $this->splitArr($el->label_classes);  
       $ftc['data_attr'] = $this->splitArr($el->data_attr_ftc);
-       
-      $el->class = $strClass;
+
+      $el->class = $el->class;
       $el->ftc_field_classes = $ftc_classes;
       $el->ftc_fix_classes = $ftc_classes_label;
       $el->label_style = $ftc['style_label'];
@@ -308,8 +305,13 @@ class PrepareVars extends \Controller
             break;
           case 'select':
             $arrOptions = unserialize($el->options);
-            $el->arrOptions = $this->getOptions($arrOptions);
+            $el->arrOptions = $this->getOptionsSelect($arrOptions);
             break;
+           case 'radio':
+            $arrOptions = unserialize($el->options);
+            $el->arrOptions = $this->getOptionsRadio($arrOptions, $el->name);
+            break;  
+
           
           default:
       }
@@ -319,8 +321,7 @@ class PrepareVars extends \Controller
   }
 
   public function formfieldtemplates($objWidget, $formId, $arrData, $_this){
-      // var_dump('test',$objWidget);
-      // exit;
+
       switch($objWidget->type) {
 
           //formfields
@@ -344,7 +345,6 @@ class PrepareVars extends \Controller
           case 'captcha':
           case 'message':
             $objWidget->__set('template','form_'.$objWidget->type.'_ftc');
-            //var_dump($objWidget->type,$objWidget->__get('template'));
             break;
           default:
                      
@@ -353,7 +353,7 @@ class PrepareVars extends \Controller
       return $objWidget;
   }
 
-  public function getOptions($arr) {
+  public function getOptionsSelect($arr) {
      $arrOption = array();
      // Generate options
         foreach ($arr as $arrOption)
@@ -397,7 +397,25 @@ class PrepareVars extends \Controller
         }
       return $arrOptions;
   }
-     
+  public function getOptionsRadio($arr,$name)
+  {
+    $arrOptions = array();
+
+    foreach ($arr as $i=>$arrOption)
+    {
+      $arrOptions[] = array
+      (
+        'name'       => $name,
+        'id'         => $name. '_' . $i,
+        'value'      => $arrOption['value'],
+        'checked'    => ($arrOption['default'])? 'checked':'',
+      //  'attributes' => $this->getAttributes(),
+        'label'      => $arrOption['label']
+      );
+    }
+
+    return $arrOptions;
+  }  
   public function getGridVars($preset,$add_custom,$custom_preset){
      
      $ftc = array();

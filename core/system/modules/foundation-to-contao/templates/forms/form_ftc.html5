@@ -1,8 +1,4 @@
 <!-- indexer::stop -->
-
-<?php
-//var_dump($this->ftc_classes);
-?>
 <div class="<?php echo $this->ftc_classes; ?> <?php echo $this->tableless ? 'tableless' : 'tableform'; ?> block" <?php echo $this->ftcID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?> <?php echo $this->data_attr;?>>
 
   <?php if ($this->headline): ?>

@@ -17,7 +17,6 @@ if ($this->mandatory){
 	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
 
 	foreach ($this->arrOptions as $i => $arrOpt) {
-	
 		echo '  <input type="radio" name="'.$arrOpt['name'].'" id="ctrl_'.$arrOpt['id'].'" class="radio';
 		if ($arrOpt['class']) {
 		echo ' '.$arrOpt['class'];
