@@ -329,8 +329,8 @@ class ContentClearing extends \ContentElement
 						$images[($i+$j)]['size'] = $this->size;
 						$images[($i+$j)]['imagemargin'] = $this->imagemargin;
 						$images[($i+$j)]['fullsize'] = $this->fullsize;
-						$prepareImages = new extndController;
-						$prepareImages->addImageToTemplateFTC($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
+						//$prepareImages = new extndController;
+						$this->addImageToTemplate($objCell, $images[($i+$j)], $intMaxWidth, $strLightboxId);
 	
 						// Add column width and class
 						$objCell->colWidth = $colwidth . '%';
@@ -354,5 +354,6 @@ class ContentClearing extends \ContentElement
 	
 			$this->Template->images = $objTemplate->parse();
 		}
-	
+
+			
 }
