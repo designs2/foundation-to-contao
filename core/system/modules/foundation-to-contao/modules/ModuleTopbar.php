@@ -25,7 +25,7 @@ namespace MHAHNEFELD\FTC;
  * @author     Leo Feyer <https://contao.org>
  * @package    Core
  */
-class ModuleTopbarStart extends \ModuleExt
+class ModuleTopbar extends \ModuleExt
 {
 
 	/**

@@ -6,6 +6,10 @@
 .invisible{
 	display: none;
 }
+/* make centered possible*/
+.ce_magellan_nav.fixed{
+	left: auto;
+}
  /* Quelle http://skybeam.de/blog/html5-input-email/
   */
 ::-webkit-validation-bubble-icon {display:none;}
