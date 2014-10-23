@@ -85,7 +85,7 @@ class ModuleTopbarSection extends \ModuleExt
 				$host = $objRootPage->domain;
 			}
 		}
-
+		
 		$this->Template->request = ampersand(\Environment::get('indexFreeRequest'));
 		$this->Template->skipId = 'skipNavigation' . $this->id;
 		$this->Template->skipNavigation = specialchars($GLOBALS['TL_LANG']['MSC']['skipNavigation']);

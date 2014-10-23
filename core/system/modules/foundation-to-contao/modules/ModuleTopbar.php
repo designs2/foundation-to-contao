@@ -32,7 +32,7 @@ class ModuleTopbar extends \ModuleExt
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_topbar_start';
+	protected $strTemplate = 'mod_topbar';
 
 
 	/**

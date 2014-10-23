@@ -53,36 +53,42 @@ class ModuleExt extends \Module
 			if ($this->navigationTpl == '')
 			{	
 			}
-		
+			
 			if ($this->strTemplate=='mod_navigation_offcanvas') {
 				$this->navigationTpl = 'nav_default_offcanvas';
 				$trailClassName = ' trail';
 				$submenuClassName = ' submenu';
 				$siblingClassName = ' sibling';
+			
 			}else if ($this->strTemplate=='mod_topbar_section') {
 				$this->navigationTpl = 'nav_default_topbar';
 				$trailClassName = ' trail has-dropdown';
 				$submenuClassName = ' submenu has-dropdown';
 				$siblingClassName = ' sibling';
+				$addToLevel = ' dropdown';
 			}else{
 				$this->navigationTpl = 'nav_default';
 				$trailClassName = ' trail';
 				$submenuClassName = ' submenu';
 				$siblingClassName = ' sibling';
+		
 			}
-			
 			$objTemplate = new \FrontendTemplate($this->navigationTpl);
-			$objTemplate->offcanvas_align = $this->offcanvas_align;
+
 			$objTemplate->level_int = $level;
 			$objTemplate->type = get_class($this);
 			$objTemplate->cssID = $this->cssID; // see #4897
-			//var_dump($this->dropdown_level);
-			if ($level>=intval($this->dropdown_level)&&$this->strTemplate=='mod_topbar_section') {
-				$objTemplate->level = 'dropdown level_' . $level++;
-			}else {
-				$objTemplate->level = 'level_' . $level++;
+
+			$levelClasses = '';
+			if (($level>=intval($this->dropdown_level))&&$this->navigationTpl=='nav_default_topbar') {
+				$levelClasses .= $addToLevel .' ';
 			}
-			
+			if ($level==1&&$this->navigationTpl=='nav_default_topbar') {
+				$levelClasses .= $this->offcanvas_align .' ';
+			}
+			$levelClasses .= 'level_' . $level++;
+			$objTemplate->level=$levelClasses;
+
 	
 			// Get page object
 			global $objPage;
@@ -98,7 +104,7 @@ class ModuleExt extends \Module
 	
 				$subitems = '';
 				$_groups = deserialize($objSubpages->groups);
-	
+
 				// Override the domain (see #3765)
 				if ($host !== null)
 				{
@@ -111,7 +117,7 @@ class ModuleExt extends \Module
 					// Check whether there will be subpages
 					if ($objSubpages->subpages > 0 && (!$this->showLevel || $this->showLevel >= $level || (!$this->hardLimit && ($objPage->id == $objSubpages->id || in_array($objPage->id, $this->Database->getChildRecords($objSubpages->id, 'tl_page'))))))
 					{
-						$subitems = $this->renderNavigation($objSubpages->id, $level, $host, $language);
+						$subitems = $this->renderNavigationFTC($objSubpages->id, $level, $host, $language);
 					}
 	
 					// Get href
