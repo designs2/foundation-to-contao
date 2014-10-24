@@ -10,8 +10,24 @@
 .ce_magellan_nav.fixed{
 	left: auto;
 }
+/* set font-size for rem*/
+html{
+	font-size:1em;
+	font-size:100.01%;
+	
+}
+body{
+	font-size:16px;
+	
+}
+/* fix toggle icons offcanvas */
+.tab-bar .menu-icon{
+	margin-top:-0.4rem !important;
+}
+
  /* Quelle http://skybeam.de/blog/html5-input-email/
   */
+  
 ::-webkit-validation-bubble-icon {display:none;}
 ::-webkit-validation-bubble-message {
 	background-color:#d73e3e;

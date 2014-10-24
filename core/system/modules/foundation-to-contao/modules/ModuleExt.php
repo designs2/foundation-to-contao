@@ -80,7 +80,7 @@ class ModuleExt extends \Module
 			$objTemplate->cssID = $this->cssID; // see #4897
 
 			$levelClasses = '';
-			if (($level>=intval($this->dropdown_level))&&$this->navigationTpl=='nav_default_topbar') {
+			if (($level>1&&$level<=intval($this->dropdown_level))&&$this->navigationTpl=='nav_default_topbar') {
 				$levelClasses .= $addToLevel .' ';
 			}
 			if ($level==1&&$this->navigationTpl=='nav_default_topbar') {
