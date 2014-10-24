@@ -186,7 +186,7 @@ class PrepareVars extends \Controller
       }
 
      $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
-//var_dump($el->cssID,($el->cssID==''));
+//var_dump($el->type,$el->cssID,($el->cssID==''));
      $el->cssID = (is_array($el->cssID))?$el->cssID : unserialize($el->cssID);
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
      $el->ftcID = ($el->cssID[0] != '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
