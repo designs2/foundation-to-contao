@@ -1,20 +1,20 @@
 #FTC
 
+Version 1.1.0 - RC2
 ##Requirements
 
-- Contao 3.3.
+- Contao 3.3.0
 - MulticolumWizard
-- Foundation 5 von Zurb
+
+##Vendor
+- Foundation 5.4.6 von Zurb
 - jQuery
+- Mediaelements 2.14.0
 
 
-##Documentation
+##Documentation & Introduction
 
 	http://www.foundation-to-contao.de
-	
-	
-##Introduction	
-	http://www.new.foundation-to-contao.de
 	
 ##Tutorials	
 
@@ -58,7 +58,7 @@ http://zurb.com/playground/foundation4-stencil-sets
 ### Mansonry Plugin 
 http://patterntap.com/code/stacking-columns-layout-masonry
 
-### settings fpr contao
+### settings for contao
 Artikel f
 Nachrichten
 Events

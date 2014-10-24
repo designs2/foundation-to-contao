@@ -1,0 +1,8 @@
+{
+  "name": "mediaelement",
+  "version": "2.14.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/johndyer/mediaelement.git"
+  }
+}
