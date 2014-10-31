@@ -1,12 +1,12 @@
 <!-- indexer::stop -->
-
+ 
  <?php   if ($this->topbar_locate=='fixed'):?>
-	<div class="fixed">
-	<?php  endif; ?>
-	 <?php   if ($this->topbar_locate=='sticky'):?>
-	 <div class="contain-to-grid sticky">
-	 <?php  else: ?>
-	<div class="contain-to-grid">
+	<div <?php echo $this->cssID; ?> class="fixed">
+<?php  endif; ?>
+<?php   if ($this->topbar_locate=='sticky'):?>
+	 <div <?php echo $this->cssID; ?> class="contain-to-grid sticky">
+<?php  else: ?>
+	<div <?php echo $this->cssID; ?> class="contain-to-grid">
 	 <?php  endif; ?>
 	
 	  <nav class="top-bar" data-topbar data-options="<?php echo $this->topbar_options; ?>">
