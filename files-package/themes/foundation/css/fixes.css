@@ -24,6 +24,10 @@ body{
 .tab-bar .menu-icon{
 	margin-top:-0.4rem !important;
 }
+.accordion dd .row{
+	margin-left:0;
+	margin-right:0;
+}
 
  /* Quelle http://skybeam.de/blog/html5-input-email/
   */
