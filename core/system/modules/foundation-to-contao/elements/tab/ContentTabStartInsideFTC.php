@@ -36,6 +36,13 @@ class ContentTabStartInsideFTC extends \ContentElement
 		}
 		$this->Template->hl = $this->hl;
 		$this->Template->headline = $this->headline;
+		$this->Template->anchor ='';
+		if($this->cssID!==''){
+		$cssArr = (is_array($this->cssID))?$this->cssID:unserialize($this->cssID);
+
+		$this->Template->anchor = $cssArr[0]; //raw cssID
+		}
+		
 
 	}
 }
