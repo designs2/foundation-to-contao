@@ -168,7 +168,10 @@ class ftcPresetsModel extends \Model
           if ($DoModel===NULL) {return;}
           $updateFieldsArr = $this->getFieldsForUpdate($dc->__get('activeRecord'));
           foreach ($updateFieldsArr as $field) {
-             $Preset = ftcPresetsModel::findByID($dc->__get('activeRecord')->$field['id'])->row();
+             $PresetModel = ftcPresetsModel::findByID($dc->__get('activeRecord')->$field['id']);
+             if($PresetModel===NULL){continue;}
+             $Preset = $PresetModel->row();
+
              $DoModel->$field['combined']=(is_array($Preset))?serialize($Preset):$Preset;   
           }
           $DoModel->save(true); 
@@ -179,7 +182,5 @@ class ftcPresetsModel extends \Model
     
 
 }
-
-
 
 ?>
