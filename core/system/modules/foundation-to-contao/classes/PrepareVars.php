@@ -39,6 +39,7 @@ class PrepareVars extends \Controller
             }
             break;
           case 'ce_headline':
+          case 'ce_teaser':
           case 'ce_text':
           case 'ce_image':
           case 'ce_list':
