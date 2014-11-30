@@ -139,6 +139,7 @@ TemplateLoader::addFiles(array
 	'search_default_topbar' => 'system/modules/foundation-to-contao/templates/modules',
 	//core
 	'mod_article_ftc' => 'system/modules/foundation-to-contao/templates/modules',
+	'mod_article_teaser_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_breadcrumb_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_navigation_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_search_ftc' => 'system/modules/foundation-to-contao/templates/modules',
