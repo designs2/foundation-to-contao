@@ -43,6 +43,7 @@ class PrepareVars extends \Controller
           case 'ce_image':
           case 'ce_list':
           case 'mod_article':
+          case 'mod_article_teaser':
           case 'mod_navigation':
           case 'mod_breadcrumb':
           case 'mod_search':
