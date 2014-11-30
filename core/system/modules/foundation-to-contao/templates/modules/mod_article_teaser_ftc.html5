@@ -1,0 +1,15 @@
+
+<article class="<?php echo $this->ftc_classes; ?> block"<?php echo $this->ftcID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+  <div class="ce_text block">
+
+    <h3><?php echo $this->headline; ?></h3>
+
+    <div class="teaser">
+      <?php echo $this->teaser; ?>
+      <p class="more button"><a href="<?php echo $this->href; ?>" title="<?php echo $this->readMore; ?>"><?php echo $this->more; ?> <span class="invisible"><?php echo $this->headline; ?></span></a></p>
+    </div>
+
+  </div>
+
+</article>
