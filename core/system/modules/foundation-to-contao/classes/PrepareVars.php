@@ -143,6 +143,7 @@ class PrepareVars extends \Controller
         case 'navigation':
         case 'customnav':
         case 'search':
+        case 'login':
         case 'breadcrumb':
         case 'topbar':
         case 'offcanvas':
@@ -241,6 +242,7 @@ class PrepareVars extends \Controller
           case 'navigation':
           case 'offcanvas':
           case 'search':
+          case 'login':
             $strClass = 'Module'.strtoupper(substr($elModel->type, 0, 1)).substr($elModel->type, 1, (strlen($elModel->type))-1);    
             $elModul = new $strClass($elModel);
             
