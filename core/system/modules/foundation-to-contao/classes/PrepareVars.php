@@ -48,6 +48,8 @@ class PrepareVars extends \Controller
           case 'mod_navigation':
           case 'mod_breadcrumb':
           case 'mod_search':
+          case 'mod_login_1cl':
+          case 'mod_login_2cl':
           case 'form':
           case 'ce_download':
           case 'ce_downloads':
