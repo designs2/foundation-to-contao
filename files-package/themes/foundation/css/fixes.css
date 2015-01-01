@@ -28,7 +28,11 @@ body{
 	margin-left:0;
 	margin-right:0;
 }
-
+/* hide carousel and controls on single image, image element*/
+  .ce_image .clearing-main-prev,
+  .ce_image .clearing-main-next,
+  .ce_image .clearing-blackout .carousel{display:none !important;}
+  .ce_image .clearing-blackout .visible-img{height:100% !important;}
  /* Quelle http://skybeam.de/blog/html5-input-email/
   */
   
