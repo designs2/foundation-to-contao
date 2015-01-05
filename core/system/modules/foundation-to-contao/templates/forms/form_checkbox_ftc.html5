@@ -1,8 +1,8 @@
 <?php 
 if (preg_match("/no-style/",$this->label_style)||$this->label_style=='') {
-	echo '<label for="ctrl_'.$this->id.'" >';
+	echo '<label for="ctrl_'.$this->name.$this->id.'" >';
 }else {
-	echo '<label for="ctrl_'.$this->id.'" class="label '.$this->label_style.' ">';
+	echo '<label for="ctrl_'.$this->name.$this->id.'" class="label '.$this->label_style.' ">';
 
 }
 if ($this->mandatory){
@@ -16,9 +16,9 @@ if ($this->mandatory){
 	
 	echo '<div class="'.$this->ftc_field_classes.' '.$this->class.'" >';
 
-	foreach ($this->arrOptions as $i => $arrOpt) {
+	foreach ($this->getOptions() as $i => $arrOpt) {
 	
-		echo '  <input type="checkbox" name="'.$arrOpt['name'].'" id="ctrl_'.$arrOpt['id'].'" class="checkbox';
+		echo '  <input type="checkbox" name="'.$arrOpt['name'].'" id="opt_'.$this->name.'_'.$arrOpt['id'].'" class="checkbox';
 		if ($arrOpt['class']) {
 		echo ' '.$arrOpt['class'];
 		}
@@ -27,7 +27,7 @@ if ($this->mandatory){
 		echo ' checked="checked"';	
 		}
 		echo '>';
-		echo '<label for="ctrl_'.$arrOpt['id'].'" ';
+		echo '<label for="opt_'.$this->name.'_'.$arrOpt['id'].'" id="lbl_'.$this->name.'_'.$arrOpt['id'].'"';
 			if ($this->hasErrors()){
 			echo ' class="error" ';
 			}
@@ -40,7 +40,7 @@ if ($this->mandatory){
 	  <span class="error"><?php echo $this->getErrorAsString(); ?></span>
 	<?php endif; ?>
   <?php if ($this->addSubmit): ?>
-    <input type="submit" id="ctrl_<?php echo $this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
+    <input type="submit" id="ctrl_<?php echo $this->name.$this->id; ?>_submit" class="submit" value="<?php echo $this->slabel; ?>">
   <?php endif; ?>
 
 <?php
