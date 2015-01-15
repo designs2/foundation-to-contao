@@ -38,9 +38,9 @@ class Callbacks extends \Backend
  
 		 $palettes = $GLOBALS['TL_DCA']['tl_form_field']['palettes'];
 
-		 $exception = array('row_start','row_stop','col_stop');
+		 $exception = array('row_start','row_stop','col_stop','fieldsetfsStart','fieldsetfsStop','html');
 		 foreach ($palettes as $p => $str) {
-		 	// echo '<br>$p '.$p;
+		 	 //echo '<br>$p '.$p;
 		 	if (in_array($p,$exception)){continue;}
 		 	 $pallete_ftc = str_replace("{type_legend}",$ftc_grid."{type_legend}",$str);
 		 	 $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$p]=$pallete_ftc;
