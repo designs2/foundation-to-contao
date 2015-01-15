@@ -243,18 +243,6 @@ array_insert($GLOBALS['FE_MOD'], 2, array
     )
 ));
 
-
- 
-/**
- * MODEL 
- * 
- */
- $GLOBALS['TL_MODELS'] = array
- (
-    'tl_mh_foundation_to_contao' => 'MHAHNEFELD\FTC\mhFoundationToContaoModel'
- );
- 
-
  /**
   * Front end form fields
   */
@@ -301,6 +289,8 @@ foreach (explode(',', $core_key) as $ckey) {
  unset($GLOBALS['TL_CTE']['slider']);
 // unset($GLOBALS['TL_CTE']['files']);
 
+if (TL_MODE =='FE') {
+
 $GLOBALS['TL_HOOKS']['parseTemplate'][] = array('PrepareVars', 'templates');
 $GLOBALS['TL_HOOKS']['getContentElement'][] = array('PrepareVars', 'elements');
 $GLOBALS['TL_HOOKS']['compileFormFields'][] = array('PrepareVars', 'forms');
@@ -310,6 +300,7 @@ $GLOBALS['TL_HOOKS']['getArticle'][] = array('PrepareVars', 'articles');
 $GLOBALS['TL_HOOKS']['getFrontendModule'][] = array('PrepareVars', 'modules');
 $GLOBALS['TL_HOOKS']['loadFormField'][] = array('PrepareWidgets', 'ffl');
 
+}
 
 
  ?>
