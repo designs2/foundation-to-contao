@@ -71,13 +71,14 @@ class PrepareVars extends \Controller
     
     // $objRow->type is the type of the Element e.g. 'row_start'
     /* $objElement */ 
-    if($objRow->type=='module'){
 
+    if($objRow->type=='module'){
+      
       $NewBuffer = $this->design_modules($objRow);
       $strBuffer = (!$NewBuffer)?$strBuffer:$NewBuffer;
     return $strBuffer;
     
-    }
+    }else
     if ($objRow->type=='form') {
 
       $strClass = $this->findContentElement($objRow->type); 
@@ -151,8 +152,8 @@ class PrepareVars extends \Controller
         case 'multitogglejq':
           $key = $objRow->type;
           //get the registrated Classname
-          $strClass = 'Module'.strtoupper(substr($key, 0, 1)).substr($key, 1, (strlen($key))-1); 
-          //var_dump($strClass );
+          $strClass  = \Module::findClass($elModel->type);
+
           $objEl = new $strClass($objRow);
           if(!is_array(unserialize($objRow->ftc_preset_full))){ 
           $akt_preset=array();
@@ -165,7 +166,7 @@ class PrepareVars extends \Controller
           $objEl->cssID = unserialize($objRow->cssID);
           $objEl->ftc_classes = trim($objRow->typePrefix.$objRow->type.' '.$objEl->cssID[1]).' '.$ftc_classes;
           $objEl->ftcID = ($objEl->cssID[0] != '') ? ' id="' . $objEl->cssID[0] . '"' : '';
-                
+          $objEl->data_attr = $this->splitArr($objRow->data_attr_ftc); 
           $strBuffer = $objEl->generate();
           unset($objEl);
           break;
@@ -236,17 +237,17 @@ class PrepareVars extends \Controller
   public function design_modules($el){
                
           $elModel = \ModuleModel::findByID($el->module);
-          
+
        switch($elModel->type) {
           case 'customnav':
           case 'navigation':
           case 'offcanvas':
           case 'search':
           case 'login':
-            $strClass = 'Module'.strtoupper(substr($elModel->type, 0, 1)).substr($elModel->type, 1, (strlen($elModel->type))-1);    
+            $strClass  = \Module::findClass($elModel->type);   
             $elModul = new $strClass($elModel);
-            
             $el->cssID = unserialize($el->cssID);
+
             if(!is_array(unserialize($el->ftc_preset_full))){ 
               $akt_preset=array();
                return $el;    
@@ -257,6 +258,8 @@ class PrepareVars extends \Controller
    
             $elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
             $elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
+            $elModul->data_attr = $this->splitArr($el->data_attr_ftc);
+
 //      $el->Template = new \FrontendTemplate('mod_'.$el->type.'_ftc');
 //      $el->Template->setData($el);
 //      $el->compile();
@@ -300,7 +303,7 @@ class PrepareVars extends \Controller
       $el->ftc_field_classes = $ftc_classes;
       $el->ftc_fix_classes = $ftc_classes_label;
       $el->label_style = $ftc['style_label'];
-      //var_dump( $ftc_classes,$ftc_classes_label);
+
       switch($el->type) {
 
           case 'range_slider':
