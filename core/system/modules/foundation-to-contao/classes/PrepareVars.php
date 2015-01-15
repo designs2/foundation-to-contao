@@ -21,7 +21,7 @@ class PrepareVars extends \Controller
   public function templates($obj){   
     
     $template = $obj->getName();
-    //var_dump($template);
+   // var_dump($template);
       switch($template) {
           
           case 'fe_page':
@@ -48,6 +48,7 @@ class PrepareVars extends \Controller
           case 'mod_navigation':
           case 'mod_breadcrumb':
           case 'mod_search':
+          case 'mod_password':
           case 'mod_login_1cl':
           case 'mod_login_2cl':
           case 'form':
@@ -139,12 +140,13 @@ class PrepareVars extends \Controller
   //outputFrontendTemplate, $strContent, $strTemplate
   // getFrontendModule
   public function modules($objRow, $strBuffer, $objModule){   
-        //var_dump($objRow->type);
+       // var_dump($objRow->type);
     switch ($objRow->type) {
         case 'navigation':
         case 'customnav':
         case 'search':
         case 'login':
+        case 'lostPassword':
         case 'breadcrumb':
         case 'topbar':
         case 'offcanvas':
@@ -182,7 +184,7 @@ class PrepareVars extends \Controller
                       
   //prepare vars for contentelements  
   public function design_elements($el){
-          
+         
      //FTC Classes 
      if(!is_array(unserialize($el->ftc_preset_full))){ 
        $akt_preset=array();
@@ -237,13 +239,14 @@ class PrepareVars extends \Controller
   public function design_modules($el){
                
           $elModel = \ModuleModel::findByID($el->module);
-
+         // var_dump($elModel->type);
        switch($elModel->type) {
           case 'customnav':
           case 'navigation':
           case 'offcanvas':
           case 'search':
           case 'login':
+          case 'lostPassword':
             $strClass  = \Module::findClass($elModel->type);   
             $elModul = new $strClass($elModel);
             $el->cssID = unserialize($el->cssID);
