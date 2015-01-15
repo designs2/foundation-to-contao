@@ -16,21 +16,16 @@ $GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array('MHAH
 $fieldsSize=count($GLOBALS['TL_DCA']['tl_form_field']['fields'])-1;
 $palettesSize=count($palettes)-1;
 $default = '{type_legend},type;';
-$expert ='{template_legend:hide},customTpl;{expert_legend:hide};';
+$expert ='{template_legend:hide},customTpl;{expert_legend:hide},class;';
 
 
  $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_start']=$default.'{row_legend},is_collapse;{template_legend:hide},customTpl';
  $GLOBALS['TL_DCA']['tl_form_field']['palettes']['row_stop']=$default.'{template_legend:hide},customTpl';
  $GLOBALS['TL_DCA']['tl_form_field']['palettes']['range_slider']=$default.'{slider_legend},rs_classes,rs_start,rs_end,rs_step,rs_show_value,rs_unity;{template_legend:hide},customTpl';
-   
  $GLOBALS['TL_DCA']['tl_form_field']['palettes']['submit']='{type_legend},type,slabel;{button_legend}, btn_styles,btn_size,label_role;{image_legend:hide},imageSubmit;{expert_legend:hide},class,accesskey,tabindex;{template_legend:hide},customTpl'; 
-    
-    
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['fieldsetfsStart']  = $default.'{fconfig_legend},fsType,label;{template_legend:hide},customTpl';
+ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['fieldsetfsStart']  = '{ftc_legend},ftc_preset_id,ftc_preset_full;'.$default.'{fconfig_legend},fsType,label;'.$expert;
   
  $fieldsSize=count($GLOBALS['TL_DCA']['tl_form_field']['fields'])-1;
-
- $GLOBALS['TL_DCA']['tl_form_field']['palettes']['default'] = $pallete_ftc;
 	  
 	array_insert($GLOBALS['TL_DCA']['tl_form_field']['fields'], $fieldsSize, array
 	(
