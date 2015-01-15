@@ -30,7 +30,7 @@ class PrepareWidgets extends \Widget
       		$objWidget->arrOptions = $this->getOpt($objWidget);
       		$objWidget->__set('template',$template.'_ftc');
       		break;
-      		case 'form_html': //fieldset
+      		case 'form_fieldset': //fieldset
       		$objWidget->__set('template','form_fieldset_ftc');
       		break;
       		case 'form_headline':
