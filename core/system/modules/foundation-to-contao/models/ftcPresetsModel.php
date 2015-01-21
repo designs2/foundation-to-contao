@@ -26,14 +26,14 @@ class ftcPresetsModel extends \Model
     // get key for table and/or class arrays
     protected function getKey()
      {    
-	     if(\Input::get('table')===NULL){
-	     	 $this->strTableKey = \Input::get('do');
-	     
-	     }else{
-	    	 $this->strTableKey = substr(\Input::get('table'), 3, (strlen(\Input::get('table')))-3);
+       if(\Input::get('table')===NULL){
+         $this->strTableKey = \Input::get('do');
+       
+       }else{
+         $this->strTableKey = substr(\Input::get('table'), 3, (strlen(\Input::get('table')))-3);
 
-	     }
-     	return $this->strTableKey;  
+       }
+      return $this->strTableKey;  
     }
      
     // get name of method from key 
@@ -50,9 +50,8 @@ class ftcPresetsModel extends \Model
      } 
 
      // get fields in backend sections like article, content, .. which use presets
-    protected function getFields($key)
+    public function getFields($key)
      {  
-      
       $FieldsArr = $GLOBALS['TL_DCA']['tl_'.$key]['fields'];
       $DiffStr = 'ftc_preset_id';
       //search all presetfields
@@ -97,42 +96,42 @@ class ftcPresetsModel extends \Model
        
        $optionsArr['-'] = '-';
         $i = 1; 
-	     foreach ($Presets as $preset) {//&&\Input::get('act')=='edit'
-		     if(in_array($this->getKey(),unserialize($preset['show_in_sections']))){
-		    	$optionsArr[$preset['id']]= $preset['name'];
-		 		$i++;
-		     }
-	      }
+       foreach ($Presets as $preset) {//&&\Input::get('act')=='edit'
+         if(in_array($this->getKey(),unserialize($preset['show_in_sections']))){
+          $optionsArr[$preset['id']]= $preset['name'];
+        $i++;
+         }
+        }
 
      return $optionsArr;
-     	
+      
      }
      
      //get align value and generate options
      public function getSelectedPreset($val,$dc)
       {
-	       
-      	if ($val=='') {
-    			$val=($dc->__get('activeRecord')->ftc_preset_id=='')?'-':$dc->__get('activeRecord')->ftc_preset_id;
-    		}
+         
+        if ($val=='') {
+          $val=($dc->__get('activeRecord')->ftc_preset_id=='')?'-':$dc->__get('activeRecord')->ftc_preset_id;
+        }
 
-  		  if($val=='-') {
-      		 $Preset = $this->getDefaultPreset(); 
+        if($val=='-') {
+           $Preset = $this->getDefaultPreset(); 
            // var_dump( $dc->__get('activeRecord')->ftc_preset_full);
-           $this->setPresets($Preset,$dc->__get('activeRecord')->id,$dc); 	
+           $this->setPresets($Preset,$dc->__get('activeRecord')->id,$dc);   
 
-	   	  }else{
+        }else{
 
-  	      	$objPreset = ftcPresetsModel::findByID($val);
-  	      
-  	      	if ($objPreset===Null) {
-  		      	$Preset = $this->getDefaultPreset(); 
+            $objPreset = ftcPresetsModel::findByID($val);
+          
+            if ($objPreset===Null) {
+              $Preset = $this->getDefaultPreset(); 
                $this->setPresets($Preset,$dc->__get('activeRecord')->id,$dc); 
-  		      	return '-';
-  	      	}
-  	       	$Preset = $objPreset->row();
-  	      	$this->setPresets(array($Preset),$dc->__get('activeRecord')->id,$dc);
-  	      	
+              return '-';
+            }
+            $Preset = $objPreset->row();
+            $this->setPresets(array($Preset),$dc->__get('activeRecord')->id,$dc);
+            
         }
        
         return $val;
@@ -141,32 +140,32 @@ class ftcPresetsModel extends \Model
      public function getDefaultPreset()
       {
 
-      	$Presets = (ftcPresetsModel::findAll()===NULL)?array():ftcPresetsModel::findAll()->fetchAll();
+        $Presets = (ftcPresetsModel::findAll()===NULL)?array():ftcPresetsModel::findAll()->fetchAll();
 
-      	foreach ($Presets as $k => $v) {
-      	if ($Presets[$k]['use_as_default_for']=='') {continue;}
-	      	if (in_array($this->getKey(), unserialize($Presets[$k]['use_as_default_for']))) {
-	      		unset($Presets[$k]['use_as_default_for'],$Presets[$k]['show_in_sections'],$Presets[$k]['tstamp'],$Presets[$k]['name'],$Presets[$k]['description'],$Presets[$k]['preview']);
-	      		$Default = $Presets[$k];
-				    $this->defaultPreset = true; 
-	      		continue;
-	      	}
-		
-      	}
-      	
-      	if ($this->defaultPreset===false) {
-      		$Default = array('small' => '-' ,'medium' => '-' ,'large' => '-' ,'xlarge' => '-' ,'xxlarge' => '-' ,'pull' => '-', 'push' => '-' ,'custom' => '','align' => 'a:1:{i:0;s:1:"-";}', 'float_ftc' => '-' );
+        foreach ($Presets as $k => $v) {
+        if ($Presets[$k]['use_as_default_for']=='') {continue;}
+          if (in_array($this->getKey(), unserialize($Presets[$k]['use_as_default_for']))) {
+            unset($Presets[$k]['use_as_default_for'],$Presets[$k]['show_in_sections'],$Presets[$k]['tstamp'],$Presets[$k]['name'],$Presets[$k]['description'],$Presets[$k]['preview']);
+            $Default = $Presets[$k];
+            $this->defaultPreset = true; 
+            continue;
+          }
+    
+        }
+        
+        if ($this->defaultPreset===false) {
+          $Default = array('small' => '-' ,'medium' => '-' ,'large' => '-' ,'xlarge' => '-' ,'xxlarge' => '-' ,'pull' => '-', 'push' => '-' ,'custom' => '','align' => 'a:1:{i:0;s:1:"-";}', 'float_ftc' => '-' );
      
-      	}
-          return $Default;	
+        }
+          return $Default;  
       } 
 
     
      
     public function setPresets($Preset,$id,$dc)
-      {	
-      		$strClass = $this->getStrClass();
-      		$DoModel = $strClass::findByID($id);
+      { 
+          $strClass = $this->getStrClass();
+          $DoModel = $strClass::findByID($id);
           if ($DoModel===NULL) {return;}
           $updateFieldsArr = $this->getFieldsForUpdate($dc->__get('activeRecord'));
            //var_dump('test', $dc->__get('activeRecord')->ftc_preset_full);
@@ -183,8 +182,8 @@ class ftcPresetsModel extends \Model
              $DoModel->$field['combined']=(is_array($Preset))?serialize($Preset):$Preset;   
           }
           $DoModel->save(true); 
-      		return;
-      		      		
+          return;
+                    
       }
      
     

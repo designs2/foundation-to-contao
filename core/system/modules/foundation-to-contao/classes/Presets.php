@@ -16,25 +16,24 @@ class Presets extends \Backend
 {
 
 	
-	protected $model = 'ftcPresetsModel';
+	
 
 	
 	public function update($table,$id,$dc) 
 	{
-		var_dump($table,$id,$dc->__get('activeRecord')->row());
+		//var_dump($table,$id,$dc->__get('activeRecord')->row());
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
-		exit;
+		
 		$PresetsArr = $dc->__get('activeRecord')->row();
 
 		if($PresetsArr['show_in_sections'] ==''){return;}	
 		$PresetsArr['show_in_sections']=(is_array($PresetsArr['show_in_sections']))?$PresetsArr['show_in_sections']:unserialize($PresetsArr['show_in_sections']);	
 		foreach ($PresetsArr['show_in_sections'] as $key) {
-		var_dump($key);
-
 
 			if ($key=='layout') {continue;}
 				$strClass = $this->getStrClass($key);
-				$updateFieldsArr = $model->getFields($key);
+				$updateFieldsArr = $this->getFields($key);
+				var_dump($updateFieldsArr);
 	          foreach ($updateFieldsArr as $field) {
 
 	          		$DoModels = $this->getModels($strClass,$field['id'],$dc->__get('activeRecord')->id);
@@ -55,13 +54,12 @@ class Presets extends \Backend
 		foreach ($PresetsArr['use_as_default_for'] as $key) {
 			if ($key=='layout') {continue;}
 				$strClass = $this->getStrClass($key);
-				$updateFieldsArr = $model->getFields($key);
+				$updateFieldsArr  = $this->getFields($key);
 	          foreach ($updateFieldsArr as $field) {
 
 	          		$DoModels = $this->getModels($strClass,$field['id'],'-');
 	          		if ($DoModels===NULL) {return;}
 	          		foreach ($DoModels as $DoModel) {
-	          			//$defM = $strModel::findBy('id',$m['id']);
 						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
 						$DoModel->save(true);
 	          		}
@@ -75,8 +73,8 @@ class Presets extends \Backend
 	
 	public function getModels($strModel,$Rel,$Val) 
 	{	
-		$arrModels = $strModel::findBy($Rel,$Val);
-	 	return ($arrModels===NULL)?array():$arrModels->fetchAll(); 
+		$objModels = $strModel::findBy($Rel,$Val);
+	 	return $objModels; //($arrModels===NULL)?array():$arrModels->fetchAll(); 
 	} 
 	
 	public function getStrClass($key)
@@ -96,6 +94,28 @@ class Presets extends \Backend
       
       	return serialize($Preset);
       }
+           // get fields in backend sections like article, content, .. which use presets
+    public function getFields($key)
+     {  
+
+      if($GLOBALS['TL_DCA']['tl_'.$key]===NULL){
+        $this->loadDataContainer('tl_'.$key);
+      }
+      $FieldsArr = $GLOBALS['TL_DCA']['tl_'.$key]['fields'];
+      $DiffStr = 'ftc_preset_id';
+      //search all presetfields
+      //attention to the name of the combined field (ftc_preset_full+chain)
+      $PresetFieldsArr = preg_grep( "/$DiffStr/i", array_keys($FieldsArr));
+      $IdFullPairArr=array();
+      $i = 0;
+      foreach ($PresetFieldsArr as $field) {
+        $IdFullPairArr[$i]['id'] = $field;
+        $IdFullPairArr[$i]['combined'] = 'ftc_preset_full'.substr($field,  strlen($DiffStr), strlen($field)-strlen($DiffStr));
+        $i++;
+      }
+       return $IdFullPairArr;
+     }
+
 
 }
 ?>
