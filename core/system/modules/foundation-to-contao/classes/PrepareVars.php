@@ -116,24 +116,24 @@ class PrepareVars extends \Controller
     return $arrFields; 
  
   } 
-     
           
   //getArticle
-  public function articles($objRow)    {   
-    if(!is_array(unserialize($objRow->ftc_preset_full))){ 
-    $akt_preset=array();
-    return $objRow;     
-      }else{
-    $akt_preset=unserialize($objRow->ftc_preset_full);    
-      
-    }
-    $ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
-    //var_dump($objRow->ftc_preset_full,'n');
-    //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
-    $objRow->cssID = unserialize($objRow->cssID);
-    $objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
-    $objRow->ftcID = ($objRow->cssID[0] != '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
-    
+  public function articles($objRow){   
+      $objRow->cssID = unserialize($objRow->cssID);
+
+      if(!is_array(unserialize($objRow->ftc_preset_full))){ 
+        $akt_preset=array();
+
+        $objRow->ftcID = ($objRow->cssID[0] !== '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
+        $objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]);
+        return $objRow;  
+
+        }else{
+       $akt_preset=unserialize($objRow->ftc_preset_full);       
+       $ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
+      //$objRow->data_attr = $this->splitArr($objRow->data_attr_ftc);
+        $objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]).' '.$ftc_classes;
+        }
     return $objRow; 
     
   } 
@@ -157,15 +157,19 @@ class PrepareVars extends \Controller
           $strClass  = \Module::findClass($objRow->type);
 
           $objEl = new $strClass($objRow);
+          $objEl->cssID = unserialize($objRow->cssID);
           if(!is_array(unserialize($objRow->ftc_preset_full))){ 
           $akt_preset=array();
+          $objEl->ftc_classes = trim($objRow->typePrefix.$objRow->type.' '.$objEl->cssID[1]);
+          $objEl->ftcID = ($objEl->cssID[0] !== '') ? ' id="' . $objEl->cssID[0] . '"' : '';
+          $objEl->data_attr = $this->splitArr($objRow->data_attr_ftc); 
+          $strBuffer = $objEl->generate();
           return $strBuffer;    
           }else{
           $akt_preset=unserialize($objRow->ftc_preset_full);      
           }
 
           $ftc_classes = $this->getGridVars($akt_preset,$objRow->ftc_preset_add_custom,$objRow->ftc_preset_custom);
-          $objEl->cssID = unserialize($objRow->cssID);
           $objEl->ftc_classes = trim($objRow->typePrefix.$objRow->type.' '.$objEl->cssID[1]).' '.$ftc_classes;
           $objEl->ftcID = ($objEl->cssID[0] != '') ? ' id="' . $objEl->cssID[0] . '"' : '';
           $objEl->data_attr = $this->splitArr($objRow->data_attr_ftc); 
@@ -185,9 +189,14 @@ class PrepareVars extends \Controller
   //prepare vars for contentelements  
   public function design_elements($el){
          
+      $el->cssID = (is_array($el->cssID))?$el->cssID : unserialize($el->cssID);
+
      //FTC Classes 
      if(!is_array(unserialize($el->ftc_preset_full))){ 
        $akt_preset=array();
+        $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]);
+        $el->ftcID = ($el->cssID[0] !== '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
+        $el->data_attr = $this->splitArr($el->data_attr_ftc);
        return $el;  
       }else{
        $akt_preset=unserialize($el->ftc_preset_full); 
@@ -195,9 +204,9 @@ class PrepareVars extends \Controller
 
      $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
 //var_dump($el->type,$el->cssID,($el->cssID==''));
-     $el->cssID = (is_array($el->cssID))?$el->cssID : unserialize($el->cssID);
+
      $el->ftc_classes = trim('ce_'.$el->type.' '.$el->cssID[1]).' '.$ftc_classes;
-     $el->ftcID = ($el->cssID[0] != '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
+     $el->ftcID = ($el->cssID[0] !== '') ? ' id="' . trim($el->cssID[0]) . '"' : '';
      $el->data_attr = $this->splitArr($el->data_attr_ftc);
      
      switch($el->type) {
@@ -253,11 +262,14 @@ class PrepareVars extends \Controller
 
             if(!is_array(unserialize($el->ftc_preset_full))){ 
               $akt_preset=array();
-              var_dump(false,$el->ftc_preset_full);
+                $elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]);
+                $elModul->ftcID = ($el->cssID[0] != '') ? ' id="' . $el->cssID[0] . '"' : '';
+                $elModul->data_attr = $this->splitArr($el->data_attr_ftc);
+                $strBuffer = $elModul->generate();
                return $strBuffer;    
             }else{
               $akt_preset=unserialize($el->ftc_preset_full);
-            }
+            
             $ftc_classes = $this->getGridVars($akt_preset,$el->ftc_preset_add_custom,$el->ftc_preset_custom);
    
             $elModul->ftc_classes = trim('mod_'.$elModel->type.' '.$el->cssID[1]).' '.$ftc_classes;
@@ -268,6 +280,7 @@ class PrepareVars extends \Controller
 //      $el->Template->setData($el);
 //      $el->compile();
             $strBuffer = $elModul->generate();
+            }
             return $strBuffer;
             break;
             
