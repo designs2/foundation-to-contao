@@ -20,7 +20,7 @@ class Callbacks extends \Backend
 		 $ftc_grid = '{ftc_legend},ftc_preset_id,ftc_preset_full,data_attr_ftc,ftc_preset_add_custom;';
 		  
 		 $palettes = $GLOBALS['TL_DCA']['tl_content']['palettes'];
-		 $exception = array('row_start','row_stop','col_stop','tab_ftc_start_inside');
+		 $exception = array('row_start','row_stop','col_stop','tab_ftc_start_inside','html');
 		 foreach ($palettes as $p => $str) {
 		 	// echo '<br>$p '.$p;
 		 	if (in_array($p,$exception)){continue;}

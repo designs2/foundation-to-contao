@@ -98,7 +98,6 @@ class GridWizard extends \Widget
 		
 		foreach(explode(',',$this->fieldsArr) as $field)
 				{
-					//var_dump(\Input::post($field));
 					$PostFieldsArr[$field] = (\Input::post($field)===NULL)?'-':\Input::post($field);
 				}
 				

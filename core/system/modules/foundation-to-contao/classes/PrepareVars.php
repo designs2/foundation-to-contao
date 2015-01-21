@@ -140,7 +140,7 @@ class PrepareVars extends \Controller
   //outputFrontendTemplate, $strContent, $strTemplate
   // getFrontendModule
   public function modules($objRow, $strBuffer, $objModule){   
-       // var_dump($objRow->type);
+        //var_dump($objRow->type);
     switch ($objRow->type) {
         case 'navigation':
         case 'customnav':
@@ -154,7 +154,7 @@ class PrepareVars extends \Controller
         case 'multitogglejq':
           $key = $objRow->type;
           //get the registrated Classname
-          $strClass  = \Module::findClass($elModel->type);
+          $strClass  = \Module::findClass($objRow->type);
 
           $objEl = new $strClass($objRow);
           if(!is_array(unserialize($objRow->ftc_preset_full))){ 
@@ -253,7 +253,8 @@ class PrepareVars extends \Controller
 
             if(!is_array(unserialize($el->ftc_preset_full))){ 
               $akt_preset=array();
-               return $el;    
+              var_dump(false,$el->ftc_preset_full);
+               return $strBuffer;    
             }else{
               $akt_preset=unserialize($el->ftc_preset_full);
             }
@@ -271,7 +272,7 @@ class PrepareVars extends \Controller
             break;
             
           default:
-            return false;
+            return $strBuffer;
         }         
   }
           

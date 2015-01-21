@@ -18,8 +18,6 @@ $default = '{type_legend},type,headline;';
 $expert ='{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 
 
-
-
 //add palettes for contentelements
 array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 (
@@ -105,13 +103,12 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 					'default'                 => '-',
 					'exclude'                 => true,
-					'sorting' 				       => true,
+					'sorting' 				        => true,
 					'filter'                  => true,
 					'inputType'               => 'select',
 					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
-					'load_callback'			 => array(
-					array('ftcPresetsModel', 'getSelectedPreset')
-						)	,
+					'load_callback'			      => array(array('ftcPresetsModel', 'getSelectedPreset')),
+          //'save_callback'           => array(array('ftcPresetsModel', 'getSelectedPreset')),
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'"
 				),
@@ -121,17 +118,17 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 	
 					'exclude'                 => true,
 					'inputType'               => 'hidden',
-					'eval'               => array('hideInput'=>	true, 'doNotShow' =>true),
-					
+          //'load_callback'           => array(array('ftcPresetsModel', 'getSelectedPreset')),
+         // 'save_callback'           => array(array('ftcPresetsModel', 'getSelectedPreset')),
+					'eval'                    => array('hideInput'=>	true, 'doNotShow' =>true),
 					'sql'                     => "text NULL"
 				),
 		'ftc_preset_custom' => array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_custom'],
-	
 					'exclude'                 => true,
 					'inputType'               => 'GridWizard',
-					'eval' => array
+					'eval'                    => array
 					(
 					    'tl_class'          => 'clr',
 					    'doNotShow' =>true   
@@ -141,11 +138,11 @@ array_insert($GLOBALS['TL_DCA']['tl_content']['palettes'], $palettesSize, array
 				),
 		'ftc_preset_add_custom' => array
 					(
-						'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
-						'exclude'                 => true,
-						'inputType'               => 'checkbox',
-						'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
-						'sql'                     => "char(1) NOT NULL default ''"
+					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_add_custom'],
+					'exclude'                 => true,
+					'inputType'               => 'checkbox',
+					'eval'                    => array('submitOnChange'=>true, 'tl_class'=>'w50'),
+					'sql'                     => "char(1) NOT NULL default ''"
 					),
 	  'data_attr_ftc' => array
 		(

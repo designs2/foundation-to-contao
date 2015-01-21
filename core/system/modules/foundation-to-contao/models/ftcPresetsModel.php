@@ -71,15 +71,17 @@ class ftcPresetsModel extends \Model
      //filter pairs which id is set
       protected function getFieldsForUpdate($activeRecord)
      {  
-      $IdFullPairArr = $this->getFields();
-      foreach ($IdFullPairArr as $k=>$field) {
-       // var_dump($IdFullPairArr[$k],$activeRecord->$field['id']);
-        if($activeRecord->$field['id']=='-'){
-           unset($IdFullPairArr[$k]);
-        }else{
-           continue;
+       $IdFullPairArr = $this->getFields();
+        foreach ($IdFullPairArr as $k=>$field) {
+          //var_dump(($activeRecord->$field['combined']!==NULL),$activeRecord->$field['combined']);
+          if($activeRecord->$field['id']=='-'&&$activeRecord->$field['combined']!==NULL){
+             unset($IdFullPairArr[$k]);
+          }
+          if($activeRecord->$field['combined']===NULL){
+                $activeRecord->$field['combined'] = $this->getDefaultPreset();
+          }
+           
         }
-      }
 
        return $IdFullPairArr;
       }
@@ -108,13 +110,14 @@ class ftcPresetsModel extends \Model
      //get align value and generate options
      public function getSelectedPreset($val,$dc)
       {
-	
+	       
       	if ($val=='') {
     			$val=($dc->__get('activeRecord')->ftc_preset_id=='')?'-':$dc->__get('activeRecord')->ftc_preset_id;
     		}
+
   		  if($val=='-') {
-  		
       		 $Preset = $this->getDefaultPreset(); 
+           // var_dump( $dc->__get('activeRecord')->ftc_preset_full);
            $this->setPresets($Preset,$dc->__get('activeRecord')->id,$dc); 	
 
 	   	  }else{
@@ -144,11 +147,9 @@ class ftcPresetsModel extends \Model
 	      	if (in_array($this->getKey(), unserialize($Presets[$k]['use_as_default_for']))) {
 	      		unset($Presets[$k]['use_as_default_for'],$Presets[$k]['show_in_sections'],$Presets[$k]['tstamp'],$Presets[$k]['name'],$Presets[$k]['description'],$Presets[$k]['preview']);
 	      		$Default = $Presets[$k];
-
-				$this->defaultPreset = true; 
+				    $this->defaultPreset = true; 
 	      		continue;
 	      	}
-      	
 		
       	}
       	
@@ -167,7 +168,13 @@ class ftcPresetsModel extends \Model
       		$DoModel = $strClass::findByID($id);
           if ($DoModel===NULL) {return;}
           $updateFieldsArr = $this->getFieldsForUpdate($dc->__get('activeRecord'));
+           //var_dump('test', $dc->__get('activeRecord')->ftc_preset_full);
           foreach ($updateFieldsArr as $field) {
+             if ($DoModel->$field['combined']===NULL) {
+               $Preset = $dc->__get('activeRecord')->$field['combined'];
+               $DoModel->$field['combined']=(is_array($Preset))?serialize($Preset):$Preset;
+               continue;
+             }
              $PresetModel = ftcPresetsModel::findByID($dc->__get('activeRecord')->$field['id']);
              if($PresetModel===NULL){continue;}
              $Preset = $PresetModel->row();
