@@ -16,12 +16,9 @@ class Presets extends \Backend
 {
 
 	
-	
 
-	
 	public function update($table,$id,$dc) 
 	{
-		//var_dump($table,$id,$dc->__get('activeRecord')->row());
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
 		
 		$PresetsArr = $dc->__get('activeRecord')->row();
@@ -33,21 +30,23 @@ class Presets extends \Backend
 			if ($key=='layout') {continue;}
 				$strClass = $this->getStrClass($key);
 				$updateFieldsArr = $this->getFields($key);
-				var_dump($updateFieldsArr);
+				//var_dump($updateFieldsArr);
+
 	          foreach ($updateFieldsArr as $field) {
 
 	          		$DoModels = $this->getModels($strClass,$field['id'],$dc->__get('activeRecord')->id);
-	          		if ($DoModels===NULL) {return;}
+
+	          		if ($DoModels===NULL) {continue;}
+	          		//var_dump($DoModels);
 	          		foreach ($DoModels as $DoModel) {
-	          			//$defM = $strModel::findBy('id',$m['id']);
 						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
-						$DoModel->save(true);
+						$DoModel->save();
 	          		}
 				
 			}
 			
 		}
-		exit;
+		
 		if($PresetsArr['use_as_default_for'] ==''){return;}
 		$PresetsArr['use_as_default_for']=(is_array($PresetsArr['use_as_default_for']))?$PresetsArr['use_as_default_for']:unserialize($PresetsArr['use_as_default_for']);	
 		
@@ -58,15 +57,14 @@ class Presets extends \Backend
 	          foreach ($updateFieldsArr as $field) {
 
 	          		$DoModels = $this->getModels($strClass,$field['id'],'-');
-	          		if ($DoModels===NULL) {return;}
+	          		if ($DoModels===NULL) {continue;}
 	          		foreach ($DoModels as $DoModel) {
 						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
-						$DoModel->save(true);
+						$DoModel->save();
 	          		}
 			
 				}
 		}
-		//exit;
 
 	}
 	
