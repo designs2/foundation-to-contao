@@ -50,9 +50,9 @@ class ftcPresetsModel extends \Model
      } 
 
      // get fields in backend sections like article, content, .. which use presets
-    protected function getFields()
+    protected function getFields($key)
      {  
-      $key = $this->getKey();
+      
       $FieldsArr = $GLOBALS['TL_DCA']['tl_'.$key]['fields'];
       $DiffStr = 'ftc_preset_id';
       //search all presetfields
@@ -71,7 +71,8 @@ class ftcPresetsModel extends \Model
      //filter pairs which id is set
       protected function getFieldsForUpdate($activeRecord)
      {  
-       $IdFullPairArr = $this->getFields();
+       $key = $this->getKey();
+       $IdFullPairArr = $this->getFields($key);
         foreach ($IdFullPairArr as $k=>$field) {
           //var_dump(($activeRecord->$field['combined']!==NULL),$activeRecord->$field['combined']);
           if($activeRecord->$field['id']=='-'&&$activeRecord->$field['combined']!==NULL){

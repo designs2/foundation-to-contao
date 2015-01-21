@@ -29,7 +29,7 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide},class;';
 	  
 	array_insert($GLOBALS['TL_DCA']['tl_form_field']['fields'], $fieldsSize, array
 	(
-	'ftc_preset_id' => array
+				'ftc_preset_id' => array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_id'],
 					'default'                 => '-',
@@ -38,15 +38,12 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide},class;';
 					'filter'                  => true,
 					'inputType'               => 'select',
 					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
-					'load_callback'			 => array(
-					array('ftcPresetsModel', 'getSelectedPreset')
-						),
-		
+					'load_callback'			  => array(array('ftcPresetsModel', 'getSelectedPreset')),
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
 					'sql'                     => "varchar(255) NOT NULL default '-'",
-					'combined'	=>'ftc_preset_full'
+					'combined'				  =>'ftc_preset_full'
 				),
-		'ftc_preset_full' => array
+			'ftc_preset_full' => array
 				(
 					'label'                   => &$GLOBALS['TL_LANG']['MSC']['ftc_preset_full'],
 	
@@ -65,11 +62,10 @@ $expert ='{template_legend:hide},customTpl;{expert_legend:hide},class;';
 					'filter'                  => true,
 					'inputType'               => 'select',
 					'options_callback'        => array('ftcPresetsModel', 'getPresets'),
-					'load_callback'			 => array(
-					array('ftcPresetsModel', 'getSelectedPreset')
-						),
+					'load_callback'			  => array(array('ftcPresetsModel', 'getSelectedPreset')),
 					'eval'                    => array('helpwizard'=>false, 'chosen'=>true, 'submitOnChange'=>true, 'tl_class'=>'w50'),
-					'sql'                     => "varchar(255) NOT NULL default '-'"
+					'sql'                     => "varchar(255) NOT NULL default '-'",
+					'combined'				  =>'ftc_preset_full_label'
 				),
 			'ftc_preset_full_label' => array
 				(

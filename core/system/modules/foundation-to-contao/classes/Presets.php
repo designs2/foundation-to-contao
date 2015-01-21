@@ -17,53 +17,56 @@ class Presets extends \Backend
 
 	
 	protected $model = 'ftcPresetsModel';
-	
+
 	
 	public function update($table,$id,$dc) 
 	{
-		//var_dump($table,$id,$dc->__get('activeRecord')->row());
+		var_dump($table,$id,$dc->__get('activeRecord')->row());
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
-
+		exit;
 		$PresetsArr = $dc->__get('activeRecord')->row();
+
 		if($PresetsArr['show_in_sections'] ==''){return;}	
 		$PresetsArr['show_in_sections']=(is_array($PresetsArr['show_in_sections']))?$PresetsArr['show_in_sections']:unserialize($PresetsArr['show_in_sections']);	
 		foreach ($PresetsArr['show_in_sections'] as $key) {
-		
+		var_dump($key);
+
+
 			if ($key=='layout') {continue;}
-				$strModel = $this->getStrClass($key);
-				$arrModelsDC=$this->getModels($strModel,'ftc_preset_id',$dc->__get('activeRecord')->id);
-			foreach ($arrModelsDC as $m) {
-				$defM = $strModel::findBy('id',$m['id']);
-				$defM->ftc_preset_full = $this->getDefaultPreset($PresetsArr);
-				$defM->save();
-				// var_dump($strModel,$defM->id,$defM->ftc_preset_full);
-				// echo'<br>';
+				$strClass = $this->getStrClass($key);
+				$updateFieldsArr = $model->getFields($key);
+	          foreach ($updateFieldsArr as $field) {
+
+	          		$DoModels = $this->getModels($strClass,$field['id'],$dc->__get('activeRecord')->id);
+	          		if ($DoModels===NULL) {return;}
+	          		foreach ($DoModels as $DoModel) {
+	          			//$defM = $strModel::findBy('id',$m['id']);
+						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
+						$DoModel->save(true);
+	          		}
 				
 			}
-			unset($arrModels);
+			
 		}
+		exit;
 		if($PresetsArr['use_as_default_for'] ==''){return;}
 		$PresetsArr['use_as_default_for']=(is_array($PresetsArr['use_as_default_for']))?$PresetsArr['use_as_default_for']:unserialize($PresetsArr['use_as_default_for']);	
+		
 		foreach ($PresetsArr['use_as_default_for'] as $key) {
 			if ($key=='layout') {continue;}
+				$strClass = $this->getStrClass($key);
+				$updateFieldsArr = $model->getFields($key);
+	          foreach ($updateFieldsArr as $field) {
 
-			$strModel = $this->getStrClass($key);
-
-			$arrModelsDEF=$this->getModels($strModel,'ftc_preset_id','-');
-			//var_dump($arrModelsDEF);
-			foreach ($arrModelsDEF as $mdf) {
-
-				$defM = $strModel::findBy('id',$mdf['id']);
-				$defM->ftc_preset_full = $this->getDefaultPreset($PresetsArr);
-
-				if ($key=='form_field'&&$defM->type!=='fieldset'){
-				$defM->ftc_preset_full_label = $this->getDefaultPreset($PresetsArr);
+	          		$DoModels = $this->getModels($strClass,$field['id'],'-');
+	          		if ($DoModels===NULL) {return;}
+	          		foreach ($DoModels as $DoModel) {
+	          			//$defM = $strModel::findBy('id',$m['id']);
+						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
+						$DoModel->save(true);
+	          		}
 			
 				}
-				$defM->save(true);
-				
-			}
-			unset($arrModelsDEF);
 		}
 		//exit;
 
@@ -87,7 +90,7 @@ class Presets extends \Backend
 	 } 
 	 	       
 	 //get default options
-     public function getDefaultPreset($Preset)
+     public function getFitPreset($Preset)
       {
       	unset($Preset['use_as_default_for'],$Preset['show_in_sections'],$Preset['tstamp'],$Preset['name'],$Preset['description'],$Preset['preview']);
       
