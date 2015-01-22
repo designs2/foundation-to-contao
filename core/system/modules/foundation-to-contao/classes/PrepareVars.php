@@ -123,11 +123,9 @@ class PrepareVars extends \Controller
   //getArticle
   public function articles($objRow){   
       $objRow->cssID = unserialize($objRow->cssID);
-
+      $objRow->ftcID = ($objRow->cssID[0] !== '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
       if(!is_array(unserialize($objRow->ftc_preset_full))){ 
         $akt_preset=array();
-
-        $objRow->ftcID = ($objRow->cssID[0] !== '') ? ' id="' . $objRow->cssID[0] . '"' : ' id="' . $objRow->alias . '"';
         $objRow->ftc_classes = trim('mod_article '.$objRow->cssID[1]);
         return $objRow;  
 
