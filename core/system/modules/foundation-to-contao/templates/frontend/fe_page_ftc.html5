@@ -15,6 +15,7 @@
   <?php //echo $this->framework; ?>
   <?php echo $this->stylesheets; ?>
   <?php //echo $this->mooScripts; ?>
+  <?php echo $this->layout->ftcLib ?>
   <?php echo $this->head; ?>
   <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
@@ -70,7 +71,7 @@
         </aside>
       <?php endif; ?>
     </div>
-	</div>
+  </div>
     <?php echo $this->getCustomSections('after'); ?>
 
     <?php if ($this->footer): ?>
@@ -85,14 +86,14 @@
 
   <?php echo $this->getCustomSections('bottom'); ?>
   
-	<?php if ($this->layout->use_offcanvas=='1'): ?>
-	
-	  <a class="exit-off-canvas"></a>
-	</div>
-	</div>
-	<?php endif; ?>
-	<?php echo $this->layout->ftcJS ?>
-		
+  <?php if ($this->layout->use_offcanvas=='1'): ?>
+  
+    <a class="exit-off-canvas"></a>
+  </div>
+  </div>
+  <?php endif; ?>
+  <?php echo $this->layout->ftcJS ?>
+    
   <?php echo $this->mootools; ?>
 
 

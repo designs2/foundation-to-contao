@@ -33,9 +33,12 @@ class PrepareVars extends \Controller
             if($obj->layout->__get("addFoundation")=='1'){
 
               $obj->__get("layout")->__set("gridCSS",(array)$this->getGridArr($obj->layout));
+              $obj->__get("layout")->__set("ftcLib",(string)$this->getLibStr($obj->layout));
               $obj->__get("layout")->__set("ftcJS",(string)$this->getScriptStr($obj->layout));
+              /* hack for other extensions whitch ask if mootools or jquery */
+              $obj->__get("layout")->__set("addJQuery","1");
              
-             //var_dump('test',$obj->layout);
+          //  var_dump('test',$obj->layout);
             }
             break;
           case 'ce_headline':
@@ -485,7 +488,29 @@ class PrepareVars extends \Controller
 
     return $GridClassesArr;
   }
+    // Add jQuery Library + Modernizr scripts for Layout
+  public function getLibStr($objLayout){
+    $ScriptStr = '';
+    $VendorArr =unserialize($objLayout->__get("FTC_JS"));
+    $objCombiner = new \Combiner();
+    $pathFTC = 'system/modules/foundation-to-contao/assets/';
+      if (is_array($VendorArr)&&!empty($VendorArr)){
+          foreach ($VendorArr as $k => $script) {
+            
+            if ($script!=='mediaelement_player') {
+             $objCombiner->add($pathFTC.'foundation/js/vendor/'.$script.".js");
+            }
+          }
+      }
+
    
+        if ((floatval(VERSION)>=3.3)) {
+          $ScriptStr .= "\n" . \Template::generateScriptTag($objCombiner->getCombinedFile(), $blnXhtml); //>=3.3.0
+        }else{
+           $ScriptStr .= "\n" . '<script src="'.$objCombiner->getCombinedFile().'"></script>';
+        }
+    return $ScriptStr;
+  }  
   // Add Foundation scripts for Layout
   public function getScriptStr($objLayout){
     $ScriptStr = '';
@@ -495,9 +520,6 @@ class PrepareVars extends \Controller
     $pathFTC = 'system/modules/foundation-to-contao/assets/';
       if (is_array($VendorArr)&&!empty($VendorArr)){
           foreach ($VendorArr as $k => $script) {
-            if ($script!=='mediaelement_player') {
-             $objCombiner->add($pathFTC.'foundation/js/vendor/'.$script.".js");
-            }
             $arrPlugs[$script] =true;
           }
       }
