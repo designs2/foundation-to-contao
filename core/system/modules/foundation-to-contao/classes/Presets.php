@@ -15,54 +15,53 @@ namespace MHAHNEFELD\FTC;
 class Presets extends \Backend
 {
 
-	
+	public $defaultPreset = false;
 
-	public function update($table,$id,$dc) 
+	public function onversion_callback($table,$id,$dc) 
+	{
+		$Preset = 'getFitPreset';
+		$this->update($dc,$Preset,'version');
+	}
+	public function ondelete_callback($dc) 
+	{
+		$Preset = 'getDefaultPreset';
+		$this->update($dc,$Preset,'delete');
+	}
+
+	public function update($dc,$getPreset,$type) 
 	{
 		//if (\Input::get('act')!=='edit'&&$dc!==false) { return;}
-		
-		$PresetsArr = $dc->__get('activeRecord')->row();
+		$PresetsArr = array('show_in_sections'=>$dc->__get('activeRecord')->id,'use_as_default_for'=>'-');//$dc->__get('activeRecord')->row();
 
-		if($PresetsArr['show_in_sections'] ==''){return;}	
-		$PresetsArr['show_in_sections']=(is_array($PresetsArr['show_in_sections']))?$PresetsArr['show_in_sections']:unserialize($PresetsArr['show_in_sections']);	
-		foreach ($PresetsArr['show_in_sections'] as $key) {
+		foreach ($PresetsArr as $arr=>$val) {
 
-			if ($key=='layout') {continue;}
-				$strClass = $this->getStrClass($key);
-				$updateFieldsArr = $this->getFields($key);
-				//var_dump($updateFieldsArr);
+			if($dc->__get('activeRecord')->$arr ==''){return;}	
+			$dc->__get('activeRecord')->$arr =(is_array($dc->__get('activeRecord')->$arr))?$dc->__get('activeRecord')->$arr :unserialize($dc->__get('activeRecord')->$arr );	
+			
+			foreach ($dc->__get('activeRecord')->$arr as $key) {
+				$getPresetF= ($type=='version')?$this->$getPreset($dc->__get('activeRecord')->row()):$this->$getPreset($key,$dc->__get('activeRecord')->id);
+				if ($key=='layout') {continue;}
+					$strClass = $this->getStrClass($key);
+					$updateFieldsArr = $this->getFields($key);
+					//var_dump($updateFieldsArr);
 
-	          foreach ($updateFieldsArr as $field) {
+		          foreach ($updateFieldsArr as $field) {
 
-	          		$DoModels = $this->getModels($strClass,$field['id'],$dc->__get('activeRecord')->id);
+		          		$DoModels = $this->getModels($strClass,$field['id'],$val);
 
-	          		if ($DoModels===NULL) {continue;}
-	          		//var_dump($DoModels);
-	          		foreach ($DoModels as $DoModel) {
-						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
-						$DoModel->save();
-	          		}
+		          		if ($DoModels===NULL) {continue;}
+		          		//var_dump($DoModels);
+		          		foreach ($DoModels as $DoModel) {
+		          			if ($type=='delete') {
+		          				$DoModel->$field['id'] = $val;
+		          				$this->defaultPreset = false; 
+		          			}
+							$DoModel->$field['combined'] = $getPresetF;
+							$DoModel->save();
+		          		}
+					
+					}
 				
-			}
-			
-		}
-		
-		if($PresetsArr['use_as_default_for'] ==''){return;}
-		$PresetsArr['use_as_default_for']=(is_array($PresetsArr['use_as_default_for']))?$PresetsArr['use_as_default_for']:unserialize($PresetsArr['use_as_default_for']);	
-		
-		foreach ($PresetsArr['use_as_default_for'] as $key) {
-			if ($key=='layout') {continue;}
-				$strClass = $this->getStrClass($key);
-				$updateFieldsArr  = $this->getFields($key);
-	          foreach ($updateFieldsArr as $field) {
-
-	          		$DoModels = $this->getModels($strClass,$field['id'],'-');
-	          		if ($DoModels===NULL) {continue;}
-	          		foreach ($DoModels as $DoModel) {
-						$DoModel->$field['combined'] = $this->getFitPreset($PresetsArr);
-						$DoModel->save();
-	          		}
-			
 				}
 		}
 
@@ -84,8 +83,35 @@ class Presets extends \Backend
 	     }
 	     return $strClass;
 	 } 
-	 	       
-	 //get default options
+	   //get default options needed for delete
+     public function getDefaultPreset($key,$id)
+      {
+        $Presets = (\ftcPresetsModel::findAll()===NULL)?array():\ftcPresetsModel::findAll()->fetchAll();
+        $arrCacheP = (!$arrCache)?array(): $arrCacheP;
+        if (isset($arrCacheP[$key])) {
+        	return $arrCacheP[$key];
+        }
+        foreach ($Presets as $k => $v) {
+        if ($Presets[$k]['use_as_default_for']=='') {continue;}
+          if (in_array($key, unserialize($Presets[$k]['use_as_default_for']))&&$Presets[$k]['id']!==$id) {
+            unset($Presets[$k]['use_as_default_for'],$Presets[$k]['show_in_sections'],$Presets[$k]['tstamp'],$Presets[$k]['name'],$Presets[$k]['description'],$Presets[$k]['preview']);
+            $Default = $Presets[$k];
+            $this->defaultPreset = true; 
+            continue;
+          }
+    
+        }
+        
+        if ($this->defaultPreset===false) {
+          $Default = array('small' => '-' ,'medium' => '-' ,'large' => '-' ,'xlarge' => '-' ,'xxlarge' => '-' ,'pull' => '-', 'push' => '-' ,'custom' => '','align' => 'a:1:{i:0;s:1:"-";}', 'float_ftc' => '-' );
+     
+        }
+        $arrCacheP[$key] = $Default;
+        var_dump( $arrCacheP);
+          return $Default;  
+      }  	    
+
+	 //get fit options
      public function getFitPreset($Preset)
       {
       	unset($Preset['use_as_default_for'],$Preset['show_in_sections'],$Preset['tstamp'],$Preset['name'],$Preset['description'],$Preset['preview']);

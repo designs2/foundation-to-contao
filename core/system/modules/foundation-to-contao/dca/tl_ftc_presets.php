@@ -26,7 +26,10 @@ $GLOBALS['TL_DCA']['tl_ftc_presets'] = array
 		'Vwidth'            => 640,
 		'Vheight'            => 480,
 		'onversion_callback' => array(  
-		array('MHAHNEFELD\FTC\Presets', 'update')
+		array('MHAHNEFELD\FTC\Presets', 'onversion_callback')
+		),
+		'ondelete_callback' => array(  
+		array('MHAHNEFELD\FTC\Presets', 'ondelete_callback')
 		),
 
 		'sql' => array
