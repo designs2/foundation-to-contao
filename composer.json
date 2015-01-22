@@ -21,7 +21,7 @@
     	},
     "require":{
         "php":">=5.3.2",
-        "contao/core":">=3.2.13,<3.5",
+        "contao/core":">=3.2.13,<3.3.x",
         "contao-community-alliance/composer-installer": "*",
         "menatwork/contao-multicolumnwizard": "~3.2"
     },
