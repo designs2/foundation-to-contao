@@ -1,2 +1,2 @@
-<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?> class="small-12 columns">
 <dl class="accordion <?php echo $this->ftc_classes; ?> block"<?php echo $this->ftcID; ?> data-accordion>
