@@ -15,7 +15,7 @@
   <?php //echo $this->framework; ?>
   <?php echo $this->stylesheets; ?>
   <?php //echo $this->mooScripts; ?>
-  <?php echo $this->layout->ftcLib ?>
+  <?php echo $this->layout->ftcLib; ?>
   <?php echo $this->head; ?>
   <!--[if lt IE 9]><script src="<?php echo TL_ASSETS_URL; ?>assets/html5shiv/<?php echo $GLOBALS['TL_ASSETS']['HTML5SHIV']; ?>/html5shiv.js"></script><![endif]-->
 
