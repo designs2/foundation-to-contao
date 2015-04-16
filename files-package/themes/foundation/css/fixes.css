@@ -20,6 +20,8 @@ body{
 	font-size:16px;
 	
 }
+/* dlh_google map grid fix */
+.dlh_googlemap{max-width:100%;}
 /* fix toggle icons offcanvas */
 .tab-bar .menu-icon{
 	margin-top:-0.4rem !important;
