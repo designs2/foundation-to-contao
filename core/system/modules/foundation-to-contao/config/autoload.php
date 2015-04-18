@@ -134,13 +134,14 @@ TemplateLoader::addFiles(array
 	'nav_default_topbar' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_navigation_offcanvas' => 'system/modules/foundation-to-contao/templates/modules',
 	'nav_default_offcanvas' => 'system/modules/foundation-to-contao/templates/modules',
-	'mod_breadcrumb' => 'system/modules/foundation-to-contao/templates/modules',
+//	'mod_breadcrumb' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_search_simple_topbar' => 'system/modules/foundation-to-contao/templates/modules',
 	'search_default_topbar' => 'system/modules/foundation-to-contao/templates/modules',
 	//core
 	'mod_article_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_article_teaser_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_breadcrumb_ftc' => 'system/modules/foundation-to-contao/templates/modules',
+	'mod_random_image_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_navigation_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_search_ftc' => 'system/modules/foundation-to-contao/templates/modules',
 	'mod_login_1cl_ftc' => 'system/modules/foundation-to-contao/templates/modules',
@@ -157,7 +158,7 @@ TemplateLoader::addFiles(array
 	//elements
 	'ce_magellan_nav'  => 'system/modules/foundation-to-contao/templates/magellan',
 	'ce_magellan_stop'  => 'system/modules/foundation-to-contao/templates/magellan',
-	//'mod_mh_foundation-to-contao' => 'system/modules/foundation-to-contao/templates',
+	
 	//forms
 	'form_ftc' => 'system/modules/foundation-to-contao/templates/forms',
 	//acc
@@ -201,10 +202,12 @@ TemplateLoader::addFiles(array
 	'ce_orbit_start_inside' => 'system/modules/foundation-to-contao/templates/orbit',
 	'ce_orbit_stop_inside' => 'system/modules/foundation-to-contao/templates/orbit',
 	'orbit_list' => 'system/modules/foundation-to-contao/templates/orbit',
+	'picture_orbit' => 'system/modules/foundation-to-contao/templates/orbit',
 	
 	'ce_clearing' => 'system/modules/foundation-to-contao/templates/clearing',
 	'clearing_list' => 'system/modules/foundation-to-contao/templates/clearing',
-	'pagination_ftc' => 'system/modules/foundation-to-contao/templates/clearing',
+	'picture_clearing' => 'system/modules/foundation-to-contao/templates/clearing',
+	'pagination' => 'system/modules/foundation-to-contao/templates/clearing',
 		
 	'ce_flex_video' => 'system/modules/foundation-to-contao/templates/media',
 	'ce_image_ftc' => 'system/modules/foundation-to-contao/templates/media',
