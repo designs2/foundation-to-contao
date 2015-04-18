@@ -33,7 +33,6 @@ if (!is_array($this->embed_path)) {return;}
   <p>You Browser don't support this format of video.</p>
 </video>
 
-
 <?php endif; ?>
 <!-- indexer::continue -->
 

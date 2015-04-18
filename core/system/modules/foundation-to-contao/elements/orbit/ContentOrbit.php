@@ -350,82 +350,115 @@ class ContentOrbit extends \ContentElement
 		
 		
 
+	/**
+	 * Add an image to a template
+	 *
+	 * @param object  $objTemplate   The template object to add the image to
+	 * @param array   $arrItem       The element or module as array
+	 * @param integer $intMaxWidth   An optional maximum width of the image
+	 * @param string  $strLightboxId An optional lightbox ID
+	 */
 	public static function addImageToTemplateFTC($objTemplate, $arrItem, $intMaxWidth=null, $strLightboxId=null)
+	{
+		global $objPage;
+		try
 		{
-			global $objPage;
-	
-			$size = deserialize($arrItem['size']);
-			$imgSize = getimagesize(TL_ROOT .'/'. $arrItem['singleSRC']);
-	
-			if ($intMaxWidth === null)
+			$objFile = new \File($arrItem['singleSRC'], true);
+		}
+		catch (\Exception $e)
+		{
+			$objFile = new \stdClass();
+			$objFile->imageSize = false;
+		}
+		$imgSize = $objFile->imageSize;
+		$size = deserialize($arrItem['size']);
+		if ($intMaxWidth === null)
+		{
+			$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
+		}
+		$arrMargin = (TL_MODE == 'BE') ? array() : deserialize($arrItem['imagemargin']);
+		// Store the original dimensions
+		$objTemplate->width = $imgSize[0];
+		$objTemplate->height = $imgSize[1];
+		// Adjust the image size
+		if ($intMaxWidth > 0)
+		{
+			// Subtract the margins before deciding whether to resize (see #6018)
+			if (is_array($arrMargin) && $arrMargin['unit'] == 'px')
 			{
-				$intMaxWidth = (TL_MODE == 'BE') ? 320 : \Config::get('maxImageWidth');
-			}
-	
-			
-			// Store the original dimensions
-			$objTemplate->width = $imgSize[0];
-			$objTemplate->height = $imgSize[1];
-	
-			
-	
-			$src = \Image::get($arrItem['singleSRC'], $size[0], $size[1], $size[2]);
-	
-			// Image dimensions
-			if (($imgSize = @getimagesize(TL_ROOT .'/'. rawurldecode($src))) !== false)
-			{
-				$objTemplate->arrSize = $imgSize;
-				$objTemplate->imgSize = ' ' . $imgSize[3];
-			}
-	
-					// Do not override the "href" key (see #6468)
-			$strHrefKey = ($objTemplate->href != '') ? 'imageHref' : 'href';
-	
-			// Image link
-			if ($arrItem['imageUrl'] != '' && TL_MODE == 'FE')
-			{
-				$objTemplate->$strHrefKey = $arrItem['imageUrl'];
-				$objTemplate->attributes = '';
-	
-				if ($arrItem['fullsize'])
+				$intMargin = $arrMargin['left'] + $arrMargin['right'];
+				// Reset the margin if it exceeds the maximum width (see #7245)
+				if ($intMaxWidth - $intMargin < 1)
 				{
-					// Open images in the lightbox
-					if (preg_match('/\.(jpe?g|gif|png)$/', $arrItem['imageUrl']))
-					{
-						// Do not add the TL_FILES_URL to external URLs (see #4923)
-						if (strncmp($arrItem['imageUrl'], 'http://', 7) !== 0 && strncmp($arrItem['imageUrl'], 'https://', 8) !== 0)
-						{
-							$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['imageUrl']);
-						}
-	
-						$objTemplate->attributes = '';
-					}
-					else
-					{
-						$objTemplate->attributes = ($objPage->outputFormat == 'xhtml') ? ' onclick="return !window.open(this.href)"' : ' target="_blank"';
-					}
+					$arrMargin['left'] = '';
+					$arrMargin['right'] = '';
+				}
+				else
+				{
+					$intMaxWidth = $intMaxWidth - $intMargin;
 				}
 			}
-	
-			// Fullsize view
-			elseif (TL_MODE == 'FE')
+			if ($size[0] > $intMaxWidth || (!$size[0] && !$size[1] && $imgSize[0] > $intMaxWidth))
 			{
-				$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
-				$objTemplate->attributes =  '';
+				// See #2268 (thanks to Thyon)
+				$ratio = ($size[0] && $size[1]) ? $size[1] / $size[0] : $imgSize[1] / $imgSize[0];
+				$size[0] = $intMaxWidth;
+				$size[1] = floor($intMaxWidth * $ratio);
 			}
-	
-			// Do not urlEncode() here because getImage() already does (see #3817)
-			$objTemplate->src = TL_FILES_URL . $src;
-			$objTemplate->alt = specialchars($arrItem['alt']);
-			$objTemplate->title = specialchars($arrItem['title']);
-			$objTemplate->linkTitle = $objTemplate->title;
-			$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
-			$objTemplate->addBefore = ($arrItem['floating'] != 'below');
-			
-			$objTemplate->caption = $arrItem['caption'];
-			$objTemplate->singleSRC = $arrItem['singleSRC'];
-			$objTemplate->addImage = true;
 		}
-			
+		try
+		{
+			$src = \Image::create($arrItem['singleSRC'], $size)->executeResize()->getResizedPath();
+			$picture = \Picture::create($arrItem['singleSRC'], $size)->getTemplateData();
+
+			if ($src !== $arrItem['singleSRC'])
+			{
+				$objFile = new \File(rawurldecode($src), true);
+			}
+		}
+		catch (\Exception $e)
+		{
+			\System::log('Image "' . $arrItem['singleSRC'] . '" could not be processed: ' . $e->getMessage(), __METHOD__, TL_ERROR);
+			$src = '';
+			$picture = array('img'=>array('src'=>'', 'srcset'=>''), 'sources'=>array());
+		}
+		// Image dimensions
+		if (($imgSize = $objFile->imageSize) !== false)
+		{
+			$objTemplate->arrSize = $imgSize;
+			$objTemplate->imgSize = ' width="' . $imgSize[0] . '" height="' . $imgSize[1] . '"';
+		}
+		$picture['alt'] = specialchars($arrItem['alt']);
+		$picture['title'] = specialchars($arrItem['title']);
+		$picture['caption'] = specialchars($arrItem['caption']);
+		
+		$objTemplate->picture = $picture;
+
+		// Float image
+		if ($arrItem['floating'] != '')
+		{
+			$objTemplate->floatClass = ' float_' . $arrItem['floating'];
+		}
+		// Do not override the "href" key (see #6468)
+		$strHrefKey = ($objTemplate->href != '') ? 'imageHref' : 'href';
+		
+		// Fullsize view
+		if (TL_MODE == 'FE')
+		{
+			$objTemplate->$strHrefKey = TL_FILES_URL . \System::urlEncode($arrItem['singleSRC']);
+			$objTemplate->attributes = ' data-caption="'.$arrItem['caption'].'"';
+		}
+		// Do not urlEncode() here because getImage() already does (see #3817)
+		$objTemplate->src = TL_FILES_URL . $src;
+		$objTemplate->alt = specialchars($arrItem['alt']);
+		$objTemplate->title = specialchars($arrItem['title']);
+		$objTemplate->linkTitle = $objTemplate->title;
+		$objTemplate->fullsize = $arrItem['fullsize'] ? true : false;
+		$objTemplate->addBefore = ($arrItem['floating'] != 'below');
+		$objTemplate->margin = static::generateMargin($arrMargin);
+		$objTemplate->caption = $arrItem['caption'];
+		$objTemplate->singleSRC = $arrItem['singleSRC'];
+		$objTemplate->addImage = true;
+	}
 		
 }

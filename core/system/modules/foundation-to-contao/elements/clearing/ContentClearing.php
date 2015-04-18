@@ -16,6 +16,11 @@ class ContentClearing extends \ContentElement
 {
 
 	/**
+	 * Files object
+	 * @var \FilesModel
+	 */
+	protected $objFiles;
+	/**
 	 * Template
 	 * @var string
 	 */
@@ -100,17 +105,29 @@ class ContentClearing extends \ContentElement
 				{
 					$objFile = new \File($objFiles->path, true);
 	
-					if (!$objFile->isGdImage)
+					if (!$objFile->isImage)
 					{
 						continue;
 					}
 	
 					$arrMeta = $this->getMetaData($objFiles->meta, $objPage->language);
-	
+
+
+					if (empty($arrMeta))
+					{
+					if ($this->metaIgnore)
+					{
+						continue;
+					}
+					elseif ($objPage->rootFallbackLanguage !== null)
+					{
+						$arrMeta = $this->getMetaData($objFiles->meta, $objPage->rootFallbackLanguage);
+					}
+				}
 					// Use the file name as title if none is given
 					if ($arrMeta['title'] == '')
 					{
-						$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+						$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->basename));
 					}
 	
 					// Add the image
@@ -146,19 +163,31 @@ class ContentClearing extends \ContentElement
 							continue;
 						}
 	
-						$objFile = new \File($objSubfiles->path, true);
-	
-						if (!$objFile->isGdImage)
+					$objFile = new \File($objSubfiles->path, true);
+
+					if (!$objFile->isImage)
+					{
+						continue;
+					}
+
+					$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+
+					if (empty($arrMeta))
+					{
+						if ($this->metaIgnore)
 						{
 							continue;
 						}
-	
-						$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->language);
+						elseif ($objPage->rootFallbackLanguage !== null)
+						{
+							$arrMeta = $this->getMetaData($objSubfiles->meta, $objPage->rootFallbackLanguage);
+						}
+					}
 	
 						// Use the file name as title if none is given
 						if ($arrMeta['title'] == '')
 						{
-							$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->filename));
+							$arrMeta['title'] = specialchars(str_replace('_', ' ', $objFile->basename));
 						}
 	
 						// Add the image
@@ -272,7 +301,7 @@ class ContentClearing extends \ContentElement
 				$offset = ($page - 1) * $this->perPage;
 				$limit = min($this->perPage + $offset, $total);
 	
-				$objPagination = new \PaginationFTC($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
+				$objPagination = new \Pagination($total, $this->perPage, \Config::get('maxPaginationLinks'), $id);
 				$this->Template->pagination = $objPagination->generate("\n  ");
 			}
 	
@@ -344,7 +373,12 @@ class ContentClearing extends \ContentElement
 			}
 	
 			$strTemplate = 'clearing_list';
-	
+			
+			// Use a custom template
+			if (TL_MODE == 'FE' && $this->galleryTpl != '')
+			{
+				$strTemplate = $this->galleryTpl;
+			}
 	
 			$objTemplate = new \FrontendTemplate($strTemplate);
 			$objTemplate->setData($this->arrData);

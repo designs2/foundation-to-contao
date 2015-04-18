@@ -9,23 +9,29 @@
   <?php endif; ?>
 
   <?php if ($this->addImage): ?>
-    <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>>
+    
+        <?php if ($this->fullsize): ?><ul class="clearing-thumbs" data-clearing> <?php endif; ?>
+         
+         <?php if (!$this->fullsize||$this->imageUrl): ?> <figure class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>> <?php endif; ?>
 
-      <?php if ($this->href): ?>
-        <a href="<?php echo $this->href; ?>"<?php if ($this->linkTitle): ?> title="<?php echo $this->linkTitle; ?>"<?php endif; ?><?php echo $this->attributes; ?>>
-      <?php endif; ?>
+         <?php if ($this->fullsize&&!$this->imageUrl): ?> <li class="image_container<?php echo $this->floatClass; ?>"<?php if ($this->margin || $this->float): ?> style="<?php echo trim($this->margin . $this->float); ?>"<?php endif; ?>> <?php endif;?>
 
-      <img src="<?php echo $this->src; ?>"<?php echo $this->imgSize; ?> alt="<?php echo $this->alt; ?>"<?php if ($this->title): ?> title="<?php echo $this->title; ?>"<?php endif; ?>>
+            <?php if ($this->fullsize&&$this->href||$this->imageUrl): ?>
+              <a href="<?php echo $this->href; ?>"<?php if ($this->linkTitle): ?> title="<?php echo $this->linkTitle; ?>"<?php endif; ?><?php echo $this->attributes; ?>>
+            <?php endif; ?>
+            
+           <?php $this->insert('picture_default', $this->picture); ?>
 
-      <?php if ($this->href): ?>
-        </a>
-      <?php endif; ?>
+            <?php if ($this->fullsize||$this->href): ?>
+              </a>
+            <?php endif; ?>
 
-      <?php if ($this->caption): ?>
-        <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
-      <?php endif; ?>
-
-    </figure>
+            <?php if ($this->caption): ?>
+              <figcaption class="caption" style="width:<?php echo $this->arrSize[0]; ?>px"><?php echo $this->caption; ?></figcaption>
+            <?php endif; ?>
+         <?php if (!$this->fullsize||$this->imageUrl): ?> </figure> <?php endif; ?>
+          <?php if ($this->fullsize&&!$this->imageUrl): ?></li>
+        </ul> <?php endif; ?>
   <?php endif; ?>
 
   <?php if ($this->addBefore): ?>

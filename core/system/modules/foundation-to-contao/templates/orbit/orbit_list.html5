@@ -3,7 +3,7 @@
     <?php foreach ($row as $col): ?>
       <?php if ($col->addImage): ?>
         <li class="<?php echo $class; ?> <?php echo $col->class; ?>">  
-           <img src="<?php echo $col->src; ?>"<?php echo $col->imgSize; ?> data-caption="<?php echo $col->caption; ?>" alt="<?php echo $col->alt; ?>">
+           <?php $this->insert('picture_orbit', $col->picture); ?>
             <div class="orbit-caption">
             <?php
             if ($col->caption!==''||!$col->caption) {
