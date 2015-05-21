@@ -297,7 +297,7 @@ class ContentClearing extends \ContentElement
 					return;
 				}
 	
-				// Set limit and offset
+				// Set limit and offset 
 				$offset = ($page - 1) * $this->perPage;
 				$limit = min($this->perPage + $offset, $total);
 	
